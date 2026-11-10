@@ -5,33 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Minecraft 1.8.8</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#080b13;color:#f5f7ff}
-body{display:grid;place-items:center;background:linear-gradient(#07101bb3,#07101bd9),url("./cherry-blossom.jpg") center/cover fixed no-repeat}
-.card{width:min(440px,calc(100vw - 36px));padding:34px;border:1px solid #ffffff24;border-radius:18px;background:#111827b8;backdrop-filter:blur(14px);box-shadow:0 24px 80px #0009}
-h1{font-size:28px;margin:0 0 8px}.sub{color:#aab5cc;margin:0 0 26px;font-size:14px}
-label{display:block;font-size:13px;color:#c8d2e8;margin:0 0 9px}
-select{width:100%;padding:13px 14px;border:1px solid #ffffff30;border-radius:10px;background:#202b40;color:#fff;font-size:15px}
-button{width:100%;margin-top:18px;padding:13px 16px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#080b13;color:#f5f7ff}
+body{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#101827dd,#101827bb),url("./cherryblocked-minecraft-garden.jpg") center/cover fixed no-repeat}
+.card{width:min(460px,100%);padding:34px;border:1px solid #ffffff30;border-radius:20px;background:#101827cc;backdrop-filter:blur(16px);box-shadow:0 24px 80px #0009}
+h1{font-size:30px;margin:0 0 8px}.sub{color:#c3cde0;margin:0 0 26px;font-size:14px;line-height:1.5}
+label{display:block;font-size:13px;color:#d6def0;margin:0 0 9px}
+select{width:100%;padding:14px;border:1px solid #ffffff30;border-radius:10px;background:#202b40;color:#fff;font-size:15px}
+button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-size:15px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer}
+.launch.secondary{background:#25334b;border:1px solid #ffffff30}
 #game{display:none;position:fixed;inset:0;background:#000}
 #game iframe{width:100%;height:100%;border:0;background:#000}
 #back{position:fixed;z-index:5;top:12px;right:12px;width:auto;margin:0;padding:10px 14px;background:#202b40;border:1px solid #ffffff35}
+#fallback{position:fixed;z-index:6;left:12px;top:12px;width:auto;margin:0;padding:10px 14px;background:#8b5cf6}
 @media(max-width:480px){.card{padding:25px}}
 </style>
 </head>
 <body>
 <main class="card" id="picker">
-<h1>Minecraft</h1>
-<p class="sub">Choose a version and jump into the game.</p>
+<h1>Minecraft 1.8.8</h1>
+<p class="sub">Choose a version and launch the browser game.</p>
 <label for="version">Game version</label>
 <select id="version">
 <option value="1.8.8">Minecraft 1.8.8</option>
 <option value="" disabled>More versions coming soon...</option>
 </select>
-<button id="play">Play 1.8.8</button>
+<button id="play" type="button">Play Minecraft 1.8.8</button>
+<a class="launch secondary" id="direct" href="https://eaglercraft.com/play?version=1.8.8" target="_blank" rel="noopener noreferrer">Open game in a new tab</a>
 </main>
-<section id="game" aria-label="Game">
+<section id="game" aria-label="Minecraft game">
 <button id="back" type="button">Back to versions</button>
+<button id="fallback" type="button">If game does not load, open it separately</button>
 <iframe id="client" title="Minecraft 1.8.8" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write"></iframe>
 </section>
 <script>
@@ -40,23 +44,19 @@ const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
 const play=document.getElementById('play');
-version.addEventListener('change',()=>{play.textContent=version.value?'Play '+version.value:'Coming soon';play.disabled=!version.value;});
+const gameUrl='https://eaglercraft.com/play?version=1.8.8';
+version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
 play.addEventListener('click',()=>{
  if(version.value!=='1.8.8')return;
- picker.style.display='none';game.style.display='block';
- frame.onload=()=>{
-  try{
-   const d=frame.contentDocument;
-   const launch=d&&d.getElementById('launch_countdown_screen');
-   const start=d&&d.getElementById('skipCountdown');
-   if(launch)launch.style.display='none';
-   if(start)start.click();
-  }catch(e){console.warn('Could not auto-start client:',e);}
- };
- frame.src='./game.html';
+ picker.style.display='none';
+ game.style.display='block';
+ frame.src=gameUrl;
 });
+document.getElementById('fallback').addEventListener('click',()=>window.open(gameUrl,'_blank','noopener'));
 document.getElementById('back').addEventListener('click',()=>{
- frame.src='about:blank';game.style.display='none';picker.style.display='block';
+ frame.src='about:blank';
+ game.style.display='none';
+ picker.style.display='grid';
 });
 </script>
 </body>
