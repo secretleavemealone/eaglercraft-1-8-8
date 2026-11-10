@@ -63,7 +63,9 @@ play.addEventListener('click',()=>{
  frame.srcdoc='';
  loadLocalGame(frame.contentWindow).catch(err=>{frame.srcdoc='<body style="background:#111;color:white;font:16px Arial;padding:24px">Could not load the local Minecraft files: '+err.message+'</body>';});
 });
-document.getElementById('fallback').addEventListener('click',async()=>{const tab=window.open('about:blank','_blank');if(!tab)return;try{await loadLocalGame(tab);}catch(err){tab.document.body.textContent='Could not load the local Minecraft files: '+err.message;}});
+async function openLocalTab(){const tab=window.open('about:blank','_blank');if(!tab)return;try{await loadLocalGame(tab);}catch(err){tab.document.body.textContent='Could not load the local Minecraft files: '+err.message;}}
+document.getElementById('fallback').addEventListener('click',openLocalTab);
+document.getElementById('direct').addEventListener('click',event=>{event.preventDefault();openLocalTab();});
 document.getElementById('back').addEventListener('click',()=>{
  frame.src='about:blank';
  game.style.display='none';
