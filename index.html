@@ -31,7 +31,7 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 <option value="" disabled>More versions coming soon...</option>
 </select>
 <button id="play" type="button">Play Minecraft 1.8.8</button>
-<a class="launch secondary" id="direct" href="https://eaglercraft.com/play?version=1.8.8" target="_blank" rel="noopener noreferrer">Open game in a new tab</a>
+<a class="launch secondary" id="direct" href="./game.html" target="_blank" rel="noopener noreferrer">Open local game files in a new tab</a>
 </main>
 <section id="game" aria-label="Minecraft game">
 <button id="back" type="button">Back to versions</button>
@@ -44,15 +44,26 @@ const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
 const play=document.getElementById('play');
-const gameUrl='https://eaglercraft.com/play?version=1.8.8';
+const gameUrl='./game.html';
+async function loadLocalGame(target){
+ const response=await fetch('./game.html');
+ if(!response.ok)throw new Error('Could not load the uploaded game.html ('+response.status+').');
+ let html=await response.text();
+ if(!html.includes('client.js')) html=html.replace('</body>','<script src="./client.js"></script></body>');
+ target.document.open();
+ target.document.write(html);
+ target.document.close();
+}
 version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
 play.addEventListener('click',()=>{
  if(version.value!=='1.8.8')return;
  picker.style.display='none';
  game.style.display='block';
- frame.src=gameUrl;
+ frame.removeAttribute('src');
+ frame.srcdoc='';
+ loadLocalGame(frame.contentWindow).catch(err=>{frame.srcdoc='<body style="background:#111;color:white;font:16px Arial;padding:24px">Could not load the local Minecraft files: '+err.message+'</body>';});
 });
-document.getElementById('fallback').addEventListener('click',()=>window.open(gameUrl,'_blank','noopener'));
+document.getElementById('fallback').addEventListener('click',async()=>{const tab=window.open('about:blank','_blank');if(!tab)return;try{await loadLocalGame(tab);}catch(err){tab.document.body.textContent='Could not load the local Minecraft files: '+err.message;}});
 document.getElementById('back').addEventListener('click',()=>{
  frame.src='about:blank';
  game.style.display='none';
