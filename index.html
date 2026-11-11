@@ -83,7 +83,10 @@ play.addEventListener('click',async()=>{
      if(!response.ok)throw new Error('Missing '+name+' (HTTP '+response.status+')');
      return response.arrayBuffer();
    }));
-   const html=new Blob(pieces,{type:'text/html'});
+   const compressed=new Blob(pieces,{type:'application/gzip'});
+   if(!('DecompressionStream' in window))throw new Error('This browser does not support gzip decompression');
+   const htmlStream=compressed.stream().pipeThrough(new DecompressionStream('gzip'));
+   const html=new Blob([await new Response(htmlStream).arrayBuffer()],{type:'text/html'});
    frame.src=URL.createObjectURL(html);
  }catch(error){
    frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 files are not uploaded yet</h2><p>'+String(error.message).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</p><p>Upload all five eaglercraft-1.12.2.part files to the repository root, then reload this page.</p></body></html>';
