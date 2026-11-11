@@ -15,7 +15,7 @@ select{width:100%;padding:14px;border:1px solid #ffffff30;border-radius:10px;bac
 button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-size:15px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer}
 .launch.secondary{background:#25334b;border:1px solid #ffffff30}
 #game{display:none;position:fixed;inset:0;background:#000}
-#game iframe{width:100%;height:100%;border:0;background:#000}
+#game iframe{width:100%;height:100%;border:0;background:#000}\n#loading-message{display:none;position:absolute;z-index:4;inset:0;align-items:center;justify-content:center;padding:24px;text-align:center;background:#080b13;color:#fff;font-size:20px;font-weight:700;line-height:1.5;pointer-events:none}
 #back{position:fixed;z-index:5;top:12px;right:12px;width:auto;margin:0;padding:10px 14px;background:#202b40;border:1px solid #ffffff35}
 #chat-toggle{position:static;width:100%;margin-top:12px;padding:13px 16px;background:#8b5cf6;border:1px solid #ffffff45}
 #chat-panel{display:none;position:relative;width:100%;height:360px;margin-top:12px;padding:14px;border:1px solid #ffffff35;border-radius:14px;background:#101827f5;box-shadow:0 18px 55px #000b;flex-direction:column;gap:10px}
@@ -61,7 +61,7 @@ const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
 const play=document.getElementById('play');
-const gameUrl='./game.html';
+const gameUrl='./game.html';\nconst loadingMessage=document.getElementById('loading-message');
 version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
 play.addEventListener('click',async()=>{
  const selected=version.value;
