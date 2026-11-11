@@ -15,7 +15,8 @@ select{width:100%;padding:14px;border:1px solid #ffffff30;border-radius:10px;bac
 button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-size:15px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer}
 .launch.secondary{background:#25334b;border:1px solid #ffffff30}
 #game{display:none;position:fixed;inset:0;background:#000}
-#game iframe{width:100%;height:100%;border:0;background:#000}\n#loading-message{display:none;position:absolute;z-index:4;inset:0;align-items:center;justify-content:center;padding:24px;text-align:center;background:#080b13;color:#fff;font-size:20px;font-weight:700;line-height:1.5;pointer-events:none}
+#game iframe{width:100%;height:100%;border:0;background:#000}
+#loading-message{display:none;position:absolute;z-index:4;inset:0;align-items:center;justify-content:center;padding:24px;text-align:center;background:#080b13;color:#fff;font-size:20px;font-weight:700;line-height:1.5;pointer-events:none}
 #back{position:fixed;z-index:5;top:12px;right:12px;width:auto;margin:0;padding:10px 14px;background:#202b40;border:1px solid #ffffff35}
 #chat-toggle{position:static;width:100%;margin-top:12px;padding:13px 16px;background:#8b5cf6;border:1px solid #ffffff45}
 #chat-panel{display:none;position:relative;width:100%;height:360px;margin-top:12px;padding:14px;border:1px solid #ffffff35;border-radius:14px;background:#101827f5;box-shadow:0 18px 55px #000b;flex-direction:column;gap:10px}
@@ -35,7 +36,8 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 <body>
 <main class="card" id="picker">
 <h1>Minecraft 1.8.8</h1>
-<p class="sub">Choose a version and launch the browser game.</p>\n<p class="sub" style="margin-top:-14px;color:#a7f3d0;font-weight:700">New version added: Minecraft 1.12.2!</p>
+<p class="sub">Choose a version and launch the browser game.</p>
+<p class="sub" style="margin-top:-14px;color:#a7f3d0;font-weight:700">New version added: Minecraft 1.12.2!</p>
 <label for="version">Game version</label>
 <select id="version">
 <option value="1.8.8">Minecraft 1.8.8</option>
@@ -53,6 +55,7 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 </main>
 <section id="game" aria-label="Minecraft game">
 <button id="back" type="button">Back to versions</button>
+<div id="loading-message">Minecraft 1.12.2 is loading...<br>Please wait — this might take a minute.</div>
 <iframe id="client" title="Minecraft 1.8.8" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write"></iframe>
 </section>
 <script>
@@ -61,8 +64,11 @@ const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
 const play=document.getElementById('play');
-const gameUrl='./game.html';\nconst loadingMessage=document.getElementById('loading-message');
-version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
+const gameUrl='./game.html';
+const loadingMessage=document.getElementById('loading-message');
+function updatePlayButton(){play.textContent='Play Minecraft '+version.value;play.disabled=false;}
+version.addEventListener('change',updatePlayButton);
+updatePlayButton();
 play.addEventListener('click',async()=>{
  const selected=version.value;
  if(selected!=='1.8.8' && selected!=='1.12.2')return;
@@ -72,24 +78,29 @@ play.addEventListener('click',async()=>{
  document.getElementById('chat-panel').style.display='none';
  game.style.display='block';
  if(selected==='1.8.8'){
+   loadingMessage.style.display='none';
    frame.src=gameUrl;
    return;
  }
  frame.src='about:blank';
+ loadingMessage.style.display='flex';
  try{
    const response=await fetch('./eaglercraft-1.12.2 (15).html.gz');
    if(!response.ok)throw new Error('The local 1.12.2 game file is not uploaded yet.');
    if(!('DecompressionStream' in window))throw new Error('This browser does not support gzip decompression.');
    const stream=response.body.pipeThrough(new DecompressionStream('gzip'));
    const html=new Blob([await new Response(stream).arrayBuffer()],{type:'text/html'});
+   frame.addEventListener('load',()=>{loadingMessage.style.display='none';},{once:true});
    frame.src=URL.createObjectURL(html);
  }catch(error){
+   loadingMessage.style.display='none';
    frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
 document.getElementById('back').addEventListener('click',()=>{
  frame.src='about:blank';
+ loadingMessage.style.display='none';
  game.style.display='none';
  document.getElementById('chat-toggle').style.display='block';
  document.getElementById('chat-panel').style.display='';
