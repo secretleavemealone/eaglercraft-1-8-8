@@ -29,9 +29,6 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 #chat-form{display:flex;gap:7px}
 #chat-input{flex:1;min-width:0;padding:11px;border:1px solid #ffffff30;border-radius:8px;background:#202b40;color:white}
 #chat-send{width:auto;margin:0;padding:0 14px}
-#server-tag{position:fixed;z-index:8;inset:0;display:grid;place-items:center;background:#0009;color:#fff;font-size:clamp(20px,4vw,34px);font-weight:800;text-shadow:0 3px 12px #000;padding:24px;pointer-events:none;transition:opacity .5s ease}
-#server-tag.hidden{opacity:0;visibility:hidden}
-#server-tag span{padding:20px 28px;border:1px solid #ffffff55;border-radius:14px;background:#202b40ee;box-shadow:0 12px 40px #0009}
 @media(max-width:480px){.card{padding:25px}}
 </style>
 </head>
@@ -56,7 +53,6 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 </main>
 <section id="game" aria-label="Minecraft game">
 <button id="back" type="button">Back to versions</button>
-<div id="server-tag"><span><s>Eaglercraft</s><br>Cherry on Top</span></div>
 <iframe id="client" title="Minecraft 1.8.8" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write"></iframe>
 </section>
 <script>
@@ -66,13 +62,6 @@ const frame=document.getElementById('client');
 const version=document.getElementById('version');
 const play=document.getElementById('play');
 const gameUrl='./game.html';
-const serverTag=document.getElementById('server-tag');
-let serverTagTimer;
-function showGameBranding(){
- serverTag.classList.remove('hidden');
- window.clearTimeout(serverTagTimer);
- serverTagTimer=window.setTimeout(()=>serverTag.classList.add('hidden'),10000);
-}
 version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
 play.addEventListener('click',()=>{
  if(version.value!=='1.8.8')return;
@@ -81,7 +70,6 @@ play.addEventListener('click',()=>{
  document.getElementById('chat-toggle').style.display='none';
  document.getElementById('chat-panel').style.display='none';
  game.style.display='block';
- showGameBranding();
  frame.src=gameUrl;
 });
 document.getElementById('direct').href=gameUrl;
