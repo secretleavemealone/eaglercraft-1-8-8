@@ -72,6 +72,9 @@ version.addEventListener('change',()=>{play.textContent=version.value?'Play Mine
 play.addEventListener('click',()=>{
  if(version.value!=='1.8.8')return;
  picker.style.display='none';
+ document.getElementById('chat-panel').classList.remove('open');
+ document.getElementById('chat-toggle').style.display='none';
+ document.getElementById('chat-panel').style.display='none';
  game.style.display='block';
  frame.src=gameUrl;
 });
@@ -79,6 +82,8 @@ document.getElementById('direct').href=gameUrl;
 document.getElementById('back').addEventListener('click',()=>{
  frame.src='about:blank';
  game.style.display='none';
+ document.getElementById('chat-toggle').style.display='block';
+ document.getElementById('chat-panel').style.display='';
  picker.style.display='grid';
 });
 </script>
