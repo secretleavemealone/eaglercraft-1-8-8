@@ -77,14 +77,14 @@ play.addEventListener('click',async()=>{
  }
  frame.src='about:blank';
  try{
-   const response=await fetch('./eaglercraft-1.12.2.html.gz');
+   const response=await fetch('./eaglercraft-1.12.2 (15).html.gz');
    if(!response.ok)throw new Error('The local 1.12.2 game file is not uploaded yet.');
    if(!('DecompressionStream' in window))throw new Error('This browser does not support gzip decompression.');
    const stream=response.body.pipeThrough(new DecompressionStream('gzip'));
    const html=new Blob([await new Response(stream).arrayBuffer()],{type:'text/html'});
    frame.src=URL.createObjectURL(html);
  }catch(error){
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2.html.gz to the repository root, then reload.</p></body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
