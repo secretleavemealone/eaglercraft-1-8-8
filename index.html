@@ -39,7 +39,7 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 <label for="version">Game version</label>
 <select id="version">
 <option value="1.8.8">Minecraft 1.8.8</option>
-<option value="" disabled>More versions coming soon...</option>
+<option value="1.12.2">Minecraft 1.12.2</option>
 </select>
 <button id="play" type="button">Play Minecraft 1.8.8</button>
 <a class="launch secondary" id="direct" href="./game.html" target="_blank" rel="noopener noreferrer">Open local game files in a new tab</a>
@@ -63,14 +63,31 @@ const version=document.getElementById('version');
 const play=document.getElementById('play');
 const gameUrl='./game.html';
 version.addEventListener('change',()=>{play.textContent=version.value?'Play Minecraft '+version.value:'Coming soon';play.disabled=!version.value;});
-play.addEventListener('click',()=>{
- if(version.value!=='1.8.8')return;
+play.addEventListener('click',async()=>{
+ const selected=version.value;
+ if(selected!=='1.8.8' && selected!=='1.12.2')return;
  picker.style.display='none';
  document.getElementById('chat-panel').classList.remove('open');
  document.getElementById('chat-toggle').style.display='none';
  document.getElementById('chat-panel').style.display='none';
  game.style.display='block';
- frame.src=gameUrl;
+ if(selected==='1.8.8'){
+   frame.src=gameUrl;
+   return;
+ }
+ frame.src='about:blank';
+ try{
+   const names=['eaglercraft-1.12.2.part01','eaglercraft-1.12.2.part02','eaglercraft-1.12.2.part03','eaglercraft-1.12.2.part04','eaglercraft-1.12.2.part05'];
+   const pieces=await Promise.all(names.map(async name=>{
+     const response=await fetch('./'+name);
+     if(!response.ok)throw new Error('Missing '+name+' (HTTP '+response.status+')');
+     return response.arrayBuffer();
+   }));
+   const html=new Blob(pieces,{type:'text/html'});
+   frame.src=URL.createObjectURL(html);
+ }catch(error){
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 files are not uploaded yet</h2><p>'+String(error.message).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</p><p>Upload all five eaglercraft-1.12.2.part files to the repository root, then reload this page.</p></body></html>';
+ }
 });
 document.getElementById('direct').href=gameUrl;
 document.getElementById('back').addEventListener('click',()=>{
