@@ -482,7 +482,7 @@ html,body{min-width:320px}
   <div class="os-window-body drive-files-body">
     <div class="drive-files-heading"><div><h2>Google Drive</h2><p>Your Drive files and folders</p></div><button type="button" id="drive-refresh" title="Refresh files">↻ Refresh</button></div>
     <div id="drive-locked" class="drive-gate"><div class="drive-gate-icon">🔒</div><h3>Sign in required</h3><p>Sign in with Google in Settings → Accounts to access your Google Drive files.</p><button type="button" id="drive-go-signin">Open account settings</button></div>
-    <div id="drive-connect" class="drive-gate" hidden><div class="drive-gate-icon">☁️</div><h3>Connect Google Drive</h3><p>Allow CherryOS to view your Google Drive files. Your files stay in your Google account.</p><button type="button" id="drive-connect-button">Connect Google Drive</button></div>
+    <div id="drive-connect" class="drive-gate" hidden><div class="drive-gate-icon">☁️</div><h3>Connect Google Drive</h3><p>Allow CherryOS to access only files you select or open with CherryOS. It will not have access to your entire Drive.</p><button type="button" id="drive-connect-button">Connect limited Drive access</button></div>
     <div id="drive-loading" class="drive-empty" hidden>Loading your Google Drive…</div>
     <div id="drive-error" class="drive-error" hidden></div>
     <div id="drive-list" class="drive-list" aria-live="polite"></div>
@@ -780,7 +780,7 @@ const firebaseConfig = {
 const authApp = getApps().find(app => app.name === "cherryos-auth") || initializeApp(firebaseConfig, "cherryos-auth");
 const auth = getAuth(authApp);
 const provider = new GoogleAuthProvider();
-provider.addScope("https://www.googleapis.com/auth/drive.readonly");
+provider.addScope("https://www.googleapis.com/auth/drive.file");
 provider.setCustomParameters({ prompt: "select_account" });
 window.cherryDriveAccessToken = null;
 
@@ -910,7 +910,7 @@ document.addEventListener("click", async event => {
       window.updateDriveGate();await loadGoogleDriveFiles();
     } catch(error) {
       errorBox.hidden=false;errorBox.textContent=error.code==="auth/unauthorized-domain"?"Add this website to Firebase Authentication authorized domains.":error.message;
-    } finally {button.disabled=false;button.textContent="Connect Google Drive";}
+    } finally {button.disabled=false;button.textContent="Connect limited Drive access";}
   }
   if(event.target.closest("#drive-refresh")) {
     if(window.cherryDriveAccessToken)await loadGoogleDriveFiles();
