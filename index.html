@@ -221,6 +221,7 @@ html,body{min-width:320px}
 .task-divider{height:30px;width:1px;background:#ffffff25;margin:0 3px}
 .task-app{width:44px;height:44px;margin:0;padding:0;border-radius:12px;background:transparent;font-size:22px}
 .task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}
+#task-apps{display:flex;align-items:center;gap:7px;min-width:0;overflow-x:auto;scrollbar-width:none}#task-apps::-webkit-scrollbar{display:none}.task-app{display:flex;align-items:center;gap:9px;width:auto;max-width:190px;height:42px;flex:0 0 auto;margin:0;padding:0 13px;border-radius:12px;background:#ffffff08;color:#f4f6fb;font-size:13px;white-space:nowrap}.task-app .task-glyph{font-size:19px}.task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}.task-app.minimized{opacity:.72}@media(max-width:600px){#task-apps{gap:4px}.task-app{height:38px;padding:0 9px;font-size:11px}.task-app .task-label{max-width:72px;overflow:hidden;text-overflow:ellipsis}}
 #taskbar-spacer{flex:1}
 #tray{display:flex;align-items:center;gap:14px;color:#e5e9f3;font-size:12px}
 #tray small{display:block;color:#9ea8bb;text-align:right;margin-top:3px}
@@ -290,9 +291,7 @@ html,body{min-width:320px}
   <div id="taskbar">
     <button id="start-button" type="button" aria-label="Start menu">✿</button>
     <div class="task-divider"></div>
-    <button class="task-app" id="task-minecraft" type="button" title="Minecraft">⛏️</button>
-    <button class="task-app" id="task-files" type="button" title="Files">📁</button>
-    <button class="task-app" id="task-settings" type="button" title="Settings">⚙️</button>
+    <div id="task-apps" aria-label="Open apps"></div>
     <div id="taskbar-spacer"></div>
     <div id="tray"><span>◉</span><span>⌃</span><span id="tray-clock">--:--<small>--/--/----</small></span></div>
   </div>
@@ -354,25 +353,30 @@ html,body{min-width:320px}
 <script>
 const picker=document.getElementById('picker');
 const desktop=document.getElementById('desktop');
-function openMinecraft(){picker.classList.remove('minimized');picker.style.display='block';bringToFront(picker);}
+function openMinecraft(){picker.classList.remove('minimized');picker.style.display='block';bringToFront(picker);showTaskApp('picker','Minecraft','⛏️',()=>openMinecraft(),false);setTaskActive('picker');}
 function closeOsWindows(){document.querySelectorAll('.os-window').forEach(w=>{w.classList.remove('open');w.setAttribute('aria-hidden','true');});}
 let topZ=20;
+const taskApps=document.getElementById('task-apps');
+const taskAppButtons=new Map();
+function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('button');b.type='button';b.className='task-app';b.innerHTML='<span class="task-glyph"></span><span class="task-label"></span>';b.addEventListener('click',()=>{if(b._activate)b._activate();});taskApps.appendChild(b);taskAppButtons.set(key,b);}b.title=label;b.querySelector('.task-glyph').textContent=glyph;b.querySelector('.task-label').textContent=label;b._activate=activate;b.classList.toggle('minimized',!!minimized);return b;}
+function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
+function removeTaskApp(key){const b=taskAppButtons.get(key);if(b)b.remove();taskAppButtons.delete(key);}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);}
+function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const key=id==='files-window'?'files':'settings';const label=id==='files-window'?'Files':'Settings';const glyph=id==='files-window'?'📁':'⚙️';showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
 makeDraggable(picker,picker.querySelector('.window-top'));
 picker.addEventListener('pointerdown',()=>bringToFront(picker));
-document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.minimize).classList.add('minimized')));
+document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
 document.querySelectorAll('[data-maximize]').forEach(b=>b.addEventListener('click',()=>setWindowMaximized(document.getElementById(b.dataset.maximize))));
-document.getElementById('minimize-picker').addEventListener('click',()=>picker.classList.add('minimized'));
+document.getElementById('minimize-picker').addEventListener('click',()=>{picker.classList.add('minimized');const item=taskAppButtons.get('picker');if(item)item.classList.add('minimized');});
 document.getElementById('maximize-picker').addEventListener('click',()=>setWindowMaximized(picker));
 document.getElementById('minecraft-app').addEventListener('click',openMinecraft);
 document.getElementById('files-app').addEventListener('click',()=>openOsWindow('files-window'));
 document.getElementById('dock-files').addEventListener('click',()=>openOsWindow('files-window'));
 document.getElementById('settings-app').addEventListener('click',()=>openOsWindow('settings-window'));
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');}));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');removeTaskApp(w.id==='files-window'?'files':'settings');}));
 const settingsKey='cherryOSSettings';
 const savedSettings=JSON.parse(localStorage.getItem(settingsKey)||'{}');
 const time24=document.getElementById('setting-24h');
@@ -403,12 +407,8 @@ document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click'
  if(b.dataset.launch==='files')openOsWindow('files-window');
  if(b.dataset.launch==='settings')openOsWindow('settings-window');
 }));
-document.getElementById('task-minecraft').addEventListener('click',openMinecraft);
-document.getElementById('task-files').addEventListener('click',()=>openOsWindow('files-window'));
-document.getElementById('task-settings').addEventListener('click',()=>openOsWindow('settings-window'));
-
 document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';closeOsWindows();});
-document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';picker.classList.remove('maximized','minimized');});
+document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';picker.classList.remove('maximized','minimized');removeTaskApp('picker');});
 function updateDesktopClock(){
  const now=new Date();
  const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};
@@ -430,6 +430,9 @@ play.addEventListener('click',async()=>{
  const selected=version.value;
  if(selected!=='1.8.8' && selected!=='1.12.2')return;
  picker.style.display='none';
+ removeTaskApp('picker');
+ showTaskApp('game','Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');},false);
+ setTaskActive('game');
  document.getElementById('chat-panel').classList.remove('open');
  document.getElementById('chat-toggle').style.display='none';
  document.getElementById('chat-panel').style.display='none';
@@ -459,8 +462,8 @@ play.addEventListener('click',async()=>{
  }
 });
 document.getElementById('direct').href=gameUrl;
-function leaveMinecraft(){if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});}game.style.display='none';frame.src='about:blank';loadingMessage.style.display='none';game.classList.remove('fullscreen-ui');document.getElementById('game-exit-fullscreen').style.display='none';}
-document.getElementById('game-minimize').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});game.style.display='none';});
+function leaveMinecraft(){if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});}game.style.display='none';frame.src='about:blank';loadingMessage.style.display='none';game.classList.remove('fullscreen-ui');document.getElementById('game-exit-fullscreen').style.display='none';removeTaskApp('game');}
+document.getElementById('game-minimize').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});game.style.display='none';const item=taskAppButtons.get('game');if(item)item.classList.add('minimized');});
 document.getElementById('game-close').addEventListener('click',leaveMinecraft);
 document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
 document.getElementById('game-exit-fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();});
