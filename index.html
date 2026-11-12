@@ -211,11 +211,27 @@ html,body{min-width:320px}
 .file-item strong,.file-item small{display:block}
 .file-item small{margin-top:5px;color:#aeb8cb;font-size:11px}
 .file-note{margin-top:16px;color:#8995aa;font-size:12px}
-#notes-window{width:min(680px,calc(100% - 28px))}
-#notes-area{display:block;width:100%;min-height:310px;resize:vertical;padding:16px;border:1px solid #ffffff25;border-radius:13px;background:#090d16;color:#f4f6fb;font:14px/1.6 Arial,sans-serif;outline:none}
-#notes-area:focus{border-color:#f52e5480;box-shadow:0 0 0 3px #f52e5418}
-.notes-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:#9da9bd;font-size:12px}
-.notes-toolbar button{width:auto;margin:0;padding:9px 13px;background:#303849;border:1px solid #ffffff20;font-size:12px}
+#notes-window{width:min(850px,calc(100% - 28px));background:#f3f3f3;color:#202020;border:1px solid #b9b9b9;border-radius:9px;overflow:hidden;box-shadow:0 24px 80px #0009}
+#notes-window .os-window-top{height:42px;padding:0 12px;background:#f3f3f3;color:#242424;border-bottom:1px solid #dedede;font:13px "Segoe UI",Arial,sans-serif}
+#notes-window .os-window-top>span{display:flex;align-items:center;gap:9px}
+#notes-window .os-window-top>span:before{content:"▤";display:grid;place-items:center;width:22px;height:22px;border-radius:4px;background:#1675d1;color:white;font-size:15px}
+#notes-window .window-actions{gap:0}
+#notes-window .window-actions button{width:42px;height:30px;border:0;border-radius:0;background:transparent;color:#333;font-size:14px}
+#notes-window .window-actions button:hover{background:#e2e2e2}
+#notes-window .window-actions .win-close{background:transparent;color:#333}
+#notes-window .window-actions .win-close:hover{background:#e81123;color:white}
+#notes-window .os-window-body{padding:0;background:#fff;font-family:"Segoe UI",Arial,sans-serif}
+#notes-window .notes-menu{height:34px;display:flex;align-items:center;gap:4px;padding:0 12px;background:#fff;border-bottom:1px solid #eee;color:#222}
+#notes-window .notes-menu span{padding:5px 9px;border-radius:4px;font-size:13px}
+#notes-window .notes-menu span:first-child{background:#e8f2fc}
+#notes-window .notes-document{padding:14px 20px 0;background:#fff}
+#notes-window #notes-area{display:block;width:100%;height: min(48vh,470px);min-height:260px;resize:vertical;padding:12px 10px;border:0;border-radius:0;background:#fff;color:#202020;font:16px/1.65 "Segoe UI",Arial,sans-serif;outline:none;box-shadow:none}
+#notes-window #notes-area:focus{border:0;box-shadow:none}
+#notes-window .notes-toolbar{height:30px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;padding:0 12px;background:#f5f5f5;border-top:1px solid #e5e5e5;color:#555;font:11px "Segoe UI",Arial,sans-serif}
+#notes-window .notes-toolbar button{width:auto;margin:0;padding:4px 10px;border:1px solid #d1d1d1;border-radius:4px;background:#fff;color:#333;font:11px "Segoe UI",Arial,sans-serif}
+#notes-window .notes-toolbar button:hover{background:#eaf3fc;border-color:#8bbce8}
+#notes-window.maximized{background:#fff}
+@media(max-width:600px){#notes-window .notes-document{padding:8px}#notes-window #notes-area{height:50vh;min-height:220px;font-size:15px}}
 #play{background:linear-gradient(135deg,var(--cherry-accent,#73b94d),#397e39)}
 #desktop-time.hidden{display:none}
 
@@ -335,7 +351,7 @@ html,body{min-width:320px}
 </section>
 <section class="os-window" id="notes-window" aria-label="Notes" aria-hidden="true">
   <div class="os-window-top"><span>📝 Notes</span><div class="window-actions"><button type="button" data-minimize="notes-window" title="Minimize">—</button><button type="button" data-maximize="notes-window" title="Maximize">□</button><button class="win-close" data-close="notes-window" type="button" title="Close">×</button></div></div>
-  <div class="os-window-body"><h2>My Notes</h2><p>Your notes save automatically on this device.</p><textarea id="notes-area" placeholder="Write something down..."></textarea><div class="notes-toolbar"><span id="notes-status" aria-live="polite">Saved on this device</span><button id="clear-notes" type="button">Clear notes</button></div></div>
+  <div class="os-window-body"><div class="notes-menu"><span>File</span><span>Edit</span><span>View</span></div><div class="notes-document"><textarea id="notes-area" spellcheck="true" placeholder="Start typing..." aria-label="Note text"></textarea></div><div class="notes-toolbar"><span id="notes-status" aria-live="polite">Saved on this device</span><span id="notes-position">Ln 1, Col 1&nbsp; · &nbsp;100%&nbsp; · &nbsp;UTF-8</span><button id="clear-notes" type="button">Clear</button></div></div>
 </section>
 <main class="card" id="picker">
 <div class="window-top"><span>🟩 Minecraft Launcher</span><div class="window-actions"><button type="button" id="minimize-picker" title="Minimize">—</button><button type="button" id="maximize-picker" title="Maximize">□</button><button class="win-close" id="close-picker" type="button" title="Close">×</button></div></div>
@@ -394,7 +410,11 @@ const notesArea=document.getElementById('notes-area');
 const notesStatus=document.getElementById('notes-status');
 const notesKey='cherryOSNotes';
 notesArea.value=localStorage.getItem(notesKey)||'';
-notesArea.addEventListener('input',()=>{localStorage.setItem(notesKey,notesArea.value);notesStatus.textContent='Saved just now';});
+const notesPosition=document.getElementById('notes-position');
+function updateNotesPosition(){const before=notesArea.value.slice(0,notesArea.selectionStart);const lines=before.split('\\n');notesPosition.textContent='Ln '+lines.length+', Col '+(lines[lines.length-1].length+1)+'  ·  100%  ·  UTF-8';}
+notesArea.addEventListener('input',()=>{localStorage.setItem(notesKey,notesArea.value);notesStatus.textContent='Saved just now';updateNotesPosition();});
+['click','keyup','select'].forEach(eventName=>notesArea.addEventListener(eventName,updateNotesPosition));
+updateNotesPosition();
 document.getElementById('clear-notes').addEventListener('click',()=>{if(!notesArea.value)return;notesArea.value='';localStorage.removeItem(notesKey);notesStatus.textContent='Notes cleared';notesArea.focus();});
 const settingsKey='cherryOSSettings';
 const savedSettings=JSON.parse(localStorage.getItem(settingsKey)||'{}');
