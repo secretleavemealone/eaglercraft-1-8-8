@@ -342,6 +342,7 @@ html,body{min-width:320px}
 .wallpaper-actions span{font-size:10px;color:#c8c0bd}
 @media(max-width:550px){.wallpaper-grid{grid-template-columns:1fr}}
 
+.settings-recommend-button{width:calc(100% + 40px);border:0;border-top:1px solid #171514;text-align:left;cursor:pointer;font:inherit;background:transparent;color:inherit}.settings-recommend-button:hover{background:#ffffff0b}
 </style>
 </head>
 <body>
@@ -412,9 +413,9 @@ html,body{min-width:320px}
       <div class="settings-home-grid">
         <div class="settings-column">
           <section class="settings-card recommended-card"><h3>Recommended settings</h3><p>Quick access to commonly used settings</p>
-            <div class="settings-link-row"><span>🕒</span><strong>Clock format</strong><span class="settings-row-value">Time &amp; language</span><span>›</span></div>
-            <div class="settings-link-row"><span>🖌️</span><strong>Desktop appearance</strong><span class="settings-row-value">Personalization</span><span>›</span></div>
-            <div class="settings-link-row"><span>🎨</span><strong>Accent color</strong><span class="settings-row-value">CherryOS theme</span><span>›</span></div>
+            <button type="button" class="settings-link-row settings-recommend-button" data-go-settings="Time &amp; language"><span>🕒</span><strong>Clock format</strong><span class="settings-row-value">Time &amp; language</span><span>›</span></button>
+            <button type="button" class="settings-link-row settings-recommend-button" data-go-settings="Personalization"><span>🖌️</span><strong>Desktop appearance</strong><span class="settings-row-value">Personalization</span><span>›</span></button>
+            <button type="button" class="settings-link-row settings-recommend-button" data-go-settings="Personalization"><span>🎨</span><strong>Accent color</strong><span class="settings-row-value">CherryOS theme</span><span>›</span></button>
           </section>
           <section class="settings-card settings-controls-card"><h3>Personalize CherryOS</h3><p>Change how your desktop looks and behaves</p>
             <label class="setting-row"><span><b>24-hour clock</b><small>Use 24-hour time in the desktop clock</small></span><input id="setting-24h" type="checkbox"></label>
@@ -563,6 +564,9 @@ settingsMain.addEventListener('change',async event=>{
  }catch(error){if(status)status.textContent='Could not load that image. Try another file.';}
 });
 settingsMain.addEventListener('click',event=>{
+ const goSettings=event.target.closest('[data-go-settings]');
+ if(goSettings){const page=goSettings.dataset.goSettings;loadSettingsPage(page);}
+
  if(event.target.id==='remove-wallpaper'){setDesktopWallpaper('');if(document.getElementById('wallpaper-status'))document.getElementById('wallpaper-status').textContent='Wallpaper removed';}
 });
 
