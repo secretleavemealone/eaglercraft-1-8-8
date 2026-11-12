@@ -235,6 +235,30 @@ html,body{min-width:320px}
 #game{z-index:20}
 @media(max-width:600px){#taskbar{height:58px;padding:0 9px;gap:5px}#start-button{width:40px;height:40px}.task-app{width:38px;height:40px}#tray{gap:6px;font-size:10px}#start-menu{bottom:68px}.desktop-icons{grid-template-columns:64px;top:52px}.os-window{resize:none}}
 
+
+/* Minecraft in-game corner controls */
+#game-titlebar{
+  position:fixed;top:12px;left:auto;right:14px;width:auto;height:auto;
+  z-index:50;padding:0;background:transparent;border:0;box-shadow:none;
+  backdrop-filter:none;pointer-events:none;
+}
+#game-titlebar>span{display:none}
+#game-controls{pointer-events:auto;gap:6px;padding:6px;border:1px solid #ffffff35;
+  border-radius:13px;background:#10131dcc;box-shadow:0 8px 28px #0009;
+  backdrop-filter:blur(14px)}
+#game-controls button{min-width:36px;height:34px;padding:0 10px;border-radius:9px;
+  background:#252a36eF;border:1px solid #ffffff30;color:#fff}
+#game-controls #game-fullscreen,#game-controls #game-exit-fullscreen{font-size:12px}
+#game-controls #game-minimize{font-size:19px}
+#game-controls #game-close{min-width:36px;font-size:21px}
+#game iframe{padding-top:0}
+@media(max-width:600px){
+  #game-titlebar{top:8px;right:8px}
+  #game-controls{gap:4px;padding:5px}
+  #game-controls button{min-width:32px;height:31px;padding:0 8px}
+  #game-controls #game-fullscreen,#game-controls #game-exit-fullscreen{font-size:11px}
+}
+
 </style>
 </head>
 <body>
