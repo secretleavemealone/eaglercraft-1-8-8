@@ -888,6 +888,7 @@ window.updateDriveGate = function() {
   locked.hidden=signed; connect.hidden=!signed;
   if(!signed){list.replaceChildren();if(refresh)refresh.hidden=true;}
   else if(refresh)refresh.hidden=false;
+  if(signed&&window.cherryDriveAccessToken&&typeof loadGoogleDriveFiles==="function")loadGoogleDriveFiles();
 };
 document.addEventListener("click", async event => {
   if(event.target.closest("#drive-go-signin")) {
