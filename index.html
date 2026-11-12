@@ -355,6 +355,17 @@ html,body{min-width:320px}
 .wallpaper-actions span{font-size:11px;color:#aeb8cb}
 @media(max-width:560px){.wallpaper-grid{grid-template-columns:1fr}}
 
+
+.account-google-profile{display:flex;align-items:center;gap:13px;padding:15px;margin:14px 0;border:1px solid #ffffff20;border-radius:12px;background:#ffffff08}
+.account-google-avatar{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:50%;background:#ffffff16;color:#fff;font-size:23px;overflow:hidden}
+.account-google-avatar img{width:100%;height:100%;object-fit:cover}
+.account-google-profile strong,.account-google-profile small{display:block;overflow-wrap:anywhere}
+.account-google-profile small{margin-top:4px;color:#aeb8cb;font-size:12px}
+.google-sign-in-button,.google-sign-out-button{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:10px 0 0;padding:13px 16px;border:1px solid #ffffff30;border-radius:10px;background:#fff;color:#222;font-weight:700;cursor:pointer}
+.google-sign-out-button{background:#343b4b;color:#fff}
+.google-g{font-weight:900;font-size:18px;color:#4285f4}
+.account-auth-status{min-height:18px;color:#aeb8cb;font-size:12px;margin:12px 0 0}
+
 </style>
 </head>
 <body>
@@ -535,7 +546,7 @@ const settingsPages={
 'Network & internet':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Network status</h3><p>This page uses your browser's internet connection.</p><div class="settings-link-row"><span>🌐</span><strong>Browser connection</strong><span class="settings-row-value" id="browser-network-state">Checking…</span></div><label class="setting-row"><span><b>Show network status indicator</b><small>Display a connection symbol in Settings</small></span><input type="checkbox" data-setting="networkIndicator" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>More network settings</h3><p>Wi-Fi and router settings are controlled by your device, not this website.</p></section></div></div>`,
 'Personalization':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Colors</h3><p>Choose your CherryOS accent color.</p><label class="setting-row"><span><b>Accent color</b><small>Used for highlights and active controls</small></span><select data-setting="accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the clock on your desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section><section class="settings-card"><h3>Desktop wallpapers</h3><p>Select a built-in CherryOS wallpaper preset.</p><div class="wallpaper-grid"><button type="button" class="wallpaper-choice" data-wallpaper-preset="garden"><img src="./wallpapers/cherry-garden.jpg" alt="Cherry blossom garden"><span>Cherry Blossom Garden</span></button><button type="button" class="wallpaper-choice" data-wallpaper-preset="crimson"><img src="./wallpapers/crimson-moon.jpg" alt="Crimson moon landscape"><span>Crimson Moon</span></button><button type="button" class="wallpaper-choice" data-wallpaper-preset="samurai"><img src="./wallpapers/samurai.jpg" alt="Samurai"><span>Samurai</span></button></div><div class="wallpaper-actions"><button type="button" id="remove-wallpaper">Remove wallpaper</button><span id="wallpaper-status" aria-live="polite">Choose a preset above</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Theme preview</h3><p>Your selected accent color and wallpaper are applied to the desktop.</p><div class="promo-pills"><i>CherryOS</i><i>Desktop</i></div></section></div></div>`,
 'Apps':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Installed apps</h3><p>Open an app from your CherryOS desktop.</p><div class="settings-link-row"><span>⛏️</span><strong>Minecraft</strong><button type="button" data-open-app="minecraft">Open</button></div><div class="settings-link-row"><span>📁</span><strong>Files</strong><button type="button" data-open-app="files">Open</button></div><div class="settings-link-row"><span>📝</span><strong>Notes</strong><button type="button" data-open-app="notes">Open</button></div></section></div><div class="settings-column"><section class="settings-card"><h3>App defaults</h3><p>CherryOS apps open inside the desktop environment.</p></section></div></div>`,
-'Accounts':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Your account</h3><p>Set the display name used on this CherryOS device.</p><label class="setting-row"><span><b>Display name</b><small>Stored only in this browser</small></span><input class="settings-text-input" data-setting="accountName" maxlength="32" placeholder="CherryOS User"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Account privacy</h3><p>This is a local website profile, not a Windows or Microsoft account.</p></section></div></div>`,
+'Accounts':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Google account</h3><p>Sign in with Google to use your account profile in CherryOS.</p><div class="account-google-profile"><div class="account-google-avatar" id="google-account-avatar">👤</div><div><strong id="google-account-name">Not signed in</strong><small id="google-account-email">Sign in to connect your Google account</small></div></div><button type="button" id="google-sign-in" class="google-sign-in-button"><span class="google-g">G</span> Continue with Google</button><button type="button" id="google-sign-out" class="google-sign-out-button" hidden>Sign out</button><p id="google-account-status" class="account-auth-status" aria-live="polite">Your account is not connected.</p></section><section class="settings-card"><h3>Device display name</h3><p>Choose the name shown on this CherryOS device.</p><label class="setting-row"><span><b>Display name</b><small>Saved in this browser</small></span><input class="settings-text-input" data-setting="accountName" maxlength="32" placeholder="CherryOS User"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Account privacy</h3><p>Google handles sign-in securely. CherryOS only displays your basic Google profile name, email, and profile picture. You can sign out at any time.</p></section></div></div>`,
 'Time & language':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Date &amp; time</h3><p>Change the way CherryOS displays the time.</p><label class="setting-row"><span><b>24-hour clock</b><small>Use 24-hour time instead of AM/PM</small></span><input type="checkbox" data-setting="time24"></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Language</h3><p>CherryOS currently follows your browser's language and regional settings.</p><div class="settings-link-row"><span>🌐</span><strong>Display language</strong><span class="settings-row-value">Browser default</span></div></section></div></div>`,
 'Gaming':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Game preferences</h3><p>Options for games opened inside CherryOS.</p><label class="setting-row"><span><b>Remember fullscreen preference</b><small>Save your preference for game sessions</small></span><input type="checkbox" data-setting="gameFullscreen"></label><label class="setting-row"><span><b>Show game loading messages</b><small>Display status while a game starts</small></span><input type="checkbox" data-setting="gameLoading" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Minecraft</h3><p>Launch Minecraft from the desktop or Apps section.</p><button type="button" data-open-app="minecraft">Open Minecraft</button></section></div></div>`,
 'Accessibility':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Visual options</h3><p>Adjust the CherryOS interface for easier reading.</p><label class="setting-row"><span><b>Larger interface text</b><small>Increase text size in CherryOS windows</small></span><input type="checkbox" data-setting="largeText"></label><label class="setting-row"><span><b>Reduce animations</b><small>Reduce interface movement effects</small></span><input type="checkbox" data-setting="reduceMotion"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Keyboard and input</h3><p>Use Tab and Enter to navigate buttons and controls.</p></section></div></div>`,
@@ -727,6 +738,82 @@ document.getElementById('game-close').addEventListener('click',leaveMinecraft);
 document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
 document.getElementById('game-exit-fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();});
 document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;game.classList.toggle('fullscreen-ui',on);document.getElementById('game-exit-fullscreen').style.display=on?'block':'none';});
+</script>
+
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCZy9hSB6JRmsmduheEBZnG4q6GatPd5c",
+  authDomain: "czxx-8392d.firebaseapp.com",
+  databaseURL: "https://czxx-8392d-default-rtdb.firebaseio.com",
+  projectId: "czxx-8392d",
+  storageBucket: "czxx-8392d.firebasestorage.app",
+  messagingSenderId: "216434211403",
+  appId: "1:216434211403:web:96c8b687ad2a7e8cf1abce"
+};
+const authApp = getApps().find(app => app.name === "cherryos-auth") || initializeApp(firebaseConfig, "cherryos-auth");
+const auth = getAuth(authApp);
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+function accountElements() {
+  return {
+    name: document.getElementById("google-account-name"),
+    email: document.getElementById("google-account-email"),
+    avatar: document.getElementById("google-account-avatar"),
+    signIn: document.getElementById("google-sign-in"),
+    signOut: document.getElementById("google-sign-out"),
+    status: document.getElementById("google-account-status")
+  };
+}
+function showAccount(user) {
+  const el = accountElements();
+  if (!el.name) return;
+  if (user) {
+    el.name.textContent = user.displayName || "Google account";
+    el.email.textContent = user.email || "";
+    el.avatar.textContent = "";
+    if (user.photoURL) {
+      const img = document.createElement("img");
+      img.src = user.photoURL;
+      img.alt = "Google profile";
+      el.avatar.replaceChildren(img);
+    } else el.avatar.textContent = "👤";
+    el.signIn.hidden = true;
+    el.signOut.hidden = false;
+    el.status.textContent = "Signed in with Google.";
+  } else {
+    el.name.textContent = "Not signed in";
+    el.email.textContent = "Sign in to connect your Google account";
+    el.avatar.textContent = "👤";
+    el.signIn.hidden = false;
+    el.signOut.hidden = true;
+    el.status.textContent = "Your account is not connected.";
+  }
+}
+onAuthStateChanged(auth, user => {
+  window.cherryGoogleUser = user || null;
+  showAccount(user);
+});
+document.addEventListener("click", async event => {
+  if (event.target.closest("#google-sign-in")) {
+    const el = accountElements();
+    if (el.status) el.status.textContent = "Opening Google sign-in…";
+    try { await signInWithPopup(auth, provider); }
+    catch (error) {
+      if (el.status) el.status.textContent = error.code === "auth/unauthorized-domain"
+        ? "This website domain must be added to Firebase Authentication authorized domains."
+        : error.code === "auth/popup-closed-by-user" ? "Sign-in was cancelled." : "Google sign-in failed: " + error.message;
+    }
+  }
+  if (event.target.closest("#google-sign-out")) {
+    const el = accountElements();
+    try { await signOut(auth); if (el.status) el.status.textContent = "You have signed out."; }
+    catch (error) { if (el.status) el.status.textContent = "Sign-out failed: " + error.message; }
+  }
+});
 </script>
 
 <script type="module">
