@@ -211,6 +211,11 @@ html,body{min-width:320px}
 .file-item strong,.file-item small{display:block}
 .file-item small{margin-top:5px;color:#aeb8cb;font-size:11px}
 .file-note{margin-top:16px;color:#8995aa;font-size:12px}
+#notes-window{width:min(680px,calc(100% - 28px))}
+#notes-area{display:block;width:100%;min-height:310px;resize:vertical;padding:16px;border:1px solid #ffffff25;border-radius:13px;background:#090d16;color:#f4f6fb;font:14px/1.6 Arial,sans-serif;outline:none}
+#notes-area:focus{border-color:#f52e5480;box-shadow:0 0 0 3px #f52e5418}
+.notes-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:#9da9bd;font-size:12px}
+.notes-toolbar button{width:auto;margin:0;padding:9px 13px;background:#303849;border:1px solid #ffffff20;font-size:12px}
 #play{background:linear-gradient(135deg,var(--cherry-accent,#73b94d),#397e39)}
 #desktop-time.hidden{display:none}
 
@@ -278,6 +283,7 @@ html,body{min-width:320px}
     <button class="app-icon" id="minecraft-app" type="button"><span class="glyph"><img class="minecraft-app-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt=""></span><span>Minecraft</span></button>
     <button class="app-icon" id="files-app" type="button"><span class="glyph">📁</span><span>Files</span></button>
     <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
+    <button class="app-icon" id="notes-app" type="button"><span class="glyph">📝</span><span>Notes</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
   <div id="desktop-brand">CHERRYOS</div>
@@ -302,6 +308,7 @@ html,body{min-width:320px}
       <button type="button" data-launch="minecraft"><span><img class="minecraft-menu-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt=""></span>Minecraft</button>
       <button type="button" data-launch="files"><span>📁</span>Files</button>
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
+      <button type="button" data-launch="notes"><span>📝</span>Notes</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
   </div>
@@ -325,6 +332,10 @@ html,body{min-width:320px}
     <a class="file-item" href="./eaglercraft-1.12.2%20(15).html.gz" download><span>📦</span><span><strong>Minecraft 1.12.2</strong><small>Compressed game client · Download file</small></span><span>↓</span></a>
     <div class="file-note">Game files are hosted with this website.</div>
   </div>
+</section>
+<section class="os-window" id="notes-window" aria-label="Notes" aria-hidden="true">
+  <div class="os-window-top"><span>📝 Notes</span><div class="window-actions"><button type="button" data-minimize="notes-window" title="Minimize">—</button><button type="button" data-maximize="notes-window" title="Maximize">□</button><button class="win-close" data-close="notes-window" type="button" title="Close">×</button></div></div>
+  <div class="os-window-body"><h2>My Notes</h2><p>Your notes save automatically on this device.</p><textarea id="notes-area" placeholder="Write something down..."></textarea><div class="notes-toolbar"><span id="notes-status" aria-live="polite">Saved on this device</span><button id="clear-notes" type="button">Clear notes</button></div></div>
 </section>
 <main class="card" id="picker">
 <div class="window-top"><span>🟩 Minecraft Launcher</span><div class="window-actions"><button type="button" id="minimize-picker" title="Minimize">—</button><button type="button" id="maximize-picker" title="Maximize">□</button><button class="win-close" id="close-picker" type="button" title="Close">×</button></div></div>
@@ -363,13 +374,13 @@ function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.ge
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(b)b.remove();taskAppButtons.delete(key);}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const key=id==='files-window'?'files':'settings';const label=id==='files-window'?'Files':'Settings';const glyph=id==='files-window'?'📁':'⚙️';showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
+function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const key=id==='files-window'?'files':id==='notes-window'?'notes':'settings';const label=id==='files-window'?'Files':id==='notes-window'?'Notes':'Settings';const glyph=id==='files-window'?'📁':id==='notes-window'?'📝':'⚙️';showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
 makeDraggable(picker,picker.querySelector('.window-top'));
 picker.addEventListener('pointerdown',()=>bringToFront(picker));
-document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
+document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
 document.querySelectorAll('[data-maximize]').forEach(b=>b.addEventListener('click',()=>setWindowMaximized(document.getElementById(b.dataset.maximize))));
 document.getElementById('minimize-picker').addEventListener('click',()=>{picker.classList.add('minimized');const item=taskAppButtons.get('picker');if(item)item.classList.add('minimized');});
 document.getElementById('maximize-picker').addEventListener('click',()=>setWindowMaximized(picker));
@@ -377,7 +388,14 @@ document.getElementById('minecraft-app').addEventListener('click',openMinecraft)
 document.getElementById('files-app').addEventListener('click',()=>openOsWindow('files-window'));
 document.getElementById('dock-files').addEventListener('click',()=>openOsWindow('files-window'));
 document.getElementById('settings-app').addEventListener('click',()=>openOsWindow('settings-window'));
+document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');removeTaskApp(w.id==='files-window'?'files':'settings');}));
+const notesArea=document.getElementById('notes-area');
+const notesStatus=document.getElementById('notes-status');
+const notesKey='cherryOSNotes';
+notesArea.value=localStorage.getItem(notesKey)||'';
+notesArea.addEventListener('input',()=>{localStorage.setItem(notesKey,notesArea.value);notesStatus.textContent='Saved just now';});
+document.getElementById('clear-notes').addEventListener('click',()=>{if(!notesArea.value)return;notesArea.value='';localStorage.removeItem(notesKey);notesStatus.textContent='Notes cleared';notesArea.focus();});
 const settingsKey='cherryOSSettings';
 const savedSettings=JSON.parse(localStorage.getItem(settingsKey)||'{}');
 const time24=document.getElementById('setting-24h');
@@ -407,6 +425,7 @@ document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click'
  if(b.dataset.launch==='minecraft')openMinecraft();
  if(b.dataset.launch==='files')openOsWindow('files-window');
  if(b.dataset.launch==='settings')openOsWindow('settings-window');
+ if(b.dataset.launch==='notes')openOsWindow('notes-window');
 }));
 document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';closeOsWindows();});
 document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';picker.classList.remove('maximized','minimized');removeTaskApp('picker');});
