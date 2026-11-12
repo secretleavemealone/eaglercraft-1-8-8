@@ -325,6 +325,12 @@ html,body{min-width:320px}
 @media(max-width:760px){#settings-window{width:calc(100vw - 12px);height:calc(100vh - 50px)}.win-settings{grid-template-columns:150px minmax(0,1fr)}.win-settings-sidebar{padding:8px 5px}.settings-nav button{font-size:10px;gap:6px;padding:0 5px}.settings-profile{gap:6px;padding-left:2px}.settings-avatar{width:34px;height:34px;font-size:17px}.settings-profile strong{font-size:10px}.settings-profile small{font-size:9px}.win-settings-main{padding:18px 12px}.settings-home-grid{grid-template-columns:1fr}.settings-device{flex-wrap:wrap}.device-status{margin-left:0}}
 @media(max-width:440px){.win-settings{grid-template-columns:112px minmax(0,1fr)}.settings-nav button{font-size:9px}.settings-nav button span{width:13px}.settings-profile{height:60px}.settings-profile small{display:none}.settings-heading h2{font-size:21px}}
 
+
+.settings-text-input{width:min(190px,48%);padding:9px 10px;border:1px solid #ffffff2b;border-radius:6px;background:#211d1b;color:#fff}
+.settings-link-row button,.settings-card>button{width:auto;margin:0 0 0 auto;padding:8px 13px;border-radius:5px;background:#45403e;border:1px solid #ffffff22;font-size:11px}
+.large-settings-text .win-settings-main{font-size:1.12em}.large-settings-text .settings-card p,.large-settings-text .setting-row{font-size:1.08em}
+.reduce-motion *, .reduce-motion *:before,.reduce-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
 </style>
 </head>
 <body>
@@ -496,10 +502,58 @@ notesArea.addEventListener('input',()=>{localStorage.setItem(notesKey,notesArea.
 updateNotesPosition();
 document.getElementById('clear-notes').addEventListener('click',()=>{if(!notesArea.value)return;notesArea.value='';localStorage.removeItem(notesKey);notesStatus.textContent='Notes cleared';notesArea.focus();});
 
-document.querySelectorAll('.settings-nav [data-settings-page]').forEach(button=>button.addEventListener('click',()=>{
- document.querySelectorAll('.settings-nav [data-settings-page]').forEach(item=>item.classList.toggle('selected',item===button));
- document.getElementById('settings-page-title').textContent=button.dataset.settingsPage;
-}));
+
+const settingsMain=document.querySelector('.win-settings-main');
+const settingsHomeMarkup=settingsMain.querySelector('.settings-home-grid').outerHTML;
+const settingsPages={
+'System':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Device information</h3><p>Basic information about this CherryOS desktop.</p><label class="setting-row"><span><b>Device name</b><small>Name shown in Settings</small></span><input class="settings-text-input" data-setting="deviceName" value="CherryOS Desktop" maxlength="32"></label><div class="settings-link-row"><span>💻</span><strong>Operating system</strong><span class="settings-row-value">CherryOS</span></div><div class="settings-link-row"><span>🧩</span><strong>Desktop environment</strong><span class="settings-row-value">Web desktop</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Display</h3><p>Choose how your desktop behaves.</p><label class="setting-row"><span><b>Show desktop clock</b><small>Display time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div></div>`,
+'Bluetooth & devices':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Bluetooth</h3><p>Bluetooth status for this browser-based desktop.</p><label class="setting-row"><span><b>Bluetooth</b><small>Remember your preferred Bluetooth state</small></span><input type="checkbox" data-setting="bluetooth" checked></label></section><section class="settings-card"><h3>Connected devices</h3><p>CherryOS does not directly manage Windows hardware devices.</p><div class="settings-link-row"><span>🎧</span><strong>Device management</strong><span class="settings-row-value">Use Windows Settings</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Device preferences</h3><p>Your Bluetooth preference is saved locally in this browser.</p></section></div></div>`,
+'Network & internet':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Network status</h3><p>This page uses your browser's internet connection.</p><div class="settings-link-row"><span>🌐</span><strong>Browser connection</strong><span class="settings-row-value" id="browser-network-state">Checking…</span></div><label class="setting-row"><span><b>Show network status indicator</b><small>Display a connection symbol in Settings</small></span><input type="checkbox" data-setting="networkIndicator" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>More network settings</h3><p>Wi-Fi and router settings are controlled by your device, not this website.</p></section></div></div>`,
+'Personalization':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Colors</h3><p>Choose your CherryOS accent color.</p><label class="setting-row"><span><b>Accent color</b><small>Used for highlights and active controls</small></span><select data-setting="accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the clock on your desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Theme preview</h3><p>Your selected accent color is applied to the desktop.</p><div class="promo-pills"><i>CherryOS</i><i>Desktop</i></div></section></div></div>`,
+'Apps':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Installed apps</h3><p>Open an app from your CherryOS desktop.</p><div class="settings-link-row"><span>⛏️</span><strong>Minecraft</strong><button type="button" data-open-app="minecraft">Open</button></div><div class="settings-link-row"><span>📁</span><strong>Files</strong><button type="button" data-open-app="files">Open</button></div><div class="settings-link-row"><span>📝</span><strong>Notes</strong><button type="button" data-open-app="notes">Open</button></div></section></div><div class="settings-column"><section class="settings-card"><h3>App defaults</h3><p>CherryOS apps open inside the desktop environment.</p></section></div></div>`,
+'Accounts':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Your account</h3><p>Set the display name used on this CherryOS device.</p><label class="setting-row"><span><b>Display name</b><small>Stored only in this browser</small></span><input class="settings-text-input" data-setting="accountName" maxlength="32" placeholder="CherryOS User"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Account privacy</h3><p>This is a local website profile, not a Windows or Microsoft account.</p></section></div></div>`,
+'Time & language':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Date &amp; time</h3><p>Change the way CherryOS displays the time.</p><label class="setting-row"><span><b>24-hour clock</b><small>Use 24-hour time instead of AM/PM</small></span><input type="checkbox" data-setting="time24"></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Language</h3><p>CherryOS currently follows your browser's language and regional settings.</p><div class="settings-link-row"><span>🌐</span><strong>Display language</strong><span class="settings-row-value">Browser default</span></div></section></div></div>`,
+'Gaming':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Game preferences</h3><p>Options for games opened inside CherryOS.</p><label class="setting-row"><span><b>Remember fullscreen preference</b><small>Save your preference for game sessions</small></span><input type="checkbox" data-setting="gameFullscreen"></label><label class="setting-row"><span><b>Show game loading messages</b><small>Display status while a game starts</small></span><input type="checkbox" data-setting="gameLoading" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Minecraft</h3><p>Launch Minecraft from the desktop or Apps section.</p><button type="button" data-open-app="minecraft">Open Minecraft</button></section></div></div>`,
+'Accessibility':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Visual options</h3><p>Adjust the CherryOS interface for easier reading.</p><label class="setting-row"><span><b>Larger interface text</b><small>Increase text size in CherryOS windows</small></span><input type="checkbox" data-setting="largeText"></label><label class="setting-row"><span><b>Reduce animations</b><small>Reduce interface movement effects</small></span><input type="checkbox" data-setting="reduceMotion"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Keyboard and input</h3><p>Use Tab and Enter to navigate buttons and controls.</p></section></div></div>`,
+'Privacy & security':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Your local data</h3><p>Clear information saved by CherryOS in this browser.</p><div class="settings-link-row"><span>📝</span><strong>Saved notes</strong><button type="button" data-clear-data="notes">Clear notes</button></div><div class="settings-link-row"><span>💬</span><strong>Chat username</strong><button type="button" data-clear-data="chat">Clear username</button></div></section></div><div class="settings-column"><section class="settings-card"><h3>Privacy information</h3><p>Settings and notes are saved in this browser's local storage. Clearing browser site data can also remove them.</p></section></div></div>`,
+'Windows Update':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>CherryOS updates</h3><p>Website updates are published by the CherryOS project.</p><div class="update-status">✓ You're viewing the current website build.</div><button type="button" id="check-cherry-updates">Check again</button><p id="update-check-status" aria-live="polite"></p></section></div><div class="settings-column"><section class="settings-card"><h3>Update history</h3><p>New features appear when the website is updated and redeployed.</p></section></div></div>`
+};
+function loadSettingsPage(page){
+ const target=settingsMain.querySelector('.settings-home-grid');
+ target.outerHTML=page==='Home'?settingsHomeMarkup:settingsPages[page];
+ document.getElementById('settings-page-title').textContent=page;
+ document.querySelectorAll('.settings-nav [data-settings-page]').forEach(item=>item.classList.toggle('selected',item.dataset.settingsPage===page));
+ hydrateSettingsControls();
+ const net=document.getElementById('browser-network-state');if(net)net.textContent=navigator.onLine?'Connected':'Offline';
+}
+function hydrateSettingsControls(){
+ const data=JSON.parse(localStorage.getItem('cherryOSExtraSettings')||'{}');
+ settingsMain.querySelectorAll('[data-setting]').forEach(el=>{
+  const key=el.dataset.setting;
+  if(el.type==='checkbox')el.checked=data[key]!==undefined?!!data[key]:(key==='showClock'?showClock.checked:key==='gameLoading'||key==='networkIndicator');
+  else if(el.tagName==='SELECT')el.value=data[key]||accent.value;
+  else if(el.tagName==='INPUT')el.value=data[key]||'';
+ });
+}
+document.querySelectorAll('.settings-nav [data-settings-page]').forEach(button=>button.addEventListener('click',()=>loadSettingsPage(button.dataset.settingsPage)));
+settingsMain.addEventListener('change',event=>{
+ const el=event.target;if(!el.matches('[data-setting]'))return;
+ const data=JSON.parse(localStorage.getItem('cherryOSExtraSettings')||'{}');const key=el.dataset.setting;
+ data[key]=el.type==='checkbox'?el.checked:el.value;localStorage.setItem('cherryOSExtraSettings',JSON.stringify(data));
+ if(key==='time24'){time24.checked=el.checked;applySettings();}
+ if(key==='showClock'){showClock.checked=el.checked;applySettings();}
+ if(key==='accent'){accent.value=el.value;applySettings();}
+ if(key==='largeText')document.getElementById('settings-window').classList.toggle('large-settings-text',el.checked);
+ if(key==='reduceMotion')document.documentElement.classList.toggle('reduce-motion',el.checked);
+});
+settingsMain.addEventListener('click',event=>{
+ const appButton=event.target.closest('[data-open-app]');
+ if(appButton){const app=appButton.dataset.openApp;if(app==='minecraft')openMinecraft();if(app==='files')openOsWindow('files-window');if(app==='notes')openOsWindow('notes-window');}
+ const clear=event.target.closest('[data-clear-data]');
+ if(clear){if(clear.dataset.clearData==='notes'){localStorage.removeItem('cherryOSNotes');alert('Saved notes cleared.');}else{localStorage.removeItem('minecraftChatUsername');alert('Saved chat username cleared.');}}
+ if(event.target.id==='check-cherry-updates'){const status=document.getElementById('update-check-status');if(status)status.textContent='You are using the latest version available to this page.';}
+});
+
 document.getElementById('settings-rename').addEventListener('click',event=>{
  event.preventDefault();
  const name=prompt('Enter a name for this CherryOS device:','CherryOS Desktop');
