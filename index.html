@@ -294,7 +294,7 @@ function updateDesktopClock(){
  const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};document.getElementById('clock').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'}).toUpperCase()+'</small>';
  const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};document.getElementById('desktop-time').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString()+'</small>';
 }
-updateDesktopClock();setInterval(updateDesktopClock,1000);
+applySettings();updateDesktopClock();setInterval(updateDesktopClock,1000);
 const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
