@@ -6,8 +6,26 @@
 <title>Minecraft 1.8.8</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#080b13;color:#f5f7ff}
-body{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#101827dd,#101827bb),url("./cherryblocked-minecraft-garden.jpg") center/cover fixed no-repeat}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,sans-serif;background:#050609;color:#f5f7ff}
+body{min-height:100vh;padding:0;background:radial-gradient(ellipse at 52% 42%,#35101d 0%,#10070d 38%,#020204 78%);position:relative}
+#desktop{position:fixed;inset:0;overflow:hidden;background:radial-gradient(ellipse at 52% 38%,#3b101d 0%,#12070d 38%,#020204 78%)}
+#desktop:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:#ff3b55;filter:blur(95px);opacity:.32;left:calc(50% - 170px);top:22%}
+.desktop-icons{position:absolute;left:22px;top:34px;display:grid;grid-template-columns:72px 72px;gap:20px 8px}
+.app-icon{width:68px;min-height:76px;border:0;background:transparent;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;cursor:pointer;border-radius:12px;font-size:12px;font-weight:600}
+.app-icon:hover{background:#ffffff18}
+.app-icon .glyph{font-size:34px;line-height:1;filter:drop-shadow(0 4px 8px #0008)}
+#clock{position:absolute;top:6%;left:50%;transform:translateX(-50%);text-align:center;color:#ffffffd9;text-shadow:0 3px 24px #000;font-weight:800;font-size:clamp(34px,4vw,54px)}
+#clock small{display:block;font-size:11px;letter-spacing:3px;margin-top:5px;color:#ffffff90}
+#desktop-brand{position:absolute;right:22px;top:45%;writing-mode:vertical-rl;letter-spacing:12px;font-size:24px;font-weight:900;color:#ffffff50}
+#dock{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;padding:12px 18px;border:1px solid #ffffff30;border-radius:22px;background:#17131be8;box-shadow:0 12px 45px #000b;backdrop-filter:blur(18px)}
+.dock-icon{border:0;background:transparent;color:white;font-size:23px;width:34px;height:34px;cursor:pointer;border-radius:9px}
+.dock-icon:hover{background:#ffffff20}
+#picker{display:none;position:fixed;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:min(460px,calc(100% - 28px));padding:26px;border:1px solid #ffffff35;border-radius:18px;background:#11151fee;backdrop-filter:blur(20px);box-shadow:0 24px 90px #000d}
+.window-top{display:flex;align-items:center;justify-content:space-between;margin:-6px 0 20px;color:#cbd5e1;font-size:13px}
+#close-picker{width:auto;margin:0;padding:5px 11px;background:#ffffff18;border:1px solid #ffffff30}
+#desktop-time{position:fixed;bottom:20px;right:24px;color:#fff;font-size:12px;text-align:right;z-index:2}
+#desktop-time small{display:block;color:#ffffff9c}
+
 .card{width:min(460px,100%);padding:34px;border:1px solid #ffffff30;border-radius:20px;background:#101827cc;backdrop-filter:blur(16px);box-shadow:0 24px 80px #0009}
 h1{font-size:30px;margin:0 0 8px}.sub{color:#c3cde0;margin:0 0 26px;font-size:14px;line-height:1.5}
 label{display:block;font-size:13px;color:#d6def0;margin:0 0 9px}
@@ -30,11 +48,29 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 #chat-form{display:flex;gap:7px}
 #chat-input{flex:1;min-width:0;padding:11px;border:1px solid #ffffff30;border-radius:8px;background:#202b40;color:white}
 #chat-send{width:auto;margin:0;padding:0 14px}
-@media(max-width:480px){.card{padding:25px}}
+@media(max-width:600px){.desktop-icons{left:8px;top:18px;grid-template-columns:64px 64px}.app-icon{width:60px}#desktop-brand{display:none}#dock{gap:4px;padding:9px 10px}.dock-icon{width:29px;font-size:19px}}
 </style>
 </head>
 <body>
+<div id="desktop">
+  <div class="desktop-icons">
+    <button class="app-icon" id="minecraft-app" type="button"><span class="glyph">🟩</span><span>Minecraft</span></button>
+    <div class="app-icon"><span class="glyph">🎮</span><span>Games</span></div>
+    <div class="app-icon"><span class="glyph">🌐</span><span>Browser</span></div>
+    <div class="app-icon"><span class="glyph">📁</span><span>Files</span></div>
+    <div class="app-icon"><span class="glyph">⚙️</span><span>Settings</span></div>
+  </div>
+  <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
+  <div id="desktop-brand">MINECRAFT</div>
+  <div id="dock">
+    <button class="dock-icon" id="dock-home" title="Home">▦</button>
+    <button class="dock-icon" id="dock-minecraft" title="Minecraft">🟩</button>
+    <span class="dock-icon">🎮</span><span class="dock-icon">🌐</span><span class="dock-icon">📁</span>
+  </div>
+  <div id="desktop-time"></div>
+</div>
 <main class="card" id="picker">
+<div class="window-top"><span>🟩 Minecraft Launcher</span><button id="close-picker" type="button">✕</button></div>
 <h1>Minecraft 1.8.8</h1>
 <p class="sub">Choose a version and launch the browser game.</p>
 <p class="sub" style="margin-top:-14px;color:#a7f3d0;font-weight:700">New version added: Minecraft 1.12.2!</p>
@@ -60,6 +96,18 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 </section>
 <script>
 const picker=document.getElementById('picker');
+const desktop=document.getElementById('desktop');
+function openMinecraft(){picker.style.display='block';}
+document.getElementById('minecraft-app').addEventListener('click',openMinecraft);
+document.getElementById('dock-minecraft').addEventListener('click',openMinecraft);
+document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';});
+document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';});
+function updateDesktopClock(){
+ const now=new Date();
+ document.getElementById('clock').innerHTML=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'<small>'+now.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'}).toUpperCase()+'</small>';
+ document.getElementById('desktop-time').innerHTML=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'<small>'+now.toLocaleDateString()+'</small>';
+}
+updateDesktopClock();setInterval(updateDesktopClock,1000);
 const game=document.getElementById('game');
 const frame=document.getElementById('client');
 const version=document.getElementById('version');
@@ -104,7 +152,7 @@ document.getElementById('back').addEventListener('click',()=>{
  game.style.display='none';
  document.getElementById('chat-toggle').style.display='block';
  document.getElementById('chat-panel').style.display='';
- picker.style.display='grid';
+ picker.style.display='block';
 });
 </script>
 
