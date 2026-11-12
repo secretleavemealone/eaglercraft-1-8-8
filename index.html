@@ -105,6 +105,69 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
  #picker h1{font-size:23px}
 }
 
+
+/* UHD desktop refinement */
+:root{color-scheme:dark}
+html,body{min-width:320px}
+#desktop{
+ background:
+  radial-gradient(ellipse at 50% 48%,#68172a55 0%,transparent 27%),
+  radial-gradient(ellipse at 76% 22%,#1b376044 0%,transparent 30%),
+  radial-gradient(ellipse at 18% 82%,#48202e38 0%,transparent 32%),
+  linear-gradient(125deg,#06070c 0%,#100b13 42%,#090d17 100%);
+}
+#desktop:before{width:min(48vw,900px);height:min(48vw,900px);left:calc(50% - min(24vw,450px));top:13%;background:radial-gradient(circle,#f52e5430 0%,#8d1d3b18 36%,transparent 70%);filter:blur(45px);opacity:1}
+#desktop:after{opacity:.22;background-image:radial-gradient(1px 1px at 12% 20%,#ffffff 98%,transparent),radial-gradient(1px 1px at 72% 16%,#ffffff 98%,transparent),radial-gradient(1px 1px at 42% 72%,#ffffff 98%,transparent),radial-gradient(1px 1px at 88% 65%,#ffffff 98%,transparent),radial-gradient(1px 1px at 24% 88%,#ffffff 98%,transparent),linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:230px 190px,310px 240px,270px 220px,360px 280px,290px 230px,64px 64px,64px 64px;mask-image:linear-gradient(to bottom,#000,transparent 95%)}
+#system-bar{height:42px;padding:0 clamp(16px,2vw,38px);background:linear-gradient(90deg,#080910eF,#10121be8,#080910ef);border-bottom-color:#ffffff1d;box-shadow:0 5px 25px #0005;font-size:12px}
+#system-bar .brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:3px}
+#system-bar .brand:before{content:"";width:8px;height:8px;border-radius:50%;background:#8ee16b;box-shadow:0 0 14px #8ee16b}
+#system-bar .right{letter-spacing:.7px}
+.desktop-icons{top:clamp(62px,5vh,100px);left:clamp(16px,2vw,42px);grid-template-columns:repeat(2,clamp(76px,5.2vw,104px));gap:clamp(12px,1.7vh,24px) 8px}
+.app-icon{width:100%;min-height:clamp(84px,9vh,116px);gap:10px;font-size:clamp(11px,.75vw,14px);text-shadow:0 2px 8px #000}
+.app-icon .glyph{width:clamp(48px,3.6vw,68px);height:clamp(48px,3.6vw,68px);border-radius:clamp(14px,1vw,20px);font-size:clamp(25px,1.8vw,34px);box-shadow:0 12px 32px #0008,inset 0 1px #ffffff40}
+#clock{top:clamp(74px,9vh,150px);font-size:clamp(48px,5.2vw,96px);letter-spacing:-.055em;text-shadow:0 12px 50px #000,0 0 45px #ffffff15}
+#clock small{margin-top:12px;font-size:clamp(9px,.65vw,13px);letter-spacing:clamp(3px,.35vw,6px);color:#e6cbd2}
+#desktop-brand{right:clamp(24px,3vw,60px);top:43%;font-size:clamp(13px,1.1vw,20px);letter-spacing:clamp(7px,.7vw,13px);color:#ffffff55}
+#dock{bottom:clamp(16px,2.5vh,34px);gap:clamp(10px,1vw,20px);padding:clamp(12px,1vw,18px) clamp(18px,1.6vw,30px);border-radius:clamp(18px,1.5vw,28px);background:linear-gradient(145deg,#292b38d9,#10121be8);border-color:#ffffff30;box-shadow:0 24px 70px #000b,inset 0 1px #ffffff2c,inset 0 -1px #0008}
+.dock-icon{width:clamp(40px,3vw,58px);height:clamp(40px,3vw,58px);font-size:clamp(21px,1.6vw,31px);border-radius:clamp(12px,1vw,18px)}
+#desktop-time{bottom:clamp(18px,2.5vh,34px);right:clamp(18px,2vw,40px);font-size:clamp(12px,.8vw,15px)}
+#picker{width:min(540px,calc(100% - 30px));max-height:min(88vh,900px);overflow:auto;border-radius:26px;background:linear-gradient(145deg,#1a1e2bf5,#0b0e17f7);box-shadow:0 40px 140px #000e,0 0 100px #d52e4b14,inset 0 1px #ffffff1b}
+.window-top{height:54px;padding:0 20px;font-size:14px}
+#picker h1{font-size:clamp(27px,2vw,36px);margin:30px 30px 8px;letter-spacing:-1.2px}
+#picker>.sub{margin-left:30px;margin-right:30px;font-size:14px}
+#picker>.sub[style]{padding:12px 14px}
+#picker label{margin-left:30px;margin-right:30px}
+#picker select{width:calc(100% - 60px);margin-left:30px;margin-right:30px;padding:16px;font-size:16px}
+#play{width:calc(100% - 60px);margin:20px 30px 12px;padding:17px;font-size:16px;border-radius:12px}
+#picker .launch.secondary,#chat-toggle{width:calc(100% - 60px);margin-left:30px;margin-right:30px;padding:14px;border-radius:12px}
+#chat-panel{width:calc(100% - 60px);margin-left:30px;margin-right:30px}
+@media(min-width:2200px){
+ #system-bar{height:54px}
+ .desktop-icons{top:82px}
+ #picker{width:620px}
+ #picker h1{font-size:42px}
+ #picker>.sub{font-size:17px}
+ #picker select{font-size:18px}
+ #play{font-size:18px;padding:20px}
+}
+@media(max-width:600px){
+ #system-bar .right{display:none}
+ #desktop-brand{display:none}
+ #clock{top:12%;font-size:42px}
+ .desktop-icons{top:54px;left:8px;grid-template-columns:62px 62px;gap:8px 2px}
+ .app-icon{min-height:72px;width:60px}
+ .app-icon .glyph{width:42px;height:42px}
+ #dock{bottom:12px;gap:3px;padding:8px}
+ .dock-icon{width:31px;height:34px}
+ #desktop-time{right:10px;bottom:70px}
+ #picker{border-radius:19px}
+ #picker h1{margin:22px 20px 7px;font-size:25px}
+ #picker>.sub,#picker label{margin-left:20px;margin-right:20px}
+ #picker select{width:calc(100% - 40px);margin-left:20px;margin-right:20px}
+ #play,#picker .launch.secondary,#chat-toggle{width:calc(100% - 40px);margin-left:20px;margin-right:20px}
+ #chat-panel{width:calc(100% - 40px);margin-left:20px;margin-right:20px}
+}
+
 </style>
 </head>
 <body>
