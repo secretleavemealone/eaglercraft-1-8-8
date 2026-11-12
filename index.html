@@ -432,7 +432,7 @@ play.addEventListener('click',async()=>{
  }
 });
 document.getElementById('direct').href=gameUrl;
-document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(frame.requestFullscreen)await frame.requestFullscreen();else if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
+document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
 document.getElementById('game-exit-fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();});
 document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;game.classList.toggle('fullscreen-ui',on);document.getElementById('game-exit-fullscreen').style.display=on?'block':'none';});
 document.getElementById('back').addEventListener('click',()=>{
