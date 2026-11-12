@@ -169,6 +169,29 @@ html,body{min-width:320px}
 }
 
 
+
+/* CherryOS app windows and working controls */
+.os-window{display:none;position:fixed;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:min(500px,calc(100% - 28px));max-height: min(82vh,720px);overflow:auto;border:1px solid #ffffff30;border-radius:20px;background:linear-gradient(145deg,#1b1f2cf7,#0b0e17f7);box-shadow:0 30px 100px #000e,inset 0 1px #ffffff16;backdrop-filter:blur(24px)}
+.os-window.open{display:block}
+.os-window-top{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #ffffff18;color:#edf1fa;font-size:14px;font-weight:700}
+.window-close{width:28px;height:28px;margin:0;padding:0;border:0;border-radius:50%;background:#e75a64;color:white;font-weight:800;cursor:pointer}
+.os-window-body{padding:24px}
+.os-window-body h2{margin:0 0 7px;font-size:25px}
+.os-window-body>p{margin:0 0 20px;color:#aeb8cb;font-size:13px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #ffffff14;color:#e7ebf4}
+.setting-row input[type=checkbox]{width:19px;height:19px;accent-color:var(--cherry-accent,#f52e54)}
+.setting-row select{width:auto;min-width:145px;padding:9px 12px;font-size:13px}
+#reset-settings{margin-top:18px;background:#303849;border:1px solid #ffffff20}
+.file-item{display:flex;align-items:center;gap:13px;padding:14px;margin:9px 0;border:1px solid #ffffff1b;border-radius:12px;background:#ffffff08;color:#f3f5fb;text-decoration:none}
+.file-item:hover{background:#ffffff12;border-color:#ffffff35}
+.file-item>span:first-child{font-size:25px}
+.file-item>span:nth-child(2){flex:1;min-width:0}
+.file-item strong,.file-item small{display:block}
+.file-item small{margin-top:5px;color:#aeb8cb;font-size:11px}
+.file-note{margin-top:16px;color:#8995aa;font-size:12px}
+#play{background:linear-gradient(135deg,var(--cherry-accent,#73b94d),#397e39)}
+#desktop-time.hidden{display:none}
+
 </style>
 </head>
 <body>
@@ -176,18 +199,38 @@ html,body{min-width:320px}
   <div id="system-bar"><span class="brand">CHERRYOS</span><span class="right">Workspace&nbsp;&nbsp; • &nbsp;&nbsp;Minecraft Hub</span></div>
   <div class="desktop-icons">
     <button class="app-icon" id="minecraft-app" type="button"><span class="glyph">⛏️</span><span>Minecraft</span></button>
-    <div class="app-icon"><span class="glyph">📁</span><span>Files</span></div>
-    <div class="app-icon"><span class="glyph">⚙️</span><span>Settings</span></div>
+    <button class="app-icon" id="files-app" type="button"><span class="glyph">📁</span><span>Files</span></button>
+    <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
   <div id="desktop-brand">CHERRYOS</div>
   <div id="dock">
     <button class="dock-icon" id="dock-home" title="Home">▦</button>
     <button class="dock-icon" id="dock-minecraft" title="Minecraft">⛏️</button>
-    <span class="dock-icon">📁</span>
+    <button class="dock-icon" id="dock-files" title="Files" type="button">📁</button>
   </div>
   <div id="desktop-time"></div>
 </div>
+<section class="os-window" id="settings-window" aria-label="Settings" aria-hidden="true">
+  <div class="os-window-top"><span>⚙️ Settings</span><button class="window-close" data-close="settings-window" type="button">✕</button></div>
+  <div class="os-window-body">
+    <h2>CherryOS Settings</h2>
+    <p>Customize your desktop.</p>
+    <label class="setting-row"><span>24-hour clock</span><input id="setting-24h" type="checkbox"></label>
+    <label class="setting-row"><span>Show desktop clock</span><input id="setting-clock" type="checkbox" checked></label>
+    <label class="setting-row"><span>Accent color</span><select id="setting-accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label>
+    <button id="reset-settings" type="button">Reset settings</button>
+  </div>
+</section>
+<section class="os-window" id="files-window" aria-label="Files" aria-hidden="true">
+  <div class="os-window-top"><span>📁 File Manager</span><button class="window-close" data-close="files-window" type="button">✕</button></div>
+  <div class="os-window-body">
+    <h2>My Files</h2><p>Files available in this CherryOS website.</p>
+    <a class="file-item" href="./game.html" target="_blank" rel="noopener"><span>🟩</span><span><strong>Minecraft 1.8.8</strong><small>game.html · Open game client</small></span><span>↗</span></a>
+    <a class="file-item" href="./eaglercraft-1.12.2%20(15).html.gz" download><span>📦</span><span><strong>Minecraft 1.12.2</strong><small>Compressed game client · Download file</small></span><span>↓</span></a>
+    <div class="file-note">Game files are hosted with this website.</div>
+  </div>
+</section>
 <main class="card" id="picker">
 <div class="window-top"><span>🟩 Minecraft Launcher</span><button id="close-picker" type="button">✕</button></div>
 <h1>Minecraft Launcher</h1>
@@ -216,15 +259,40 @@ html,body{min-width:320px}
 <script>
 const picker=document.getElementById('picker');
 const desktop=document.getElementById('desktop');
-function openMinecraft(){picker.style.display='block';}
+function openMinecraft(){closeOsWindows();picker.style.display='block';}
+function closeOsWindows(){document.querySelectorAll('.os-window').forEach(w=>{w.classList.remove('open');w.setAttribute('aria-hidden','true');});}
+function openOsWindow(id){picker.style.display='none';closeOsWindows();const w=document.getElementById(id);w.classList.add('open');w.setAttribute('aria-hidden','false');}
 document.getElementById('minecraft-app').addEventListener('click',openMinecraft);
+document.getElementById('files-app').addEventListener('click',()=>openOsWindow('files-window'));
+document.getElementById('dock-files').addEventListener('click',()=>openOsWindow('files-window'));
+document.getElementById('settings-app').addEventListener('click',()=>openOsWindow('settings-window'));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open');w.setAttribute('aria-hidden','true');}));
+const settingsKey='cherryOSSettings';
+const savedSettings=JSON.parse(localStorage.getItem(settingsKey)||'{}');
+const time24=document.getElementById('setting-24h');
+const showClock=document.getElementById('setting-clock');
+const accent=document.getElementById('setting-accent');
+time24.checked=!!savedSettings.time24;
+showClock.checked=savedSettings.showClock!==false;
+accent.value=savedSettings.accent||'#f52e54';
+function applySettings(){
+ const settings={time24:time24.checked,showClock:showClock.checked,accent:accent.value};
+ localStorage.setItem(settingsKey,JSON.stringify(settings));
+ document.documentElement.style.setProperty('--cherry-accent',accent.value);
+ document.getElementById('desktop-time').classList.toggle('hidden',!showClock.checked);
+ updateDesktopClock();
+}
+[time24,showClock,accent].forEach(el=>el.addEventListener('change',applySettings));
+document.getElementById('reset-settings').addEventListener('click',()=>{
+ time24.checked=false;showClock.checked=true;accent.value='#f52e54';applySettings();
+});
 document.getElementById('dock-minecraft').addEventListener('click',openMinecraft);
-document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';});
+document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';closeOsWindows();});
 document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';});
 function updateDesktopClock(){
  const now=new Date();
- document.getElementById('clock').innerHTML=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'<small>'+now.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'}).toUpperCase()+'</small>';
- document.getElementById('desktop-time').innerHTML=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'<small>'+now.toLocaleDateString()+'</small>';
+ const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};document.getElementById('clock').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'}).toUpperCase()+'</small>';
+ const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};document.getElementById('desktop-time').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString()+'</small>';
 }
 updateDesktopClock();setInterval(updateDesktopClock,1000);
 const game=document.getElementById('game');
@@ -245,7 +313,9 @@ play.addEventListener('click',async()=>{
  document.getElementById('chat-panel').style.display='none';
  game.style.display='block';
  if(selected==='1.8.8'){
-   loadingMessage.style.display='none';
+   loadingMessage.textContent='Starting Minecraft 1.8.8...';
+   loadingMessage.style.display='flex';
+   frame.addEventListener('load',()=>{loadingMessage.style.display='none';},{once:true});
    frame.src=gameUrl;
    return;
  }
