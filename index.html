@@ -64,6 +64,7 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 .app-icon{width:72px;min-height:82px;padding:8px 4px;border:1px solid transparent;transition:background .18s,border-color .18s,transform .18s}
 .app-icon:hover{background:#ffffff12;border-color:#ffffff18;transform:translateY(-2px)}
 .app-icon .glyph{width:48px;height:48px;display:grid;place-items:center;border:1px solid #ffffff24;border-radius:15px;background:linear-gradient(145deg,#303848,#151a26);font-size:27px;box-shadow:0 8px 24px #0008}
+.minecraft-app-image{width:100%;height:100%;object-fit:cover;border-radius:13px;display:block}.minecraft-dock-image{width:100%;height:100%;object-fit:cover;border-radius:9px;display:block}.minecraft-menu-image{width:30px;height:30px;object-fit:cover;border-radius:8px;display:block}
 .app-icon:nth-child(1) .glyph{background:linear-gradient(145deg,#5b8c42,#1c3d28)}
 .app-icon:nth-child(2) .glyph{background:linear-gradient(145deg,#5b72b5,#292e59)}
 .app-icon:nth-child(3) .glyph{background:linear-gradient(145deg,#4d9eaa,#16434c)}
@@ -221,7 +222,7 @@ html,body{min-width:320px}
 .task-divider{height:30px;width:1px;background:#ffffff25;margin:0 3px}
 .task-app{width:44px;height:44px;margin:0;padding:0;border-radius:12px;background:transparent;font-size:22px}
 .task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}
-#task-apps{display:flex;align-items:center;gap:7px;min-width:0;overflow-x:auto;scrollbar-width:none}#task-apps::-webkit-scrollbar{display:none}.task-app{display:flex;align-items:center;gap:9px;width:auto;max-width:190px;height:42px;flex:0 0 auto;margin:0;padding:0 13px;border-radius:12px;background:#ffffff08;color:#f4f6fb;font-size:13px;white-space:nowrap}.task-app .task-glyph{font-size:19px}.task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}.task-app.minimized{opacity:.72}@media(max-width:600px){#task-apps{gap:4px}.task-app{height:38px;padding:0 9px;font-size:11px}.task-app .task-label{max-width:72px;overflow:hidden;text-overflow:ellipsis}}
+.minecraft-task-image{width:25px;height:25px;object-fit:cover;border-radius:7px;display:block}#task-apps{display:flex;align-items:center;gap:7px;min-width:0;overflow-x:auto;scrollbar-width:none}#task-apps::-webkit-scrollbar{display:none}.task-app{display:flex;align-items:center;gap:9px;width:auto;max-width:190px;height:42px;flex:0 0 auto;margin:0;padding:0 13px;border-radius:12px;background:#ffffff08;color:#f4f6fb;font-size:13px;white-space:nowrap}.task-app .task-glyph{font-size:19px}.task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}.task-app.minimized{opacity:.72}@media(max-width:600px){#task-apps{gap:4px}.task-app{height:38px;padding:0 9px;font-size:11px}.task-app .task-label{max-width:72px;overflow:hidden;text-overflow:ellipsis}}
 #taskbar-spacer{flex:1}
 #tray{display:flex;align-items:center;gap:14px;color:#e5e9f3;font-size:12px}
 #tray small{display:block;color:#9ea8bb;text-align:right;margin-top:3px}
@@ -274,7 +275,7 @@ html,body{min-width:320px}
 <div id="desktop">
   <div id="system-bar"><span class="brand">CHERRYOS</span><span class="right">Workspace&nbsp;&nbsp; • &nbsp;&nbsp;Minecraft Hub</span></div>
   <div class="desktop-icons">
-    <button class="app-icon" id="minecraft-app" type="button"><span class="glyph">⛏️</span><span>Minecraft</span></button>
+    <button class="app-icon" id="minecraft-app" type="button"><span class="glyph"><img class="minecraft-app-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt=""></span><span>Minecraft</span></button>
     <button class="app-icon" id="files-app" type="button"><span class="glyph">📁</span><span>Files</span></button>
     <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
   </div>
@@ -282,7 +283,7 @@ html,body{min-width:320px}
   <div id="desktop-brand">CHERRYOS</div>
   <div id="dock">
     <button class="dock-icon" id="dock-home" title="Home">▦</button>
-    <button class="dock-icon" id="dock-minecraft" title="Minecraft">⛏️</button>
+    <button class="dock-icon" id="dock-minecraft" title="Minecraft"><img class="minecraft-dock-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt=""></button>
     <button class="dock-icon" id="dock-files" title="Files" type="button">📁</button>
   </div>
   <div id="desktop-time"></div>
@@ -298,7 +299,7 @@ html,body{min-width:320px}
   <div id="start-menu">
     <h3>CHERRYOS · APPS</h3>
     <div class="menu-grid">
-      <button type="button" data-launch="minecraft"><span>⛏️</span>Minecraft</button>
+      <button type="button" data-launch="minecraft"><span><img class="minecraft-menu-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt=""></span>Minecraft</button>
       <button type="button" data-launch="files"><span>📁</span>Files</button>
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
     </div>
@@ -358,7 +359,7 @@ function closeOsWindows(){document.querySelectorAll('.os-window').forEach(w=>{w.
 let topZ=20;
 const taskApps=document.getElementById('task-apps');
 const taskAppButtons=new Map();
-function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('button');b.type='button';b.className='task-app';b.innerHTML='<span class="task-glyph"></span><span class="task-label"></span>';b.addEventListener('click',()=>{if(b._activate)b._activate();});taskApps.appendChild(b);taskAppButtons.set(key,b);}b.title=label;b.querySelector('.task-glyph').textContent=glyph;b.querySelector('.task-label').textContent=label;b._activate=activate;b.classList.toggle('minimized',!!minimized);return b;}
+function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('button');b.type='button';b.className='task-app';b.innerHTML='<span class="task-glyph"></span><span class="task-label"></span>';b.addEventListener('click',()=>{if(b._activate)b._activate();});taskApps.appendChild(b);taskAppButtons.set(key,b);}const icon=b.querySelector('.task-glyph');if(key==='picker'||key==='game'){icon.innerHTML='<img class="minecraft-task-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="">';}else{icon.textContent=glyph;}b.querySelector('.task-label').textContent=label;b._activate=activate;b.classList.toggle('minimized',!!minimized);return b;}
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(b)b.remove();taskAppButtons.delete(key);}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
