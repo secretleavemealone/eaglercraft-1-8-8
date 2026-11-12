@@ -331,6 +331,17 @@ html,body{min-width:320px}
 .large-settings-text .win-settings-main{font-size:1.12em}.large-settings-text .settings-card p,.large-settings-text .setting-row{font-size:1.08em}
 .reduce-motion *, .reduce-motion *:before,.reduce-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 
+
+.wallpaper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}
+.wallpaper-choice{min-width:0;display:flex;flex-direction:column;gap:7px;padding:7px;border:1px solid #ffffff20;border-radius:7px;background:#211d1b;cursor:pointer;font-size:10px}
+.wallpaper-choice:hover{border-color:var(--cherry-accent,#f52e54)}
+.wallpaper-choice img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;background:#38302e}
+.wallpaper-choice input{width:100%;font-size:9px;color:#cfc8c5}
+.wallpaper-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.wallpaper-actions button{width:auto;padding:8px 12px;background:#45403e;border:1px solid #ffffff22;border-radius:5px;font-size:11px}
+.wallpaper-actions span{font-size:10px;color:#c8c0bd}
+@media(max-width:550px){.wallpaper-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -509,7 +520,7 @@ const settingsPages={
 'System':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Device information</h3><p>Basic information about this CherryOS desktop.</p><label class="setting-row"><span><b>Device name</b><small>Name shown in Settings</small></span><input class="settings-text-input" data-setting="deviceName" value="CherryOS Desktop" maxlength="32"></label><div class="settings-link-row"><span>💻</span><strong>Operating system</strong><span class="settings-row-value">CherryOS</span></div><div class="settings-link-row"><span>🧩</span><strong>Desktop environment</strong><span class="settings-row-value">Web desktop</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Display</h3><p>Choose how your desktop behaves.</p><label class="setting-row"><span><b>Show desktop clock</b><small>Display time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div></div>`,
 'Bluetooth & devices':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Bluetooth</h3><p>Bluetooth status for this browser-based desktop.</p><label class="setting-row"><span><b>Bluetooth</b><small>Remember your preferred Bluetooth state</small></span><input type="checkbox" data-setting="bluetooth" checked></label></section><section class="settings-card"><h3>Connected devices</h3><p>CherryOS does not directly manage Windows hardware devices.</p><div class="settings-link-row"><span>🎧</span><strong>Device management</strong><span class="settings-row-value">Use Windows Settings</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Device preferences</h3><p>Your Bluetooth preference is saved locally in this browser.</p></section></div></div>`,
 'Network & internet':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Network status</h3><p>This page uses your browser's internet connection.</p><div class="settings-link-row"><span>🌐</span><strong>Browser connection</strong><span class="settings-row-value" id="browser-network-state">Checking…</span></div><label class="setting-row"><span><b>Show network status indicator</b><small>Display a connection symbol in Settings</small></span><input type="checkbox" data-setting="networkIndicator" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>More network settings</h3><p>Wi-Fi and router settings are controlled by your device, not this website.</p></section></div></div>`,
-'Personalization':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Colors</h3><p>Choose your CherryOS accent color.</p><label class="setting-row"><span><b>Accent color</b><small>Used for highlights and active controls</small></span><select data-setting="accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the clock on your desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Theme preview</h3><p>Your selected accent color is applied to the desktop.</p><div class="promo-pills"><i>CherryOS</i><i>Desktop</i></div></section></div></div>`,
+'Personalization':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Colors</h3><p>Choose your CherryOS accent color.</p><label class="setting-row"><span><b>Accent color</b><small>Used for highlights and active controls</small></span><select data-setting="accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the clock on your desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section><section class="settings-card"><h3>Desktop wallpapers</h3><p>Choose one of your pictures as your CherryOS desktop background. Select each image from your computer to add it.</p><div class="wallpaper-grid"><label class="wallpaper-choice"><img id="wallpaper-preview-0" alt="Cherry blossom Minecraft garden preview"><span>Cherry Blossom Garden</span><input type="file" accept="image/*" data-wallpaper-file="0"></label><label class="wallpaper-choice"><img id="wallpaper-preview-1" alt="Red moon Japanese landscape preview"><span>Crimson Moon</span><input type="file" accept="image/*" data-wallpaper-file="1"></label><label class="wallpaper-choice"><img id="wallpaper-preview-2" alt="Samurai landscape preview"><span>Samurai</span><input type="file" accept="image/*" data-wallpaper-file="2"></label></div><div class="wallpaper-actions"><button type="button" id="remove-wallpaper">Remove wallpaper</button><span id="wallpaper-status" aria-live="polite">No custom wallpaper selected</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Theme preview</h3><p>Your selected accent color and wallpaper are applied to the desktop.</p><div class="promo-pills"><i>CherryOS</i><i>Desktop</i></div></section></div></div>`,
 'Apps':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Installed apps</h3><p>Open an app from your CherryOS desktop.</p><div class="settings-link-row"><span>⛏️</span><strong>Minecraft</strong><button type="button" data-open-app="minecraft">Open</button></div><div class="settings-link-row"><span>📁</span><strong>Files</strong><button type="button" data-open-app="files">Open</button></div><div class="settings-link-row"><span>📝</span><strong>Notes</strong><button type="button" data-open-app="notes">Open</button></div></section></div><div class="settings-column"><section class="settings-card"><h3>App defaults</h3><p>CherryOS apps open inside the desktop environment.</p></section></div></div>`,
 'Accounts':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Your account</h3><p>Set the display name used on this CherryOS device.</p><label class="setting-row"><span><b>Display name</b><small>Stored only in this browser</small></span><input class="settings-text-input" data-setting="accountName" maxlength="32" placeholder="CherryOS User"></label></section></div><div class="settings-column"><section class="settings-card"><h3>Account privacy</h3><p>This is a local website profile, not a Windows or Microsoft account.</p></section></div></div>`,
 'Time & language':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card settings-controls-card"><h3>Date &amp; time</h3><p>Change the way CherryOS displays the time.</p><label class="setting-row"><span><b>24-hour clock</b><small>Use 24-hour time instead of AM/PM</small></span><input type="checkbox" data-setting="time24"></label><label class="setting-row"><span><b>Show desktop clock</b><small>Display the time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div><div class="settings-column"><section class="settings-card"><h3>Language</h3><p>CherryOS currently follows your browser's language and regional settings.</p><div class="settings-link-row"><span>🌐</span><strong>Display language</strong><span class="settings-row-value">Browser default</span></div></section></div></div>`,
@@ -518,6 +529,43 @@ const settingsPages={
 'Privacy & security':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Your local data</h3><p>Clear information saved by CherryOS in this browser.</p><div class="settings-link-row"><span>📝</span><strong>Saved notes</strong><button type="button" data-clear-data="notes">Clear notes</button></div><div class="settings-link-row"><span>💬</span><strong>Chat username</strong><button type="button" data-clear-data="chat">Clear username</button></div></section></div><div class="settings-column"><section class="settings-card"><h3>Privacy information</h3><p>Settings and notes are saved in this browser's local storage. Clearing browser site data can also remove them.</p></section></div></div>`,
 'Windows Update':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>CherryOS updates</h3><p>Website updates are published by the CherryOS project.</p><div class="update-status">✓ You're viewing the current website build.</div><button type="button" id="check-cherry-updates">Check again</button><p id="update-check-status" aria-live="polite"></p></section></div><div class="settings-column"><section class="settings-card"><h3>Update history</h3><p>New features appear when the website is updated and redeployed.</p></section></div></div>`
 };
+
+function setDesktopWallpaper(dataUrl){
+ const desktop=document.getElementById('desktop');
+ desktop.style.backgroundImage=dataUrl?'linear-gradient(#0002,#0002),url("'+dataUrl+'")':'';
+ desktop.style.backgroundSize=dataUrl?'cover':'';
+ desktop.style.backgroundPosition=dataUrl?'center':'';
+ desktop.style.backgroundRepeat=dataUrl?'no-repeat':'';
+ if(dataUrl)localStorage.setItem('cherryOSWallpaper',dataUrl);else localStorage.removeItem('cherryOSWallpaper');
+}
+function compressWallpaper(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();reader.onerror=reject;
+  reader.onload=()=>{const img=new Image();img.onerror=reject;img.onload=()=>{
+   const scale=Math.min(1,1600/img.width,900/img.height),canvas=document.createElement('canvas');
+   canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+   canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+   resolve(canvas.toDataURL('image/jpeg',.76));
+  };img.src=reader.result;};reader.readAsDataURL(file);
+ });
+}
+function restoreWallpaper(){
+ const saved=localStorage.getItem('cherryOSWallpaper');if(saved)setDesktopWallpaper(saved);
+}
+restoreWallpaper();
+settingsMain.addEventListener('change',async event=>{
+ const fileInput=event.target.closest('[data-wallpaper-file]');if(!fileInput||!fileInput.files||!fileInput.files[0])return;
+ const status=document.getElementById('wallpaper-status');if(status)status.textContent='Adding wallpaper…';
+ try{
+  const data=await compressWallpaper(fileInput.files[0]);setDesktopWallpaper(data);
+  const preview=document.getElementById('wallpaper-preview-'+fileInput.dataset.wallpaperFile);if(preview)preview.src=data;
+  if(status)status.textContent='Wallpaper applied and saved on this device';
+ }catch(error){if(status)status.textContent='Could not load that image. Try another file.';}
+});
+settingsMain.addEventListener('click',event=>{
+ if(event.target.id==='remove-wallpaper'){setDesktopWallpaper('');if(document.getElementById('wallpaper-status'))document.getElementById('wallpaper-status').textContent='Wallpaper removed';}
+});
+
 function loadSettingsPage(page){
  const target=settingsMain.querySelector('.settings-home-grid');
  target.outerHTML=page==='Home'?settingsHomeMarkup:settingsPages[page];
@@ -536,6 +584,16 @@ function hydrateSettingsControls(){
  });
 }
 document.querySelectorAll('.settings-nav [data-settings-page]').forEach(button=>button.addEventListener('click',()=>loadSettingsPage(button.dataset.settingsPage)));
+
+settingsMain.addEventListener('change',event=>{
+ const el=event.target;if(!el.matches('[data-setting]'))return;
+ const key=el.dataset.setting;
+ if(key==='deviceName'){const v=el.value.trim().slice(0,32);if(v){document.querySelector('.device-name strong').textContent=v;localStorage.setItem('cherryOSDeviceName',v);}}
+ if(key==='accountName'){const v=el.value.trim().slice(0,32);if(v){const profile=document.querySelector('.settings-profile strong');if(profile)profile.textContent=v;localStorage.setItem('cherryOSAccountName',v);}}
+});
+const savedDeviceName=localStorage.getItem('cherryOSDeviceName');if(savedDeviceName&&document.querySelector('.device-name strong'))document.querySelector('.device-name strong').textContent=savedDeviceName;
+const savedAccountName=localStorage.getItem('cherryOSAccountName');if(savedAccountName&&document.querySelector('.settings-profile strong'))document.querySelector('.settings-profile strong').textContent=savedAccountName;
+
 settingsMain.addEventListener('change',event=>{
  const el=event.target;if(!el.matches('[data-setting]'))return;
  const data=JSON.parse(localStorage.getItem('cherryOSExtraSettings')||'{}');const key=el.dataset.setting;
