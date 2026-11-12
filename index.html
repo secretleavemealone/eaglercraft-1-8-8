@@ -290,6 +290,41 @@ html,body{min-width:320px}
   #game-controls #game-fullscreen,#game-controls #game-exit-fullscreen{font-size:11px}
 }
 
+
+/* Windows 11 inspired Settings layout */
+#settings-window{width:min(1180px,calc(100vw - 34px));height:min(790px,calc(100vh - 70px));max-height:none;overflow:hidden;background:#211d1b;color:#f7f5f4;border:1px solid #ffffff20;border-radius:9px;box-shadow:0 28px 100px #000b;font-family:"Segoe UI",Arial,sans-serif}
+#settings-window.maximized{left:8px!important;top:8px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important}
+#settings-window .settings-titlebar{height:42px;padding:0 14px;background:#211d1b;border-bottom:0;font-size:12px;font-weight:500}
+#settings-window .settings-titlebar .window-actions button{border:0;border-radius:0;width:42px;height:32px;background:transparent}
+#settings-window .settings-titlebar .window-actions .win-close{background:transparent}
+#settings-window .settings-titlebar .window-actions .win-close:hover{background:#c42b35}
+.win-settings{display:grid;grid-template-columns:255px minmax(0,1fr);height:calc(100% - 42px);min-height:0;background:#211d1b}
+.win-settings-sidebar{padding:12px 10px 14px 12px;border-right:1px solid #ffffff0c;overflow:auto}
+.settings-profile{height:78px;display:flex;align-items:center;gap:12px;padding:5px 8px 14px;margin-bottom:8px}
+.settings-avatar{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#b33c54,#45212a);font-size:24px;border:1px solid #ffffff35}
+.settings-profile strong,.settings-profile small{display:block}.settings-profile strong{font-size:12px}.settings-profile small{font-size:10px;color:#c0b8b5;margin-top:4px}
+.settings-nav{display:flex;flex-direction:column;gap:3px}
+.settings-nav button{height:35px;display:flex;align-items:center;gap:12px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:#f5f2f0;text-align:left;font:12px "Segoe UI",Arial;cursor:pointer}
+.settings-nav button span{width:17px;text-align:center;font-size:15px}
+.settings-nav button:hover{background:#ffffff12}
+.settings-nav button.selected{background:#ffffff17;box-shadow:inset 3px 0 #45b7ed}
+.win-settings-main{min-width:0;overflow:auto;padding:20px clamp(20px,3vw,52px) 34px}
+.settings-heading h2{font-size:25px;font-weight:650;letter-spacing:-.5px;margin:0 0 24px}
+.settings-device{display:flex;align-items:center;gap:14px;min-height:88px;margin-bottom:22px}
+.device-wallpaper{width:58px;height:78px;display:grid;place-items:center;background:linear-gradient(160deg,#c35c77,#4b6749);font-size:25px;border:3px solid #080808}
+.device-name{min-width:180px;display:flex;flex-direction:column;gap:4px;font-size:12px}.device-name span,.device-name a{font-size:11px;color:#c6bfbd}.device-name a{color:#74c9ee;text-decoration:none}
+.device-status{display:flex;align-items:center;gap:12px;margin-left:auto;font-size:12px}.device-status>span{font-size:19px;color:#36aef0}.device-status strong,.device-status small{display:block}.device-status small{font-size:10px;color:#bdb5b2;margin-top:4px}
+.settings-home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.settings-column{display:flex;flex-direction:column;gap:10px;min-width:0}
+.settings-card{background:#302927;border:1px solid #ffffff08;border-radius:8px;overflow:hidden;padding:20px}
+.settings-card h3{font-size:16px;margin:0 0 8px;font-weight:650}.settings-card>p{font-size:11px;color:#d0c9c6;line-height:1.5;margin:0 0 14px}
+.recommended-card{padding-bottom:0}.settings-link-row{height:52px;margin:0 -20px;padding:0 20px;display:flex;align-items:center;gap:14px;border-top:1px solid #171514;color:#f7f4f2;font-size:12px}.settings-link-row>span:first-child{font-size:17px}.settings-link-row strong{font-weight:500}.settings-link-row .settings-row-value{margin-left:auto;color:#c8c0bd;font-size:10px}
+.settings-controls-card .setting-row{padding:13px 0;border-bottom:1px solid #ffffff15;margin:0;font-size:12px}.settings-controls-card .setting-row span{display:flex;flex-direction:column;gap:4px}.settings-controls-card .setting-row b{font-size:12px;font-weight:500}.settings-controls-card .setting-row small{font-size:10px;color:#bdb5b2}.settings-controls-card .setting-row select{background:#211d1b;border-color:#ffffff25;color:white;border-radius:5px}.settings-controls-card #reset-settings{width:auto;margin-top:14px;padding:9px 15px;background:#45403e;border:1px solid #ffffff20;font-size:11px}
+.promo-settings,.storage-settings,.update-settings{min-height:150px}.promo-icon{font-size:23px;margin-bottom:10px}.promo-pills{display:flex;gap:7px}.promo-pills i{font-style:normal;font-size:10px;padding:5px 9px;border-radius:20px;background:#ffffff12;color:#e4dcda}.storage-settings button{width:auto;margin:8px 0 0;padding:9px 14px;background:#39aee9;color:#111;border-radius:5px;font-size:11px}.update-status{font-size:11px;color:#8bd69b}
+#settings-rename{cursor:pointer}
+@media(max-width:760px){#settings-window{width:calc(100vw - 12px);height:calc(100vh - 50px)}.win-settings{grid-template-columns:150px minmax(0,1fr)}.win-settings-sidebar{padding:8px 5px}.settings-nav button{font-size:10px;gap:6px;padding:0 5px}.settings-profile{gap:6px;padding-left:2px}.settings-avatar{width:34px;height:34px;font-size:17px}.settings-profile strong{font-size:10px}.settings-profile small{font-size:9px}.win-settings-main{padding:18px 12px}.settings-home-grid{grid-template-columns:1fr}.settings-device{flex-wrap:wrap}.device-status{margin-left:0}}
+@media(max-width:440px){.win-settings{grid-template-columns:112px minmax(0,1fr)}.settings-nav button{font-size:9px}.settings-nav button span{width:13px}.settings-profile{height:60px}.settings-profile small{display:none}.settings-heading h2{font-size:21px}}
+
 </style>
 </head>
 <body>
@@ -330,14 +365,54 @@ html,body{min-width:320px}
   </div>
 
 <section class="os-window" id="settings-window" aria-label="Settings" aria-hidden="true">
-  <div class="os-window-top"><span>⚙️ Settings</span><div class="window-actions"><button type="button" data-minimize="settings-window" title="Minimize">—</button><button type="button" data-maximize="settings-window" title="Maximize">□</button><button class="win-close" data-close="settings-window" type="button" title="Close">×</button></div></div>
-  <div class="os-window-body">
-    <h2>CherryOS Settings</h2>
-    <p>Customize your desktop.</p>
-    <label class="setting-row"><span>24-hour clock</span><input id="setting-24h" type="checkbox"></label>
-    <label class="setting-row"><span>Show desktop clock</span><input id="setting-clock" type="checkbox" checked></label>
-    <label class="setting-row"><span>Accent color</span><select id="setting-accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label>
-    <button id="reset-settings" type="button">Reset settings</button>
+  <div class="os-window-top settings-titlebar"><span>⚙️ Settings</span><div class="window-actions"><button type="button" data-minimize="settings-window" title="Minimize">—</button><button type="button" data-maximize="settings-window" title="Maximize">□</button><button class="win-close" data-close="settings-window" type="button" title="Close">×</button></div></div>
+  <div class="win-settings">
+    <aside class="win-settings-sidebar">
+      <div class="settings-profile"><div class="settings-avatar">🍒</div><div><strong>CherryOS User</strong><small>Local account</small></div></div>
+      <nav class="settings-nav" aria-label="Settings categories">
+        <button class="selected" data-settings-page="Home"><span>🏠</span>Home</button>
+        <button data-settings-page="System"><span>🖥️</span>System</button>
+        <button data-settings-page="Bluetooth & devices"><span>ᛒ</span>Bluetooth &amp; devices</button>
+        <button data-settings-page="Network & internet"><span>📶</span>Network &amp; internet</button>
+        <button data-settings-page="Personalization"><span>🖌️</span>Personalization</button>
+        <button data-settings-page="Apps"><span>▦</span>Apps</button>
+        <button data-settings-page="Accounts"><span>👤</span>Accounts</button>
+        <button data-settings-page="Time & language"><span>🕒</span>Time &amp; language</button>
+        <button data-settings-page="Gaming"><span>🎮</span>Gaming</button>
+        <button data-settings-page="Accessibility"><span>♿</span>Accessibility</button>
+        <button data-settings-page="Privacy & security"><span>🛡️</span>Privacy &amp; security</button>
+        <button data-settings-page="Windows Update"><span>🔄</span>Windows Update</button>
+      </nav>
+    </aside>
+    <main class="win-settings-main">
+      <div class="settings-heading"><h2 id="settings-page-title">Home</h2></div>
+      <div class="settings-device">
+        <div class="device-wallpaper">🌸</div>
+        <div class="device-name"><strong>CherryOS Desktop</strong><span>Personal computer</span><a href="#" id="settings-rename">Rename this device</a></div>
+        <div class="device-status"><span>📶</span><div><strong>Network</strong><small>Connected</small></div></div>
+        <div class="device-status"><span>🔄</span><div><strong>System status</strong><small>Up to date</small></div></div>
+      </div>
+      <div class="settings-home-grid">
+        <div class="settings-column">
+          <section class="settings-card recommended-card"><h3>Recommended settings</h3><p>Quick access to commonly used settings</p>
+            <div class="settings-link-row"><span>🕒</span><strong>Clock format</strong><span class="settings-row-value">Time &amp; language</span><span>›</span></div>
+            <div class="settings-link-row"><span>🖌️</span><strong>Desktop appearance</strong><span class="settings-row-value">Personalization</span><span>›</span></div>
+            <div class="settings-link-row"><span>🎨</span><strong>Accent color</strong><span class="settings-row-value">CherryOS theme</span><span>›</span></div>
+          </section>
+          <section class="settings-card settings-controls-card"><h3>Personalize CherryOS</h3><p>Change how your desktop looks and behaves</p>
+            <label class="setting-row"><span><b>24-hour clock</b><small>Use 24-hour time in the desktop clock</small></span><input id="setting-24h" type="checkbox"></label>
+            <label class="setting-row"><span><b>Show desktop clock</b><small>Display the clock on your desktop</small></span><input id="setting-clock" type="checkbox" checked></label>
+            <label class="setting-row"><span><b>Accent color</b><small>Choose your CherryOS highlight color</small></span><select id="setting-accent"><option value="#f52e54">Cherry red</option><option value="#73b94d">Minecraft green</option><option value="#5b8cff">Blue</option><option value="#a879ff">Violet</option></select></label>
+            <button id="reset-settings" type="button">Reset settings</button>
+          </section>
+        </div>
+        <div class="settings-column">
+          <section class="settings-card promo-settings"><div class="promo-icon">🍒</div><h3>Welcome to CherryOS</h3><p>Your desktop, your style. Personalize your workspace and make it yours.</p><span class="promo-pills"><i>Simple</i><i>Personal</i><i>CherryOS</i></span></section>
+          <section class="settings-card storage-settings"><div class="promo-icon">📁</div><h3>Your apps and files</h3><p>Open your installed CherryOS apps and access the game files from one place.</p><button type="button" data-launch="files">Open File Manager</button></section>
+          <section class="settings-card update-settings"><div class="promo-icon">🔄</div><h3>CherryOS updates</h3><p>You're using the latest available CherryOS page version.</p><span class="update-status">✓ All caught up</span></section>
+        </div>
+      </div>
+    </main>
   </div>
 </section>
 <section class="os-window" id="files-window" aria-label="Files" aria-hidden="true">
@@ -420,6 +495,17 @@ notesArea.addEventListener('input',()=>{localStorage.setItem(notesKey,notesArea.
 ['click','keyup','select'].forEach(eventName=>notesArea.addEventListener(eventName,updateNotesPosition));
 updateNotesPosition();
 document.getElementById('clear-notes').addEventListener('click',()=>{if(!notesArea.value)return;notesArea.value='';localStorage.removeItem(notesKey);notesStatus.textContent='Notes cleared';notesArea.focus();});
+
+document.querySelectorAll('.settings-nav [data-settings-page]').forEach(button=>button.addEventListener('click',()=>{
+ document.querySelectorAll('.settings-nav [data-settings-page]').forEach(item=>item.classList.toggle('selected',item===button));
+ document.getElementById('settings-page-title').textContent=button.dataset.settingsPage;
+}));
+document.getElementById('settings-rename').addEventListener('click',event=>{
+ event.preventDefault();
+ const name=prompt('Enter a name for this CherryOS device:','CherryOS Desktop');
+ if(name&&name.trim())document.querySelector('.device-name strong').textContent=name.trim().slice(0,32);
+});
+
 const settingsKey='cherryOSSettings';
 const savedSettings=JSON.parse(localStorage.getItem(settingsKey)||'{}');
 const time24=document.getElementById('setting-24h');
