@@ -192,6 +192,37 @@ html,body{min-width:320px}
 #play{background:linear-gradient(135deg,var(--cherry-accent,#73b94d),#397e39)}
 #desktop-time.hidden{display:none}
 
+
+/* Desktop-style taskbar and Start menu */
+#taskbar{position:fixed;z-index:6;left:0;right:0;bottom:0;height:66px;display:flex;align-items:center;gap:10px;padding:0 18px;background:linear-gradient(180deg,#171923eF,#0a0c13f5);border-top:1px solid #ffffff28;box-shadow:0 -12px 38px #0008;backdrop-filter:blur(28px)}
+#start-button{width:46px;height:44px;margin:0;border:1px solid #ffffff20;border-radius:13px;background:linear-gradient(145deg,#303544,#151923);font-size:22px;display:grid;place-items:center}
+#start-button:hover,.task-app:hover{background:#ffffff20}
+.task-divider{height:30px;width:1px;background:#ffffff25;margin:0 3px}
+.task-app{width:44px;height:44px;margin:0;padding:0;border-radius:12px;background:transparent;font-size:22px}
+.task-app.active{background:#ffffff20;box-shadow:inset 0 -2px #ff526d}
+#taskbar-spacer{flex:1}
+#tray{display:flex;align-items:center;gap:14px;color:#e5e9f3;font-size:12px}
+#tray small{display:block;color:#9ea8bb;text-align:right;margin-top:3px}
+#start-menu{display:none;position:fixed;z-index:10;left:14px;bottom:78px;width:min(370px,calc(100vw - 28px));padding:18px;border:1px solid #ffffff30;border-radius:20px;background:#111520f5;box-shadow:0 25px 90px #000d;backdrop-filter:blur(28px)}
+#start-menu.open{display:block;animation:menuIn .16s ease-out}
+@keyframes menuIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#start-menu h3{margin:2px 4px 14px;font-size:15px;letter-spacing:1px}
+#start-menu .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#start-menu button{margin:0;min-height:82px;padding:12px 5px;background:#ffffff0b;border:1px solid #ffffff14;border-radius:12px;font-size:12px}
+#start-menu button span{display:block;font-size:25px;margin-bottom:7px}
+#start-menu .menu-footer{margin-top:14px;padding-top:12px;border-top:1px solid #ffffff18;color:#9ba6ba;font-size:11px}
+.desktop-icons{grid-template-columns:78px;gap:8px}
+#desktop-time{display:none}
+#dock{display:none}
+.os-window{resize:both;min-width:min(320px,calc(100vw - 24px));min-height:220px}
+.os-window-top{cursor:grab;user-select:none}
+.os-window-top:active{cursor:grabbing}
+.window-close{flex-shrink:0}
+#picker .window-top{cursor:grab;user-select:none}
+#game{z-index:20}
+#back{top:12px;right:12px}
+@media(max-width:600px){#taskbar{height:58px;padding:0 9px;gap:5px}#start-button{width:40px;height:40px}.task-app{width:38px;height:40px}#tray{gap:6px;font-size:10px}#start-menu{bottom:68px}.desktop-icons{grid-template-columns:64px;top:52px}.os-window{resize:none}}
+
 </style>
 </head>
 <body>
@@ -211,6 +242,26 @@ html,body{min-width:320px}
   </div>
   <div id="desktop-time"></div>
 </div>
+
+  <div id="taskbar">
+    <button id="start-button" type="button" aria-label="Start menu">✿</button>
+    <div class="task-divider"></div>
+    <button class="task-app" id="task-minecraft" type="button" title="Minecraft">⛏️</button>
+    <button class="task-app" id="task-files" type="button" title="Files">📁</button>
+    <button class="task-app" id="task-settings" type="button" title="Settings">⚙️</button>
+    <div id="taskbar-spacer"></div>
+    <div id="tray"><span>◉</span><span>⌃</span><span id="tray-clock">--:--<small>--/--/----</small></span></div>
+  </div>
+  <div id="start-menu">
+    <h3>CHERRYOS · APPS</h3>
+    <div class="menu-grid">
+      <button type="button" data-launch="minecraft"><span>⛏️</span>Minecraft</button>
+      <button type="button" data-launch="files"><span>📁</span>Files</button>
+      <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
+    </div>
+    <div class="menu-footer">CherryOS Desktop · Your workspace</div>
+  </div>
+
 <section class="os-window" id="settings-window" aria-label="Settings" aria-hidden="true">
   <div class="os-window-top"><span>⚙️ Settings</span><button class="window-close" data-close="settings-window" type="button">✕</button></div>
   <div class="os-window-body">
@@ -286,7 +337,21 @@ function applySettings(){
 document.getElementById('reset-settings').addEventListener('click',()=>{
  time24.checked=false;showClock.checked=true;accent.value='#f52e54';applySettings();
 });
+
 document.getElementById('dock-minecraft').addEventListener('click',openMinecraft);
+const startMenu=document.getElementById('start-menu');
+document.getElementById('start-button').addEventListener('click',()=>startMenu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!e.target.closest('#start-menu')&&!e.target.closest('#start-button'))startMenu.classList.remove('open');});
+document.querySelectorAll('[data-launch]').forEach(b=>b.addEventListener('click',()=>{
+ startMenu.classList.remove('open');
+ if(b.dataset.launch==='minecraft')openMinecraft();
+ if(b.dataset.launch==='files')openOsWindow('files-window');
+ if(b.dataset.launch==='settings')openOsWindow('settings-window');
+}));
+document.getElementById('task-minecraft').addEventListener('click',openMinecraft);
+document.getElementById('task-files').addEventListener('click',()=>openOsWindow('files-window'));
+document.getElementById('task-settings').addEventListener('click',()=>openOsWindow('settings-window'));
+
 document.getElementById('dock-home').addEventListener('click',()=>{picker.style.display='none';closeOsWindows();});
 document.getElementById('close-picker').addEventListener('click',()=>{picker.style.display='none';});
 function updateDesktopClock(){
@@ -294,6 +359,7 @@ function updateDesktopClock(){
  const clockOptions={hour:'numeric',minute:'2-digit',hour12:!time24.checked};
  document.getElementById('clock').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'}).toUpperCase()+'</small>';
  document.getElementById('desktop-time').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString()+'</small>';
+ document.getElementById('tray-clock').innerHTML=now.toLocaleTimeString([],clockOptions)+'<small>'+now.toLocaleDateString()+'</small>';
 }
 applySettings();updateDesktopClock();setInterval(updateDesktopClock,1000);
 const game=document.getElementById('game');
@@ -316,8 +382,10 @@ play.addEventListener('click',async()=>{
  if(selected==='1.8.8'){
    loadingMessage.textContent='Starting Minecraft 1.8.8...';
    loadingMessage.style.display='flex';
-   frame.addEventListener('load',()=>{loadingMessage.style.display='none';},{once:true});
+   let loaded=false;
+   frame.addEventListener('load',()=>{loaded=true;loadingMessage.style.display='none';},{once:true});
    frame.src=gameUrl;
+   setTimeout(()=>{if(!loaded && game.style.display==='block'){loadingMessage.innerHTML='Minecraft is taking longer than expected.<br>Check your connection, then use Back to versions to retry.';loadingMessage.style.display='flex';}},25000);
    return;
  }
  frame.src='about:blank';
