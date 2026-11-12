@@ -49,12 +49,69 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
 #chat-input{flex:1;min-width:0;padding:11px;border:1px solid #ffffff30;border-radius:8px;background:#202b40;color:white}
 #chat-send{width:auto;margin:0;padding:0 14px}
 @media(max-width:600px){.desktop-icons{left:8px;top:18px;grid-template-columns:64px 64px}.app-icon{width:60px}#desktop-brand{display:none}#dock{gap:4px;padding:9px 10px}.dock-icon{width:29px;font-size:19px}}
+
+/* polished desktop shell */
+#desktop{background:
+ radial-gradient(ellipse at 51% 39%,rgba(196,28,58,.28),transparent 28%),
+ radial-gradient(ellipse at 72% 78%,rgba(35,74,130,.18),transparent 32%),
+ radial-gradient(ellipse at 18% 12%,rgba(120,25,45,.18),transparent 28%),
+ linear-gradient(135deg,#07080d 0%,#100b12 48%,#05070d 100%)}
+#desktop:before{width:440px;height:440px;left:calc(50% - 220px);top:18%;background:#ff294f;filter:blur(130px);opacity:.2}
+#desktop:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+#system-bar{position:absolute;z-index:2;top:0;left:0;right:0;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#090a0ed9;border-bottom:1px solid #ffffff12;color:#dce2ef;font-size:12px;letter-spacing:.2px;backdrop-filter:blur(18px)}
+#system-bar .brand{font-weight:800;letter-spacing:2px;color:#fff}
+#system-bar .right{color:#aab2c4}
+.desktop-icons{top:66px;left:22px;grid-template-columns:76px 76px;gap:14px 8px;z-index:1}
+.app-icon{width:72px;min-height:82px;padding:8px 4px;border:1px solid transparent;transition:background .18s,border-color .18s,transform .18s}
+.app-icon:hover{background:#ffffff12;border-color:#ffffff18;transform:translateY(-2px)}
+.app-icon .glyph{width:48px;height:48px;display:grid;place-items:center;border:1px solid #ffffff24;border-radius:15px;background:linear-gradient(145deg,#303848,#151a26);font-size:27px;box-shadow:0 8px 24px #0008}
+.app-icon:nth-child(1) .glyph{background:linear-gradient(145deg,#5b8c42,#1c3d28)}
+.app-icon:nth-child(2) .glyph{background:linear-gradient(145deg,#5b72b5,#292e59)}
+.app-icon:nth-child(3) .glyph{background:linear-gradient(145deg,#4d9eaa,#16434c)}
+.app-icon:nth-child(4) .glyph{background:linear-gradient(145deg,#bd9b54,#5d4020)}
+.app-icon:nth-child(5) .glyph{background:linear-gradient(145deg,#697386,#303747)}
+#clock{top:12%;font-size:clamp(42px,5vw,68px);letter-spacing:-2px;color:#fff;text-shadow:0 8px 40px #000}
+#clock small{font-size:10px;letter-spacing:4px;color:#d2b9c1}
+#desktop-brand{right:34px;top:40%;font-size:17px;letter-spacing:9px;color:#ffffff38}
+#dock{bottom:20px;gap:12px;padding:12px 17px;background:#171923c9;border:1px solid #ffffff25;border-radius:20px;box-shadow:0 18px 60px #000b, inset 0 1px #ffffff18;backdrop-filter:blur(26px)}
+.dock-icon{width:42px;height:42px;border-radius:13px;font-size:23px;transition:transform .18s,background .18s}
+.dock-icon:hover{background:#ffffff1c;transform:translateY(-5px)}
+#desktop-time{bottom:22px;right:24px;font-size:13px;color:#fff;text-shadow:0 2px 12px #000}
+#desktop-time small{margin-top:4px;color:#b8becb}
+#picker{width:min(490px,calc(100% - 28px));padding:0;border:1px solid #ffffff2e;border-radius:22px;background:linear-gradient(145deg,#1a1d29f5,#0d1019f5);box-shadow:0 30px 100px #000e,0 0 0 1px #ffffff08;overflow:hidden}
+.window-top{height:48px;margin:0;padding:0 17px;border-bottom:1px solid #ffffff16;background:#ffffff06;color:#dce2ef}
+#close-picker{width:28px;height:28px;padding:0;border-radius:50%;background:#ed5b62;color:#fff;border:0;font-size:12px}
+#picker h1{margin:24px 26px 7px;font-size:27px;letter-spacing:-.8px}
+#picker>.sub{margin:0 26px 18px;color:#aeb8cb}
+#picker>.sub[style]{margin:0 26px 24px;padding:10px 12px;border:1px solid #4b9a713d;border-radius:10px;background:#173b2b55;color:#a8efc0!important}
+#picker label{margin:0 26px 9px;color:#d9dfeb}
+#picker select{width:calc(100% - 52px);margin:0 26px;padding:14px 15px;border-radius:11px;background:#0b0e17;border:1px solid #ffffff24;outline:none}
+#picker select:focus{border-color:#72b85b;box-shadow:0 0 0 3px #72b85b22}
+#play{width:calc(100% - 52px);margin:18px 26px 10px;background:linear-gradient(135deg,#73b94d,#397e39);box-shadow:0 8px 22px #3c8d3944;transition:filter .18s,transform .18s}
+#play:hover{filter:brightness(1.1);transform:translateY(-1px)}
+#picker .launch.secondary{width:calc(100% - 52px);margin:0 26px 12px;background:#ffffff0a;border:1px solid #ffffff1b;color:#cbd3e2}
+#chat-toggle{width:calc(100% - 52px);margin:0 26px 24px;background:#252b3b;border:1px solid #ffffff20}
+#chat-panel{width:calc(100% - 52px);margin:0 26px 24px}
+#chat-close{width:auto}
+#loading-message{background:#07090ff2}
+@media(max-width:600px){
+ #system-bar{height:34px;padding:0 10px}
+ .desktop-icons{top:52px;left:7px;grid-template-columns:64px 64px;gap:8px 3px}
+ .app-icon{width:62px;min-height:72px}
+ .app-icon .glyph{width:42px;height:42px}
+ #clock{top:15%;font-size:38px}
+ #dock{bottom:12px}
+ #desktop-time{right:10px;bottom:76px}
+ #picker h1{font-size:23px}
+}
+
 </style>
 </head>
 <body>
 <div id="desktop">
+  <div id="system-bar"><span class="brand">SERUM OS</span><span class="right">Workspace&nbsp;&nbsp; • &nbsp;&nbsp;Minecraft Hub</span></div>
   <div class="desktop-icons">
-    <button class="app-icon" id="minecraft-app" type="button"><span class="glyph">🟩</span><span>Minecraft</span></button>
+    <button class="app-icon" id="minecraft-app" type="button"><span class="glyph">⛏️</span><span>Minecraft</span></button>
     <div class="app-icon"><span class="glyph">🎮</span><span>Games</span></div>
     <div class="app-icon"><span class="glyph">🌐</span><span>Browser</span></div>
     <div class="app-icon"><span class="glyph">📁</span><span>Files</span></div>
@@ -64,15 +121,15 @@ button,.launch{display:block;width:100%;margin-top:16px;padding:14px 16px;border
   <div id="desktop-brand">MINECRAFT</div>
   <div id="dock">
     <button class="dock-icon" id="dock-home" title="Home">▦</button>
-    <button class="dock-icon" id="dock-minecraft" title="Minecraft">🟩</button>
+    <button class="dock-icon" id="dock-minecraft" title="Minecraft">⛏️</button>
     <span class="dock-icon">🎮</span><span class="dock-icon">🌐</span><span class="dock-icon">📁</span>
   </div>
   <div id="desktop-time"></div>
 </div>
 <main class="card" id="picker">
 <div class="window-top"><span>🟩 Minecraft Launcher</span><button id="close-picker" type="button">✕</button></div>
-<h1>Minecraft 1.8.8</h1>
-<p class="sub">Choose a version and launch the browser game.</p>
+<h1>Minecraft Launcher</h1>
+<p class="sub">Choose your edition and jump into the game.</p>
 <p class="sub" style="margin-top:-14px;color:#a7f3d0;font-weight:700">New version added: Minecraft 1.12.2!</p>
 <label for="version">Game version</label>
 <select id="version">
