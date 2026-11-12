@@ -504,7 +504,7 @@ document.getElementById('clear-notes').addEventListener('click',()=>{if(!notesAr
 
 
 const settingsMain=document.querySelector('.win-settings-main');
-const settingsHomeMarkup=settingsMain.querySelector('.settings-home-grid').outerHTML;
+const settingsHomeMarkup=settingsMain.querySelector('.settings-home-grid').outerHTML.replace('id="setting-24h"','id="setting-24h" data-setting="time24"').replace('id="setting-clock"','id="setting-clock" data-setting="showClock"').replace('id="setting-accent"','id="setting-accent" data-setting="accent"');
 const settingsPages={
 'System':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Device information</h3><p>Basic information about this CherryOS desktop.</p><label class="setting-row"><span><b>Device name</b><small>Name shown in Settings</small></span><input class="settings-text-input" data-setting="deviceName" value="CherryOS Desktop" maxlength="32"></label><div class="settings-link-row"><span>💻</span><strong>Operating system</strong><span class="settings-row-value">CherryOS</span></div><div class="settings-link-row"><span>🧩</span><strong>Desktop environment</strong><span class="settings-row-value">Web desktop</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Display</h3><p>Choose how your desktop behaves.</p><label class="setting-row"><span><b>Show desktop clock</b><small>Display time on the desktop</small></span><input type="checkbox" data-setting="showClock" checked></label></section></div></div>`,
 'Bluetooth & devices':`<div class="settings-home-grid"><div class="settings-column"><section class="settings-card"><h3>Bluetooth</h3><p>Bluetooth status for this browser-based desktop.</p><label class="setting-row"><span><b>Bluetooth</b><small>Remember your preferred Bluetooth state</small></span><input type="checkbox" data-setting="bluetooth" checked></label></section><section class="settings-card"><h3>Connected devices</h3><p>CherryOS does not directly manage Windows hardware devices.</p><div class="settings-link-row"><span>🎧</span><strong>Device management</strong><span class="settings-row-value">Use Windows Settings</span></div></section></div><div class="settings-column"><section class="settings-card"><h3>Device preferences</h3><p>Your Bluetooth preference is saved locally in this browser.</p></section></div></div>`,
@@ -551,6 +551,11 @@ settingsMain.addEventListener('click',event=>{
  if(appButton){const app=appButton.dataset.openApp;if(app==='minecraft')openMinecraft();if(app==='files')openOsWindow('files-window');if(app==='notes')openOsWindow('notes-window');}
  const clear=event.target.closest('[data-clear-data]');
  if(clear){if(clear.dataset.clearData==='notes'){localStorage.removeItem('cherryOSNotes');alert('Saved notes cleared.');}else{localStorage.removeItem('minecraftChatUsername');alert('Saved chat username cleared.');}}
+ if(event.target.id==='reset-settings'){
+ const data=JSON.parse(localStorage.getItem('cherryOSExtraSettings')||'{}');delete data.time24;delete data.showClock;delete data.accent;localStorage.setItem('cherryOSExtraSettings',JSON.stringify(data));
+ const controls=settingsMain.querySelectorAll('[data-setting]');controls.forEach(el=>{if(el.dataset.setting==='time24')el.checked=false;if(el.dataset.setting==='showClock')el.checked=true;if(el.dataset.setting==='accent')el.value='#f52e54';});
+ time24.checked=false;showClock.checked=true;accent.value='#f52e54';applySettings();
+ }
  if(event.target.id==='check-cherry-updates'){const status=document.getElementById('update-check-status');if(status)status.textContent='You are using the latest version available to this page.';}
 });
 
