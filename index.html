@@ -1231,17 +1231,17 @@ $("cl-generate").addEventListener("click",async()=>{
  const owner=signedUser.email?.toLowerCase()===ownerEmail;
  const button=$("cl-generate");button.disabled=true;button.textContent="Generating…";
  try{
-  if(!owner){
-   const quotaRef=ref(db,"cherryLinksDaily/"+signedUser.uid);
-   const result=await runTransaction(quotaRef,current=>{
-    const today=dayKey();
-    if(current?.date===today&&Number(current.count||0)>=1)return;
-    return {date:today,count:current?.date===today?Number(current.count||0)+1:1};
-   });
-   if(!result.committed){$("cl-status").textContent="You've already used today's generation. Come back tomorrow!";button.disabled=true;return;}
-   $("cl-count").textContent="0";$("cl-limit").textContent="daily generation used";
-  }
-  const picked=eligible[Math.floor(Math.random()*eligible.length)];
+  const quotaRef=ref(db,"cherryLinksDaily/"+signedUser.uid);
+  const shuffled=[...eligible].sort(()=>Math.random()-0.5);
+  const result=await runTransaction(quotaRef,current=>{
+   const today=dayKey();
+   if(!owner&&current?.date===today&&Number(current.count||0)>=1)return;
+   const picked=shuffled.find(url=>url!==current?.lastUrl)||shuffled[0];
+   return {...(current||{}),date:today,count:current?.date===today?Number(current.count||0)+1:1,lastUrl:picked};
+  });
+  if(!result.committed){$("cl-status").textContent="You've already used today's generation. Come back tomorrow!";button.disabled=true;return;}
+  const picked=result.snapshot.val()?.lastUrl;
+  if(!owner){$("cl-count").textContent="0";$("cl-limit").textContent="daily generation used";}
   $("cl-url").href=picked;$("cl-url").textContent=picked;$("cl-result").hidden=false;
   $("cl-status").textContent="Your random link is ready. Copy it or open it.";
  }catch(error){
