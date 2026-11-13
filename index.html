@@ -367,6 +367,7 @@ html,body{min-width:320px}
 .account-auth-status{min-height:18px;color:#aeb8cb;font-size:12px;margin:12px 0 0}
 
 
+.drive-heading-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.drive-heading-actions #drive-import{background:linear-gradient(135deg,#a92e49,#722038);border-color:#ff78924d}.drive-import-modal{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:18px;background:#03050bd9;backdrop-filter:blur(12px)}.drive-import-modal[hidden]{display:none}.drive-import-card{width:min(460px,100%);padding:20px;border:1px solid #ffffff30;border-radius:17px;background:linear-gradient(145deg,#202433,#10131d);box-shadow:0 24px 80px #000c}.drive-import-top{display:flex;align-items:center;justify-content:space-between;font-size:17px}.drive-import-top button{width:30px;height:30px;margin:0;padding:0;border-radius:8px;background:#ffffff16;color:#fff}.drive-import-card p{color:#bac4d5;font-size:13px;line-height:1.5}.drive-import-card #drive-picker-status{min-height:20px;color:#cbd5e1;font-size:12px;margin:14px 0}.drive-import-card #drive-picker-open{margin-top:8px;background:linear-gradient(135deg,#73b94d,#397e39)}.drive-imported-label{margin:18px 0 8px;color:#aeb8cb;font-size:11px;text-transform:uppercase;letter-spacing:1px}.drive-file-row[draggable=true]{cursor:grab}.drive-file-row[draggable=true]:active{cursor:grabbing}
 .drive-files-body{overflow:auto}
 .drive-files-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .drive-files-heading h2{margin:0 0 4px}
@@ -480,7 +481,8 @@ html,body{min-width:320px}
 <section class="os-window" id="files-window" aria-label="Files" aria-hidden="true">
   <div class="os-window-top"><span>📁 File Manager</span><div class="window-actions"><button type="button" data-minimize="files-window" title="Minimize">—</button><button type="button" data-maximize="files-window" title="Maximize">□</button><button class="win-close" data-close="files-window" type="button" title="Close">×</button></div></div>
   <div class="os-window-body drive-files-body">
-    <div class="drive-files-heading"><div><h2>Google Drive</h2><p>Your Drive files and folders</p></div><button type="button" id="drive-refresh" title="Refresh files">↻ Refresh</button></div>
+    <div class="drive-files-heading"><div><h2>Google Drive</h2><p>Your Drive files and folders</p></div><div class="drive-heading-actions"><button type="button" id="drive-import" title="Import files from Google Drive">＋ Import</button><button type="button" id="drive-refresh" title="Refresh files">↻ Refresh</button></div></div>
+    <div id="drive-import-modal" class="drive-import-modal" hidden role="dialog" aria-modal="true" aria-labelledby="drive-import-title"><div class="drive-import-card"><div class="drive-import-top"><strong id="drive-import-title">Import from Google Drive</strong><button type="button" id="drive-import-close" aria-label="Close">×</button></div><p>Choose files in the Google Drive window. They'll be added to your CherryOS Files list as Drive items.</p><div id="drive-picker-status">Ready to connect to Google Drive.</div><button type="button" id="drive-picker-open">Choose from Google Drive</button></div></div>
     <div id="drive-locked" class="drive-gate"><div class="drive-gate-icon">🔒</div><h3>Sign in required</h3><p>Sign in with Google in Settings → Accounts to access your Google Drive files.</p><button type="button" id="drive-go-signin">Open account settings</button></div>
     <div id="drive-connect" class="drive-gate" hidden><div class="drive-gate-icon">☁️</div><h3>Connect Google Drive</h3><p>Allow CherryOS to access only files you select or open with CherryOS. It will not have access to your entire Drive.</p><button type="button" id="drive-connect-button">Connect limited Drive access</button></div>
     <div id="drive-loading" class="drive-empty" hidden>Loading your Google Drive…</div>
@@ -848,6 +850,121 @@ document.addEventListener("click", async event => {
   }
 });
 
+const DRIVE_API_KEY = "AIzaSyCZy9hSB6JRmsmduheEIBZnG4q6GatPd5c";
+const DRIVE_APP_ID = "216434211403";
+let pickerLoading = null;
+function loadPickerLibrary() {
+  if (window.google?.picker) return Promise.resolve();
+  if (pickerLoading) return pickerLoading;
+  pickerLoading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://apis.google.com/js/api.js";
+    script.onload = () => window.gapi.load("picker", { callback: resolve });
+    script.onerror = () => reject(new Error("Google Picker could not be loaded. Check your connection."));
+    document.head.appendChild(script);
+  });
+  return pickerLoading;
+}
+function savedDriveImports() {
+  try { return JSON.parse(localStorage.getItem("cherryOSDriveImports") || "[]"); }
+  catch { return []; }
+}
+function saveDriveImport(file) {
+  const items = savedDriveImports().filter(item => item.id !== file.id);
+  items.unshift({id:file.id,name:file.name || "Untitled",mimeType:file.mimeType || "",url:file.url || ("https://drive.google.com/open?id="+encodeURIComponent(file.id))});
+  localStorage.setItem("cherryOSDriveImports", JSON.stringify(items.slice(0,100)));
+  renderDriveImports();
+}
+function renderDriveImports() {
+  const list = document.getElementById("drive-list");
+  if (!list) return;
+  const old = list.querySelector("[data-imported-drive-section]");
+  if (old) old.remove();
+  const items = savedDriveImports();
+  if (!items.length) return;
+  const section = document.createElement("section");
+  section.dataset.importedDriveSection = "true";
+  const heading = document.createElement("div");
+  heading.className = "drive-imported-label";
+  heading.textContent = "Imported to CherryOS";
+  section.append(heading);
+  items.forEach(file => {
+    const a = document.createElement("a");
+    a.className = "drive-file-row";
+    a.href = file.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.draggable = true;
+    a.addEventListener("dragstart", event => {
+      event.dataTransfer.setData("text/plain", file.url);
+      event.dataTransfer.setData("application/x-cherry-drive-file", JSON.stringify(file));
+      event.dataTransfer.effectAllowed = "copy";
+    });
+    const icon = document.createElement("span"); icon.className = "drive-file-icon";
+    icon.textContent = file.mimeType === "application/vnd.google-apps.folder" ? "📁" : file.mimeType?.startsWith("image/") ? "🖼️" : file.mimeType?.includes("spreadsheet") ? "📊" : file.mimeType?.includes("document") ? "📄" : "📃";
+    const details = document.createElement("span"); details.className = "drive-file-details";
+    const name = document.createElement("strong"); name.textContent = file.name;
+    const meta = document.createElement("small"); meta.textContent = "Google Drive · Imported";
+    details.append(name, meta);
+    const arrow = document.createElement("span"); arrow.textContent = "↗";
+    a.append(icon, details, arrow); section.append(a);
+  });
+  list.prepend(section);
+}
+async function openDrivePicker() {
+  const status = document.getElementById("drive-picker-status");
+  const button = document.getElementById("drive-picker-open");
+  if (!window.cherryDriveAccessToken) {
+    status.textContent = "Connect Google Drive first, then try again.";
+    return;
+  }
+  button.disabled = true; button.textContent = "Opening Drive…";
+  status.textContent = "Loading Google Drive picker…";
+  try {
+    await loadPickerLibrary();
+    const view = new google.picker.DocsView(google.picker.ViewId.DOCS);
+    view.setIncludeFolders(true);
+    view.setSelectFolderEnabled(true);
+    const picker = new google.picker.PickerBuilder()
+      .addView(view)
+      .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+      .setOAuthToken(window.cherryDriveAccessToken)
+      .setDeveloperKey(DRIVE_API_KEY)
+      .setAppId(DRIVE_APP_ID)
+      .setOrigin(window.location.protocol + "//" + window.location.host)
+      .setCallback(data => {
+        if (data.action === google.picker.Action.PICKED) {
+          (data.docs || []).forEach(doc => saveDriveImport({
+            id: doc.id, name: doc.name, mimeType: doc.mimeType,
+            url: doc.url || ("https://drive.google.com/open?id=" + encodeURIComponent(doc.id))
+          }));
+          status.textContent = (data.docs?.length || 0) + " item(s) added to CherryOS Files.";
+          document.getElementById("drive-import-modal").hidden = true;
+        } else if (data.action === google.picker.Action.CANCEL) {
+          status.textContent = "No files selected.";
+        }
+      })
+      .build();
+    picker.setVisible(true);
+    status.textContent = "Select one or more files in the Google Drive window.";
+  } catch (error) {
+    status.textContent = error.message || "Google Drive picker could not open.";
+  } finally {
+    button.disabled = false; button.textContent = "Choose from Google Drive";
+  }
+}
+document.getElementById("drive-import").addEventListener("click", () => {
+  document.getElementById("drive-import-modal").hidden = false;
+  document.getElementById("drive-picker-status").textContent = "Choose files to add to CherryOS Files.";
+});
+document.getElementById("drive-import-close").addEventListener("click", () => {
+  document.getElementById("drive-import-modal").hidden = true;
+});
+document.getElementById("drive-import-modal").addEventListener("click", event => {
+  if (event.target.id === "drive-import-modal") event.currentTarget.hidden = true;
+});
+document.getElementById("drive-picker-open").addEventListener("click", openDrivePicker);
+
 async function loadGoogleDriveFiles() {
   const list = document.getElementById("drive-list");
   const loading = document.getElementById("drive-loading");
@@ -880,6 +997,7 @@ async function loadGoogleDriveFiles() {
     errorBox.textContent = error.message.includes("accessNotConfigured") ? "Enable the Google Drive API in Google Cloud Console, then reconnect Drive." : error.message;
   }
 }
+  renderDriveImports();
 window.updateDriveGate = function() {
   const locked=document.getElementById("drive-locked"), connect=document.getElementById("drive-connect");
   const list=document.getElementById("drive-list"), refresh=document.getElementById("drive-refresh");
