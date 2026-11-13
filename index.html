@@ -367,6 +367,7 @@ html,body{min-width:320px}
 .account-auth-status{min-height:18px;color:#aeb8cb;font-size:12px;margin:12px 0 0}
 
 
+.drive-preview-window{width:min(900px,calc(100vw - 36px));height:min(650px,calc(100vh - 100px));left:50%;top:50%;transform:translate(-50%,-50%);display:none;flex-direction:column;overflow:hidden}.drive-preview-window.open{display:flex}.drive-preview-window.minimized{display:none}.drive-preview-window .os-window-top{flex:0 0 auto}.drive-preview-body{flex:1;min-height:0;padding:0;overflow:hidden;background:#080a10}.drive-preview-body iframe{display:block;width:100%;height:100%;border:0;background:#080a10}.drive-imported-file{width:100%;text-align:left;color:inherit;font:inherit;cursor:pointer}.drive-imported-file:hover{background:#ffffff12}
 .drive-heading-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.drive-heading-actions #drive-import{background:linear-gradient(135deg,#a92e49,#722038);border-color:#ff78924d}.drive-import-modal{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:18px;background:#03050bd9;backdrop-filter:blur(12px)}.drive-import-modal[hidden]{display:none}.drive-import-card{width:min(460px,100%);padding:20px;border:1px solid #ffffff30;border-radius:17px;background:linear-gradient(145deg,#202433,#10131d);box-shadow:0 24px 80px #000c}.drive-import-top{display:flex;align-items:center;justify-content:space-between;font-size:17px}.drive-import-top button{width:30px;height:30px;margin:0;padding:0;border-radius:8px;background:#ffffff16;color:#fff}.drive-import-card p{color:#bac4d5;font-size:13px;line-height:1.5}.drive-import-card #drive-picker-status{min-height:20px;color:#cbd5e1;font-size:12px;margin:14px 0}.drive-import-card #drive-picker-open{margin-top:8px;background:linear-gradient(135deg,#73b94d,#397e39)}.drive-imported-label{margin:18px 0 8px;color:#aeb8cb;font-size:11px;text-transform:uppercase;letter-spacing:1px}.drive-file-row[draggable=true]{cursor:grab}.drive-file-row[draggable=true]:active{cursor:grabbing}
 .drive-files-body{overflow:auto}
 .drive-files-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -875,6 +876,57 @@ function saveDriveImport(file) {
   localStorage.setItem("cherryOSDriveImports", JSON.stringify(items.slice(0,100)));
   renderDriveImports();
 }
+function openDrivePreview(file) {
+  if (file.mimeType === "application/vnd.google-apps.folder") {
+    window.open(file.url, "_blank", "noopener");
+    return;
+  }
+  const key = "drive-" + file.id;
+  const existing = document.getElementById(key);
+  if (existing) {
+    existing.classList.remove("minimized");
+    existing.classList.add("open");
+    bringToFront(existing);
+    setTaskActive(key);
+    return;
+  }
+  const win = document.createElement("section");
+  win.className = "os-window open drive-preview-window";
+  win.id = key;
+  win.setAttribute("aria-label", file.name);
+  win.setAttribute("aria-hidden", "false");
+  const top = document.createElement("div");
+  top.className = "os-window-top";
+  const label = document.createElement("span");
+  label.textContent = (file.mimeType?.startsWith("video/") ? "🎬 " : "📄 ") + file.name;
+  const actions = document.createElement("div");
+  actions.className = "window-actions";
+  const min = document.createElement("button");
+  min.type = "button"; min.textContent = "—"; min.title = "Minimize";
+  min.addEventListener("click", () => { win.classList.add("minimized"); const task=taskAppButtons.get(key); if(task)task.classList.add("minimized"); });
+  const max = document.createElement("button");
+  max.type = "button"; max.textContent = "□"; max.title = "Maximize";
+  max.addEventListener("click", () => setWindowMaximized(win));
+  const close = document.createElement("button");
+  close.type = "button"; close.className = "win-close"; close.textContent = "×"; close.title = "Close";
+  close.addEventListener("click", () => { win.remove(); removeTaskApp(key); });
+  actions.append(min,max,close); top.append(label,actions);
+  const body = document.createElement("div");
+  body.className = "os-window-body drive-preview-body";
+  const frame = document.createElement("iframe");
+  frame.title = file.name;
+  frame.allow = "autoplay; fullscreen; picture-in-picture";
+  frame.allowFullscreen = true;
+  frame.src = "https://drive.google.com/file/d/" + encodeURIComponent(file.id) + "/preview";
+  body.append(frame);
+  win.append(top,body);
+  document.body.append(win);
+  makeDraggable(win,top);
+  win.addEventListener("pointerdown",()=>bringToFront(win));
+  bringToFront(win);
+  showTaskApp(key,file.name,"🎬",()=>{win.classList.remove("minimized");win.classList.add("open");bringToFront(win);},false);
+  setTaskActive(key);
+}
 function renderDriveImports() {
   const list = document.getElementById("drive-list");
   if (!list) return;
@@ -889,24 +941,23 @@ function renderDriveImports() {
   heading.textContent = "Imported to CherryOS";
   section.append(heading);
   items.forEach(file => {
-    const a = document.createElement("a");
-    a.className = "drive-file-row";
-    a.href = file.url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
+    const a = document.createElement("button");
+    a.type = "button";
+    a.className = "drive-file-row drive-imported-file";
     a.draggable = true;
+    a.addEventListener("click", () => openDrivePreview(file));
     a.addEventListener("dragstart", event => {
       event.dataTransfer.setData("text/plain", file.url);
       event.dataTransfer.setData("application/x-cherry-drive-file", JSON.stringify(file));
       event.dataTransfer.effectAllowed = "copy";
     });
     const icon = document.createElement("span"); icon.className = "drive-file-icon";
-    icon.textContent = file.mimeType === "application/vnd.google-apps.folder" ? "📁" : file.mimeType?.startsWith("image/") ? "🖼️" : file.mimeType?.includes("spreadsheet") ? "📊" : file.mimeType?.includes("document") ? "📄" : "📃";
+    icon.textContent = file.mimeType === "application/vnd.google-apps.folder" ? "📁" : file.mimeType?.startsWith("video/") ? "🎬" : file.mimeType?.startsWith("audio/") ? "🎵" : file.mimeType?.startsWith("image/") ? "🖼️" : file.mimeType?.includes("spreadsheet") ? "📊" : file.mimeType?.includes("document") ? "📄" : "📃";
     const details = document.createElement("span"); details.className = "drive-file-details";
     const name = document.createElement("strong"); name.textContent = file.name;
-    const meta = document.createElement("small"); meta.textContent = "Google Drive · Imported";
+    const meta = document.createElement("small"); meta.textContent = file.mimeType?.startsWith("video/") ? "Google Drive · Video" : "Google Drive · Imported";
     details.append(name, meta);
-    const arrow = document.createElement("span"); arrow.textContent = "↗";
+    const arrow = document.createElement("span"); arrow.textContent = "›";
     a.append(icon, details, arrow); section.append(a);
   });
   list.prepend(section);
