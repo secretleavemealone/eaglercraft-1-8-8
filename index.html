@@ -390,7 +390,7 @@ html,body{min-width:320px}
 .drive-footnote{padding:14px 2px}
 
 
-#cherry-links-window{width:min(620px,calc(100% - 28px));background:#171116;color:#fff;border:1px solid #ff6b853d;border-radius:16px;overflow:hidden;box-shadow:0 24px 90px #000b}#cherry-links-window .os-window-top{background:#21151c;color:#fff;border-bottom:1px solid #ffffff14}#cherry-links-window .os-window-body{padding:26px;background:radial-gradient(ellipse at 15% 0%,#572033 0%,#21141c 55%,#171116 100%)}.cherry-links-hero{display:flex;align-items:center;gap:14px;margin-bottom:22px}.cherry-links-mark{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:28px;background:#f23c61;color:#fff;box-shadow:0 8px 24px #f23c6140}.cherry-links-hero h2{margin:0 0 5px;font-size:23px}.cherry-links-hero p{margin:0;color:#cdbbc3;font-size:13px}.cl-account{padding:12px 14px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:10px;color:#e8dbe1;font-size:13px}.cl-counter{display:flex;align-items:center;gap:14px;margin:16px 0;padding:16px;border-radius:12px;background:#ffffff0b}.cl-counter strong{font-size:32px;color:#ff718d}.cl-counter span{color:#d8c7ce;font-size:13px}.cl-generate,#cl-copy{border:0;border-radius:10px;padding:13px 18px;background:#f04468;color:white;font-weight:700;cursor:pointer}.cl-generate{width:100%;font-size:15px}.cl-generate:disabled{opacity:.45;cursor:not-allowed}.cl-result{display:grid;gap:9px;margin-top:16px;padding:15px;border:1px solid #ff718d55;border-radius:12px;background:#ffffff0b}.cl-result span{font-size:10px;letter-spacing:2px;color:#d8aebb}.cl-result a{color:#ff9bb0;overflow-wrap:anywhere;font-size:13px}.cl-result button{justify-self:start}.cl-status{min-height:18px;color:#e5cbd4;font-size:12px}.cl-foot{padding-top:13px;border-top:1px solid #ffffff18;color:#bba9b1;font-size:11px;line-height:1.5}
+#cherry-links-window{width:min(620px,calc(100% - 28px));background:#171116;color:#fff;border:1px solid #ff6b853d;border-radius:16px;overflow:hidden;box-shadow:0 24px 90px #000b}#cherry-links-window .os-window-top{background:#21151c;color:#fff;border-bottom:1px solid #ffffff14}#cherry-links-window .os-window-body{position:relative;padding:26px;background:radial-gradient(ellipse at 15% 0%,#572033 0%,#21141c 55%,#171116 100%)}.cherry-links-hero{display:flex;align-items:center;gap:14px;margin-bottom:22px}.cherry-links-mark{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:28px;background:#f23c61;color:#fff;box-shadow:0 8px 24px #f23c6140}.cherry-links-hero h2{margin:0 0 5px;font-size:23px}.cherry-links-hero p{margin:0;color:#cdbbc3;font-size:13px}.cl-account{padding:12px 14px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:10px;color:#e8dbe1;font-size:13px}.cl-counter{position:absolute;top:14px;right:18px;display:flex;align-items:center;gap:7px;margin:0;padding:7px 11px;border:1px solid #ff718d44;border-radius:10px;background:#171116dd;box-shadow:0 5px 18px #0004}.cl-counter strong{font-size:16px;color:#ff718d}.cl-counter span{color:#d8c7ce;font-size:11px}.cl-generate,#cl-copy{border:0;border-radius:10px;padding:13px 18px;background:#f04468;color:white;font-weight:700;cursor:pointer}.cl-generate{width:100%;font-size:15px}.cl-generate:disabled{opacity:.45;cursor:not-allowed}.cl-result{display:grid;gap:9px;margin-top:16px;padding:15px;border:1px solid #ff718d55;border-radius:12px;background:#ffffff0b}.cl-result span{font-size:10px;letter-spacing:2px;color:#d8aebb}.cl-result a{color:#ff9bb0;overflow-wrap:anywhere;font-size:13px}.cl-result button{justify-self:start}.cl-status{min-height:18px;color:#e5cbd4;font-size:12px}.cl-foot{padding-top:13px;border-top:1px solid #ffffff18;color:#bba9b1;font-size:11px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -505,7 +505,7 @@ html,body{min-width:320px}
   <div class="os-window-body cherry-links-body">
     <div class="cherry-links-hero"><div class="cherry-links-mark">🍒</div><div><h2>Cherry Links</h2><p>Generate a random destination from the CherryOS link pool.</p></div></div>
     <div id="cl-account" class="cl-account">Checking Google sign-in…</div>
-    <div class="cl-counter"><strong id="cl-count">—</strong><span id="cl-limit">Sign in to see your daily allowance</span></div>
+    <div class="cl-counter" title="Unique destinations generated this cycle"><strong id="cl-count">0 / 7</strong><span>links generated</span></div>
     <button id="cl-generate" class="cl-generate" type="button" disabled>Generate random link</button>
     <div id="cl-result" class="cl-result" hidden><span>YOUR LINK</span><a id="cl-url" href="#" target="_blank" rel="noopener noreferrer"></a><button id="cl-copy" type="button">Copy link</button></div>
     <p id="cl-status" class="cl-status" aria-live="polite">Sign in with Google in Settings → Accounts to use Cherry Links.</p>
@@ -1216,12 +1216,21 @@ const destinations=[
 const $=id=>document.getElementById(id);
 let signedUser=null;
 const dayKey=()=>new Date().toLocaleDateString("en-CA");
-function updateState(){
+async function updateState(){
  const owner=signedUser?.email?.toLowerCase()===ownerEmail;
+ const eligible=destinations.filter(url=>{try{return new URL(url).origin!==location.origin;}catch{return false;}});
  $("cl-account").textContent=signedUser?("Signed in as "+signedUser.email):"Not signed in — open Settings → Accounts and sign in with Google.";
- $("cl-count").textContent=owner?"∞":"1";
- $("cl-limit").textContent=owner?"Unlimited generations":signedUser?"generation available per day":"Sign in to see your daily allowance";
+ $("cl-count").textContent="0 / "+eligible.length;
  $("cl-generate").disabled=!signedUser;
+ if(signedUser){
+  try{
+   const snap=await get(ref(db,"cherryLinksDaily/"+signedUser.uid));
+   const used=(snap.val()?.usedUrls||[]).filter(url=>eligible.includes(url)).length;
+   $("cl-count").textContent=used+" / "+eligible.length;
+   const today=snap.val()?.date===dayKey();
+   $("cl-generate").disabled=!owner&&today&&Number(snap.val()?.count||0)>=1;
+  }catch(error){console.warn("Could not load link counter",error);}
+ }
 }
 onAuthStateChanged(auth,user=>{signedUser=user;updateState();});
 $("cl-generate").addEventListener("click",async()=>{
@@ -1236,14 +1245,18 @@ $("cl-generate").addEventListener("click",async()=>{
   const result=await runTransaction(quotaRef,current=>{
    const today=dayKey();
    if(!owner&&current?.date===today&&Number(current.count||0)>=1)return;
-   const picked=shuffled.find(url=>url!==current?.lastUrl)||shuffled[0];
-   return {...(current||{}),date:today,count:current?.date===today?Number(current.count||0)+1:1,lastUrl:picked};
+   let used=(Array.isArray(current?.usedUrls)?current.usedUrls:[]).filter(url=>eligible.includes(url));
+   if(used.length>=eligible.length)used=[];
+   const picked=shuffled.find(url=>!used.includes(url))||shuffled[0];
+   used=[...used,picked];
+   return {...(current||{}),date:today,count:current?.date===today?Number(current.count||0)+1:1,lastUrl:picked,usedUrls:used};
   });
   if(!result.committed){$("cl-status").textContent="You've already used today's generation. Come back tomorrow!";button.disabled=true;return;}
-  const picked=result.snapshot.val()?.lastUrl;
-  if(!owner){$("cl-count").textContent="0";$("cl-limit").textContent="daily generation used";}
+  const saved=result.snapshot.val();
+  const picked=saved?.lastUrl;
+  $("cl-count").textContent=saved.usedUrls.length+" / "+eligible.length;
   $("cl-url").href=picked;$("cl-url").textContent=picked;$("cl-result").hidden=false;
-  $("cl-status").textContent="Your random link is ready. Copy it or open it.";
+  $("cl-status").textContent=saved.usedUrls.length===eligible.length?"You've used every link. The next cycle will start fresh.":"Your random link is ready. Copy it or open it.";
  }catch(error){
   $("cl-status").textContent="Couldn't record your generation. Check the Cherry Links database permissions and try again.";
   console.error(error);
