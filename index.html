@@ -775,64 +775,7 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
-<script type="module">
-import { getApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getDatabase, ref, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-const auth=getAuth(getApp("cherryos-auth"));
-const db=getDatabase(getApp("cherryos-auth"));
-const ownerEmail="raylendoughtie6@gmail.com";
-const destinations=[
- "https://cherryos.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/",
- "https://eyghlrghtss19djgqfbcneyghredbqdfr12lkghwygds.vercel.app/",
- "https://ooooooherebooootingggggggg.vercel.app/",
- "https://braydenthegoat.vercel.app/",
- "https://alteaglercraft1-8.vercel.app/",
- "https://eaglercraft-1-8-8-ten.vercel.app/",
- "https://eaglercraft-1-8-8.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/"
-];
-const $=id=>document.getElementById(id);
-let signedUser=null;
-const dayKey=()=>new Date().toLocaleDateString("en-CA");
-function updateState(){
- const owner=signedUser?.email?.toLowerCase()===ownerEmail;
- $("cl-account").textContent=signedUser?("Signed in as "+signedUser.email):"Not signed in — open Settings → Accounts and sign in with Google.";
- $("cl-count").textContent=owner?"∞":"1";
- $("cl-limit").textContent=owner?"Unlimited generations":signedUser?"generation available per day":"Sign in to see your daily allowance";
- $("cl-generate").disabled=!signedUser;
-}
-onAuthStateChanged(auth,user=>{signedUser=user;updateState();});
-$("cl-generate").addEventListener("click",async()=>{
- if(!signedUser){$("cl-status").textContent="Please sign in with Google first.";return;}
- const eligible=destinations.filter(url=>{try{return new URL(url).origin!==location.origin;}catch{return false;}});
- if(!eligible.length){$("cl-status").textContent="No other destination is available.";return;}
- const owner=signedUser.email?.toLowerCase()===ownerEmail;
- const button=$("cl-generate");button.disabled=true;button.textContent="Generating…";
- try{
-  if(!owner){
-   const quotaRef=ref(db,"cherryLinksDaily/"+signedUser.uid);
-   const result=await runTransaction(quotaRef,current=>{
-    const today=dayKey();
-    if(current?.date===today&&Number(current.count||0)>=1)return;
-    return {date:today,count:current?.date===today?Number(current.count||0)+1:1};
-   });
-   if(!result.committed){$("cl-status").textContent="You've already used today's generation. Come back tomorrow!";button.disabled=true;return;}
-   $("cl-count").textContent="0";$("cl-limit").textContent="daily generation used";
-  }
-  const picked=eligible[Math.floor(Math.random()*eligible.length)];
-  $("cl-url").href=picked;$("cl-url").textContent=picked;$("cl-result").hidden=false;
-  $("cl-status").textContent="Your random link is ready. Copy it or open it.";
- }catch(error){
-  $("cl-status").textContent="Couldn't record your generation. Check the Cherry Links database permissions and try again.";
-  console.error(error);
- }finally{if(owner||!signedUser||$("cl-status").textContent!=="You've already used today's generation. Come back tomorrow!") {button.disabled=!signedUser||(!owner&&$("cl-limit").textContent==="daily generation used");}button.textContent="Generate random link";}
-});
-$("cl-copy").addEventListener("click",async()=>{
- try{await navigator.clipboard.writeText($("cl-url").href);$("cl-status").textContent="Link copied!";}catch{$("cl-status").textContent="Copy was blocked by your browser. Select the link and copy it.";}
-});
-</script>
-</body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
@@ -1253,5 +1196,63 @@ form.addEventListener("submit", async event => {
 
 status.textContent = "Connected as " + (username || "choose a username");
 </script>
+
+<script type="module">
+import { getApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getDatabase, ref, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+const auth=getAuth(getApp("cherryos-auth"));
+const db=getDatabase(getApp("cherryos-auth"));
+const ownerEmail="raylendoughtie6@gmail.com";
+const destinations=[
+ "https://cherryos.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/",
+ "https://eyghlrghtss19djgqfbcneyghredbqdfr12lkghwygds.vercel.app/",
+ "https://ooooooherebooootingggggggg.vercel.app/",
+ "https://braydenthegoat.vercel.app/",
+ "https://alteaglercraft1-8.vercel.app/",
+ "https://eaglercraft-1-8-8-ten.vercel.app/",
+ "https://eaglercraft-1-8-8.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/"
+];
+const $=id=>document.getElementById(id);
+let signedUser=null;
+const dayKey=()=>new Date().toLocaleDateString("en-CA");
+function updateState(){
+ const owner=signedUser?.email?.toLowerCase()===ownerEmail;
+ $("cl-account").textContent=signedUser?("Signed in as "+signedUser.email):"Not signed in — open Settings → Accounts and sign in with Google.";
+ $("cl-count").textContent=owner?"∞":"1";
+ $("cl-limit").textContent=owner?"Unlimited generations":signedUser?"generation available per day":"Sign in to see your daily allowance";
+ $("cl-generate").disabled=!signedUser;
+}
+onAuthStateChanged(auth,user=>{signedUser=user;updateState();});
+$("cl-generate").addEventListener("click",async()=>{
+ if(!signedUser){$("cl-status").textContent="Please sign in with Google first.";return;}
+ const eligible=destinations.filter(url=>{try{return new URL(url).origin!==location.origin;}catch{return false;}});
+ if(!eligible.length){$("cl-status").textContent="No other destination is available.";return;}
+ const owner=signedUser.email?.toLowerCase()===ownerEmail;
+ const button=$("cl-generate");button.disabled=true;button.textContent="Generating…";
+ try{
+  if(!owner){
+   const quotaRef=ref(db,"cherryLinksDaily/"+signedUser.uid);
+   const result=await runTransaction(quotaRef,current=>{
+    const today=dayKey();
+    if(current?.date===today&&Number(current.count||0)>=1)return;
+    return {date:today,count:current?.date===today?Number(current.count||0)+1:1};
+   });
+   if(!result.committed){$("cl-status").textContent="You've already used today's generation. Come back tomorrow!";button.disabled=true;return;}
+   $("cl-count").textContent="0";$("cl-limit").textContent="daily generation used";
+  }
+  const picked=eligible[Math.floor(Math.random()*eligible.length)];
+  $("cl-url").href=picked;$("cl-url").textContent=picked;$("cl-result").hidden=false;
+  $("cl-status").textContent="Your random link is ready. Copy it or open it.";
+ }catch(error){
+  $("cl-status").textContent="Couldn't record your generation. Check the Cherry Links database permissions and try again.";
+  console.error(error);
+ }finally{if(owner||!signedUser||$("cl-status").textContent!=="You've already used today's generation. Come back tomorrow!") {button.disabled=!signedUser||(!owner&&$("cl-limit").textContent==="daily generation used");}button.textContent="Generate random link";}
+});
+$("cl-copy").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText($("cl-url").href);$("cl-status").textContent="Link copied!";}catch{$("cl-status").textContent="Copy was blocked by your browser. Select the link and copy it.";}
+});
+</script>
+
 </body>
 </html>
