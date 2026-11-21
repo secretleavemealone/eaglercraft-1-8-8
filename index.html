@@ -631,6 +631,15 @@ html,body{background:#080910!important}
 .store-product-info{padding:13px 14px 14px}.store-product-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.store-category-tag{color:#c39aaa;font-size:8px;font-weight:800;letter-spacing:1.3px}.store-price{color:#8cdbad;font-size:9px;font-weight:900;letter-spacing:1px}.store-item-v2 h3{margin:0 0 5px;color:#f7edf1;font-size:14px}.store-item-v2 p{min-height:34px;margin:0 0 13px;color:#aeb5c4;font-size:11px;line-height:1.5}.store-item-v2 button{width:100%;padding:9px 10px;border:1px solid #ff7c9655;border-radius:9px;background:linear-gradient(135deg,#ef5b7b,#b83256);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.store-item-v2 button:hover{filter:brightness(1.12)}.store-item-v2 button.applied{border-color:#58a77b;background:linear-gradient(135deg,#286b4b,#204d3b)}.store-item-v2 button:disabled{border-color:#ffffff14;background:#ffffff0b;color:#9ba0ae;cursor:not-allowed}.store-coming{color:#d9a6ef;font-size:8px;font-weight:900;letter-spacing:.7px}.store-empty{padding:30px;text-align:center;color:#aeb5c4;font-size:12px}.store-footer{display:flex;justify-content:space-between;margin-top:22px;padding-top:13px;border-top:1px solid #ffffff12;color:#8e8290;font-size:9px;letter-spacing:1px}.store-footer span:last-child{letter-spacing:0}
 @media(max-width:760px){.store-hero-art{right:1%;opacity:.65}.store-grid-v2{grid-template-columns:repeat(2,minmax(0,1fr))}.store-toolbar{align-items:stretch;flex-direction:column}.store-search{width:100%;box-sizing:border-box}}
 @media(max-width:480px){#cherry-store-window .os-window-body.store-body{padding:14px}.store-hero-v2{padding:20px 18px}.store-hero-art{right:-40px;opacity:.35}.store-grid-v2{grid-template-columns:1fr}.store-product-art{height:95px}}
+/* Extra cursor and trail packs */
+.art-neon{background:radial-gradient(circle,#29e6ff35,transparent 60%),#101b26;color:#76f5ff;text-shadow:0 0 18px #00dfff}.art-neon span,.art-blue span{font-size:62px}.art-blue{background:radial-gradient(circle,#388cff44,transparent 60%),#111a2b;color:#80b7ff;text-shadow:0 0 18px #287bff}.art-pixel{background:#201b30;color:#e6d3ff;text-shadow:3px 3px #8156ce;font-size:60px}.art-rainbow{background:linear-gradient(135deg,#211b3c,#172432);color:#fff;text-shadow:0 0 12px #ff69c8}.art-heart{background:radial-gradient(circle,#ff6b9c35,transparent 65%),#24131f;color:#ff9dbb;text-shadow:0 0 15px #ff4d8c}.art-bubble{background:radial-gradient(circle,#5fd9ff25,transparent 65%),#12202a;color:#a7efff;text-shadow:0 0 15px #48cfff}
+body.cherry-cursor-neon,body.cherry-cursor-neon *{cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 2L8 27L14 19L19 29L23 26L17 16L28 14Z' fill='%230b1820' stroke='%236af4ff' stroke-width='2.5'/%3E%3C/svg%3E") 4 2,auto!important}
+body.cherry-cursor-blue,body.cherry-cursor-blue *{cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 2L8 27L14 19L19 29L23 26L17 16L28 14Z' fill='%231b4caa' stroke='%23b8dcff' stroke-width='1.8'/%3E%3C/svg%3E") 4 2,auto!important}
+body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 2H10V8H16V14H22V20H28V26H22V22H16V16H12V26H8V14H6V8H4Z' fill='%23d9b8ff' stroke='%234c347c' stroke-width='1'/%3E%3C/svg%3E") 4 2,auto!important}
+.cherry-trail-dot.rainbow{background:linear-gradient(135deg,#ff4b82,#ffcf58,#65e6ad,#55baff,#bd83ff);box-shadow:0 0 13px #a96cff;animation:cherryTrailFade .65s ease-out forwards,hueTrail .65s linear forwards}
+.cherry-trail-dot.heart,.cherry-trail-dot.bubble{width:auto;height:auto;background:none;box-shadow:none;font-size:15px;line-height:1;animation:floatTrail .85s ease-out forwards}
+.cherry-trail-dot.heart{color:#ff7da8;text-shadow:0 0 9px #ff4d8c}.cherry-trail-dot.bubble{width:10px;height:10px;border:2px solid #8ce8ff;border-radius:50%;box-shadow:inset 0 0 5px #8ce8ff66,0 0 8px #8ce8ff66;animation:bubbleTrail .8s ease-out forwards}
+@keyframes hueTrail{to{filter:hue-rotate(100deg) blur(2px);opacity:0;transform:scale(.3)}}@keyframes floatTrail{to{opacity:0;transform:translateY(-22px) scale(.55)}}@keyframes bubbleTrail{to{opacity:0;transform:translateY(-18px) scale(1.6)}}
 </style>
 </head>
 <body>
@@ -759,13 +768,19 @@ html,body{background:#080910!important}
  <div class="os-window-body store-body">
   <div class="store-hero store-hero-v2"><div class="store-hero-copy"><span class="store-eyebrow">THE CHERRYOS MARKETPLACE</span><h2>Make it yours.</h2><p>Fresh looks and little upgrades for your desktop.</p><div class="store-hero-meta"><span>✦ Free collection</span><span>•</span><span>Saved on this device</span></div></div><div class="store-hero-art"><div class="store-orbit orbit-one"></div><div class="store-orbit orbit-two"></div><div class="store-big-cherry">🍒</div><span class="store-spark spark-a">✦</span><span class="store-spark spark-b">✧</span></div></div>
   <div class="store-toolbar"><div class="store-filters" role="group" aria-label="Filter store items"><button type="button" class="store-filter active" data-store-filter="all">Discover</button><button type="button" class="store-filter" data-store-filter="cursor">Cursors</button><button type="button" class="store-filter" data-store-filter="trail">Mouse trails</button><button type="button" class="store-filter" data-store-filter="future">Coming soon</button></div><label class="store-search"><span>⌕</span><input id="store-search-input" type="search" placeholder="Search the store..." autocomplete="off"></label></div>
-  <div class="store-section-heading"><div><span class="store-kicker">PERSONALIZE</span><h3>Desktop accessories</h3><p>Small details. A whole new feel.</p></div><span class="store-count" id="store-count">6 ITEMS</span></div>
+  <div class="store-section-heading"><div><span class="store-kicker">PERSONALIZE</span><h3>Desktop accessories</h3><p>Small details. A whole new feel.</p></div><span class="store-count" id="store-count">12 ITEMS</span></div>
   <div class="store-grid store-grid-v2" id="store-products">
    <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Cherry Pointer"><div class="store-product-art art-cherry"><span>↖</span><b>🍒</b></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Cherry Pointer</h3><p>A custom pointer with a tiny CherryOS cherry accent.</p><button type="button" data-store-action="cursor-cherry">Apply cursor</button></div></article>
-   <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Classic Pointer"><div class="store-product-art art-classic"><span class="pointer-preview">↖</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Classic Pointer</h3><p>Keep things simple with your browser's default pointer.</p><button type="button" data-store-action="cursor-default">Use default</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Classic Pointer"><div class="store-product-art art-classic"><span class="pointer-preview">↖</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Classic Pointer</h3><p>Keep things simple with your browser's default pointer.</p><button type="button" data-store-action="cursor-default">Use default</button></div></article> 
+   <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Neon Cursor"><div class="store-product-art art-neon"><span>➤</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Neon Cursor</h3><p>A bright cyan pointer with a glowing edge.</p><button type="button" data-store-action="cursor-neon">Apply cursor</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Blue Cursor"><div class="store-product-art art-blue"><span>➤</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Ocean Cursor</h3><p>A cool blue pointer for a clean desktop look.</p><button type="button" data-store-action="cursor-blue">Apply cursor</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Pixel Cursor"><div class="store-product-art art-pixel"><span>▟</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">CURSOR</span><span class="store-price">FREE</span></div><h3>Pixel Cursor</h3><p>A chunky retro pixel-style pointer.</p><button type="button" data-store-action="cursor-pixel">Apply cursor</button></div></article>
    <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Cherry Trail"><div class="store-product-art art-trail"><span class="trail-preview">●　·　●　·　●</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>Cherry Trail</h3><p>A trail of soft cherry-red particles follows your pointer.</p><button type="button" data-store-action="trail-cherry">Enable trail</button></div></article>
    <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Sparkle Trail"><div class="store-product-art art-sparkle"><span>✦　✧　✦</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>Sparkle Trail</h3><p>A soft pink shimmer follows your mouse around.</p><button type="button" data-store-action="trail-sparkle">Enable trail</button></div></article>
    <article class="store-item store-item-v2" data-store-category="trail" data-store-name="No Trail"><div class="store-product-art art-none"><span>〰</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>No Trail</h3><p>Switch off pointer effects whenever you want.</p><button type="button" data-store-action="trail-off">Turn off</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Rainbow Trail"><div class="store-product-art art-rainbow"><span>🌈　·　🌈</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>Rainbow Trail</h3><p>A colorful shifting glow follows your pointer.</p><button type="button" data-store-action="trail-rainbow">Enable trail</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Heart Trail"><div class="store-product-art art-heart"><span>♥　·　♥</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>Heart Trail</h3><p>Little pink hearts float away behind your mouse.</p><button type="button" data-store-action="trail-heart">Enable trail</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Bubble Trail"><div class="store-product-art art-bubble"><span>○　◦　○</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">MOUSE TRAIL</span><span class="store-price">FREE</span></div><h3>Bubble Trail</h3><p>Soft floating bubbles pop up as you move.</p><button type="button" data-store-action="trail-bubble">Enable trail</button></div></article>
    <article class="store-item store-item-v2 store-future-card" data-store-category="future" data-store-name="Cherry Games"><div class="store-product-art art-games"><span>🎮</span><i>✦</i></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">GAMES</span><span class="store-coming">COMING SOON</span></div><h3>Cherry Games</h3><p>A collection of games made for your CherryOS desktop.</p><button type="button" disabled>Coming soon</button></div></article>
   </div><p class="store-empty" id="store-empty" hidden>No items match that search.</p>
   <div class="store-footer"><span>🍒 CHERRY STORE</span><span>Your desktop, your style.</span></div>
@@ -1540,39 +1555,43 @@ $("cl-copy").addEventListener("click",async()=>{
  let settings={cursor:'default',trail:'off'};
  try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
  const layer=document.getElementById('cherry-trail-layer');
- const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.toggle('cherry-cursor',settings.cursor==='cherry');};
+ const cursorClasses=['cherry-cursor','cherry-cursor-neon','cherry-cursor-blue','cherry-cursor-pixel'];
+ const save=()=>{
+  localStorage.setItem(storageKey,JSON.stringify(settings));
+  document.body.classList.remove(...cursorClasses);
+  if(settings.cursor==='cherry')document.body.classList.add('cherry-cursor');
+  if(settings.cursor==='neon')document.body.classList.add('cherry-cursor-neon');
+  if(settings.cursor==='blue')document.body.classList.add('cherry-cursor-blue');
+  if(settings.cursor==='pixel')document.body.classList.add('cherry-cursor-pixel');
+ };
  save();
  let last=0,trailCount=0;
  document.addEventListener('pointermove',event=>{
   if(settings.trail==='off'||event.pointerType==='touch')return;
-  const now=performance.now();if(now-last<24||trailCount>26)return;last=now;
-  const dot=document.createElement('i');dot.className='cherry-trail-dot'+(settings.trail==='sparkle'?' sparkle':'');
+  const now=performance.now();if(now-last<26||trailCount>34)return;last=now;
+  const dot=document.createElement('i');
+  const type=settings.trail;
+  dot.className='cherry-trail-dot'+(type==='sparkle'?' sparkle':type==='rainbow'?' rainbow':type==='heart'?' heart':type==='bubble'?' bubble':'');
+  if(type==='heart')dot.textContent='♥';
   dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';layer.append(dot);trailCount++;
   dot.addEventListener('animationend',()=>{dot.remove();trailCount=Math.max(0,trailCount-1);},{once:true});
  },{passive:true});
+ const labels={'cursor-cherry':'Apply cursor','cursor-default':'Use default','cursor-neon':'Apply cursor','cursor-blue':'Apply cursor','cursor-pixel':'Apply cursor','trail-cherry':'Enable trail','trail-sparkle':'Enable trail','trail-rainbow':'Enable trail','trail-heart':'Enable trail','trail-bubble':'Enable trail','trail-off':'Turn off'};
+ function refreshButtons(){
+  document.querySelectorAll('[data-store-action]').forEach(item=>{
+   const a=item.dataset.storeAction;
+   const active=a==='cursor-cherry'&&settings.cursor==='cherry'||a==='cursor-default'&&settings.cursor==='default'||a==='cursor-neon'&&settings.cursor==='neon'||a==='cursor-blue'&&settings.cursor==='blue'||a==='cursor-pixel'&&settings.cursor==='pixel'||a==='trail-cherry'&&settings.trail==='cherry'||a==='trail-sparkle'&&settings.trail==='sparkle'||a==='trail-rainbow'&&settings.trail==='rainbow'||a==='trail-heart'&&settings.trail==='heart'||a==='trail-bubble'&&settings.trail==='bubble'||a==='trail-off'&&settings.trail==='off';
+   item.classList.toggle('applied',active);item.textContent=active?'Applied ✓':(labels[a]||'Apply');
+  });
+ }
  document.addEventListener('click',event=>{
   const button=event.target.closest('[data-store-action]');if(!button)return;
   const action=button.dataset.storeAction;
-  if(action==='cursor-cherry')settings.cursor='cherry';
-  if(action==='cursor-default')settings.cursor='default';
-  if(action==='trail-cherry')settings.trail='cherry';
-  if(action==='trail-sparkle')settings.trail='sparkle';
-  if(action==='trail-off')settings.trail='off';
-  save();
-  document.querySelectorAll('[data-store-action]').forEach(item=>{
-   const a=item.dataset.storeAction;
-   const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
-   item.classList.toggle('applied',active);
-   if(active)item.textContent='Applied ✓';
-   else item.textContent=({'cursor-cherry':'Apply cursor','cursor-default':'Use default','trail-cherry':'Enable trail','trail-sparkle':'Enable trail','trail-off':'Turn off'})[a];
-  });
+  if(action.startsWith('cursor-'))settings.cursor=action.slice(7);
+  if(action.startsWith('trail-'))settings.trail=action.slice(6);
+  save();refreshButtons();
  });
- document.addEventListener('DOMContentLoaded',()=>{});
- document.querySelectorAll('[data-store-action]').forEach(item=>{
-  const a=item.dataset.storeAction;
-  const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
-  item.classList.toggle('applied',active);if(active)item.textContent='Applied ✓';
- });
+ refreshButtons();
 })();
 </script>
 <script>
