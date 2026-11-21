@@ -652,6 +652,38 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .decor-uninstall{margin-top:13px;padding:8px 12px;border:1px solid #ff6e8060;border-radius:8px;background:#ff40501a;color:#ff9ba8;font-size:11px;font-weight:700;cursor:pointer}.decor-uninstall:hover{background:#ff405033}
 .decor-download-screen{position:fixed;inset:0;z-index:99999;display:none;place-items:center;background:#05060bd9;backdrop-filter:blur(18px);padding:20px}.decor-download-screen.active{display:grid}.decor-download-card{width:min(410px,100%);padding:30px;border:1px solid #ffffff25;border-radius:20px;background:linear-gradient(145deg,#211520,#10131d);box-shadow:0 25px 90px #000b;text-align:center}.download-app-icon{width:66px;height:66px;margin:0 auto 18px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#ff6485,#922b4a);font-size:34px;box-shadow:0 8px 30px #f43c6b55}.decor-download-card h2{margin:8px 0;color:#fff;font-size:24px}.decor-download-card p{margin:0 0 22px;color:#aeb5c4;font-size:12px}.download-progress{height:9px;overflow:hidden;border-radius:20px;background:#ffffff16}.download-progress span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#ff587b,#ff9ab1);transition:width .12s linear}.download-progress-meta{display:flex;justify-content:space-between;margin-top:9px;color:#b7bdcb;font-size:10px}.download-complete{margin-top:18px;color:#8ce0ad;font-size:12px;font-weight:800}
 
+
+/* Refined CherryOS Games library and Retro Bowl player */
+#games-window{display:none;flex-direction:column;overflow:hidden}
+#games-window.open{display:flex}
+#games-window .os-window-top{flex:0 0 52px}
+#games-window .games-window-body{flex:1;min-height:0;overflow:auto;padding:30px 34px;background:radial-gradient(ellipse at 85% 0%,#8d4df01a,transparent 42%),linear-gradient(150deg,#171a27,#10121b)}
+.games-heading{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 24px}
+.games-eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;color:#b99bff}
+.games-heading h2{font-size:30px;letter-spacing:-.8px;margin:7px 0 5px;color:#f7f5ff}
+.games-heading p{margin:0;color:#9da6ba;font-size:14px}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,310px));gap:20px}
+.game-card{overflow:hidden;border:1px solid #ffffff18;border-radius:17px;background:linear-gradient(145deg,#252938,#191c28);box-shadow:0 16px 38px #0004;transition:transform .18s,border-color .18s}
+.game-card:hover{transform:translateY(-3px);border-color:#a78bfa88}
+.game-art{height:190px;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 50% 42%,#4a8a2c,#28651f 72%);border-bottom:1px solid #ffffff16}
+.game-art img{display:block;width:min(100%,230px);height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px #0005)}
+.game-card-info{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px}
+.game-card-info h3{margin:0 0 5px;color:#f5f5fb;font-size:17px}
+.game-card-info p{margin:0;color:#aab2c4;font-size:12px}
+.game-card-info button{flex:0 0 auto;margin:0;padding:10px 14px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-weight:750;font-size:12px}
+.game-card-info button:hover{background:#a178ff}
+.retro-player{height:100%;min-height:0;display:flex;flex-direction:column;gap:18px}
+.retro-player-toolbar{display:flex;align-items:center;gap:16px;min-height:42px}
+.retro-back{margin:0;padding:9px 13px;border:1px solid #ffffff24;border-radius:9px;background:#ffffff0b;color:#e9e7f3;font-size:13px}
+.retro-back:hover{background:#ffffff18}
+.retro-player-name{display:flex;align-items:center;gap:9px;color:#f4f2fb;font-size:14px}
+.retro-live-dot{width:8px;height:8px;border-radius:50%;background:#83d66a;box-shadow:0 0 12px #83d66a99}
+.retro-player-hint{margin-left:auto;color:#788297;font-size:11px;letter-spacing:.5px}
+.retro-game-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:16px;border:1px solid #ffffff15;border-radius:16px;background:radial-gradient(ellipse at center,#242b3a,#11141d 75%);overflow:auto}
+.retro-game-screen{width:min(100%,900px);aspect-ratio:4/3;max-height:100%;margin:auto;border:1px solid #ffffff24;border-radius:10px;overflow:hidden;background:#111;box-shadow:0 20px 55px #0008}
+.retro-game-screen iframe{display:block;width:100%;height:100%;border:0;background:#111}
+@media(max-width:700px){#games-window{width:96vw!important;height:88vh!important}.games-window-body{padding:20px!important}.games-grid{grid-template-columns:1fr}.game-card-info{align-items:flex-start;flex-direction:column}.game-card-info button{width:100%}.game-art{height:160px}.retro-game-stage{padding:6px}.retro-player-hint{display:none}}
+
 </style>
 
 <style id="cherry-onboarding-styles">
@@ -807,21 +839,18 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     </main>
   </div>
 </section>
-<section class="os-window" id="games-window" aria-label="Games" aria-hidden="true" style="width:min(760px,94vw);height:min(620px,86vh)">
+<section class="os-window" id="games-window" aria-label="Games" aria-hidden="true" style="width:min(1080px,96vw);height:min(820px,90vh)">
  <div class="os-window-top"><span>🎮 Games Library</span><div class="window-actions"><button type="button" data-minimize="games-window" title="Minimize">—</button><button type="button" data-maximize="games-window" title="Maximize">□</button><button class="win-close" data-close="games-window" type="button" title="Close">×</button></div></div>
- <div class="os-window-body" style="overflow:auto">
-  <div id="games-library-view"><h2>My Games</h2><p>Games available in your CherryOS Games app.</p>
-   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px">
-    <article style="padding:18px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff0a">
-     <div style="height:150px;display:grid;place-items:center;border-radius:10px;overflow:hidden;background:#397b22">
-      <img src="https://images.launchbox-app.com//b9e6898e-722b-443a-b9aa-914f34b86146.png" alt="Retro Bowl" style="width:100%;height:100%;display:block;object-fit:cover">
-     </div><h3 style="margin:14px 0 6px">Retro Bowl</h3><p style="margin:0 0 14px;color:#b8c1d2;font-size:13px">Football season management and arcade action.</p><button type="button" data-play-game="retro-bowl" style="width:100%">Play</button>
-    </article>
-   </div>
+ <div class="os-window-body games-window-body">
+  <div id="games-library-view" class="games-library-view"><div class="games-heading"><div><span class="games-eyebrow">CHERRYOS ARCADE</span><h2>My Games</h2><p>Pick a game and jump straight in.</p></div></div>
+   <div class="games-grid"><article class="game-card">
+    <div class="game-art"><img src="https://images.launchbox-app.com//b9e6898e-722b-443a-b9aa-914f34b86146.png" alt="Retro Bowl logo"></div>
+    <div class="game-card-info"><div><h3>Retro Bowl</h3><p>Build your team. Lead your season.</p></div><button type="button" data-play-game="retro-bowl">Play now <span>→</span></button></div>
+   </article></div>
   </div>
-  <div id="retro-bowl-player" hidden style="height:100%;min-height:440px;flex-direction:column;overflow:hidden">
-   <div style="display:flex;align-items:center;gap:12px;padding:0 0 12px"><button type="button" id="retro-bowl-back">← Back to games</button><strong>Retro Bowl</strong></div>
-   <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#101010;border-radius:10px"><iframe title="Retro Bowl game" src="https://game316009.konggames.com/gamez/0031/6009/live/index.html" style="position:absolute;left:0;top:-36px;width:100%;height:calc(100% + 72px);border:0;background:#101010" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe></div>
+  <div id="retro-bowl-player" class="retro-player" hidden>
+   <div class="retro-player-toolbar"><button type="button" id="retro-bowl-back" class="retro-back">← <span>All games</span></button><div class="retro-player-name"><span class="retro-live-dot"></span><strong>Retro Bowl</strong></div><span class="retro-player-hint">Game session</span></div>
+   <div class="retro-game-stage"><div class="retro-game-screen"><iframe title="Retro Bowl game" src="https://game316009.konggames.com/gamez/0031/6009/live/index.html" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe></div></div>
   </div>
  </div>
 </section>
