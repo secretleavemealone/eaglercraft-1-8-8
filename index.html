@@ -649,6 +649,43 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 /* App install and uninstall flow */
 .decor-uninstall{margin-top:13px;padding:8px 12px;border:1px solid #ff6e8060;border-radius:8px;background:#ff40501a;color:#ff9ba8;font-size:11px;font-weight:700;cursor:pointer}.decor-uninstall:hover{background:#ff405033}
 .decor-download-screen{position:fixed;inset:0;z-index:99999;display:none;place-items:center;background:#05060bd9;backdrop-filter:blur(18px);padding:20px}.decor-download-screen.active{display:grid}.decor-download-card{width:min(410px,100%);padding:30px;border:1px solid #ffffff25;border-radius:20px;background:linear-gradient(145deg,#211520,#10131d);box-shadow:0 25px 90px #000b;text-align:center}.download-app-icon{width:66px;height:66px;margin:0 auto 18px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#ff6485,#922b4a);font-size:34px;box-shadow:0 8px 30px #f43c6b55}.decor-download-card h2{margin:8px 0;color:#fff;font-size:24px}.decor-download-card p{margin:0 0 22px;color:#aeb5c4;font-size:12px}.download-progress{height:9px;overflow:hidden;border-radius:20px;background:#ffffff16}.download-progress span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#ff587b,#ff9ab1);transition:width .12s linear}.download-progress-meta{display:flex;justify-content:space-between;margin-top:9px;color:#b7bdcb;font-size:10px}.download-complete{margin-top:18px;color:#8ce0ad;font-size:12px;font-weight:800}
+
+/* Cherry Music desktop app */
+#music-player-window{width:min(1120px,calc(100vw - 30px));height:min(760px,calc(100vh - 105px));min-height:490px;background:#101512;color:#f5f7f5}
+.cherry-music-body{height:calc(100% - 42px);padding:0!important;display:flex;flex-direction:column;overflow:hidden;background:#101512;color:#f4f7f4}
+.cm-header{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 26px;background:linear-gradient(120deg,#18251d,#111713 65%,#14261b);border-bottom:1px solid #ffffff12}
+.cm-eyebrow{font-size:9px;letter-spacing:2px;font-weight:900;color:#70d99b}
+.cm-header h2{font-size:24px;margin:5px 0}.cm-header p{font-size:12px;color:#a9b7ad;margin:0}
+.cm-header button,.cm-empty button{border:0;border-radius:20px;padding:11px 16px;background:#1ed760;color:#07130b;font-weight:900;cursor:pointer;white-space:nowrap}
+.cm-layout{display:grid;grid-template-columns:210px 1fr;min-height:0;flex:1}
+.cm-sidebar{padding:22px 15px;background:#0b100d;border-right:1px solid #ffffff10}
+.cm-side-label{font-size:9px;letter-spacing:1.6px;color:#8d9c91;font-weight:900;margin:0 0 14px 8px}
+.cm-nav{width:100%;text-align:left;border:0;border-radius:8px;background:#1b2a20;color:#eaffef;padding:12px;font-weight:800}
+.cm-library-count{font-size:11px;color:#8e9d92;padding:14px 8px}
+.cm-drop{margin-top:22px;padding:18px 10px;border:1px dashed #52665a;border-radius:12px;text-align:center;color:#aab8ae}
+.cm-drop span{display:block;font-size:25px;color:#70d99b}.cm-drop strong{display:block;font-size:11px;margin:8px 0 4px}.cm-drop small{font-size:10px;color:#819087}
+.cm-drop.dragover{background:#1d3c29;border-color:#1ed760}
+.cm-main{min-width:0;overflow:auto;padding:24px 26px 110px}
+.cm-list-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}
+.cm-list-head h3{font-size:24px;margin:5px 0 0}
+#cm-search{width:min(240px,45%);padding:10px 13px;border-radius:20px;border:1px solid #ffffff20;background:#ffffff0b;color:#fff;outline:none}
+.cm-track-list{display:grid;gap:5px}
+.cm-track{display:grid;grid-template-columns:34px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 12px;border-radius:8px;color:#dce5de}
+.cm-track:hover,.cm-track.playing{background:#ffffff12}
+.cm-track-num{color:#8c9a90;font-size:12px;text-align:center}
+.cm-track-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:750}
+.cm-track-type{display:block;color:#849188;font-size:10px;font-weight:400;margin-top:3px}
+.cm-track button{border:0;background:transparent;color:#b7c4ba;cursor:pointer;padding:7px}
+.cm-empty{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#c9d4cc}
+.cm-empty>span{font-size:42px;color:#70d99b}.cm-empty strong{margin:10px 0 5px}.cm-empty p{font-size:12px;color:#9ba99f;margin:0 0 16px}
+.cm-player{position:absolute;bottom:0;left:0;right:0;min-height:86px;display:grid;grid-template-columns:minmax(160px,1fr) minmax(220px,1.5fr) minmax(100px,1fr);gap:18px;align-items:center;padding:12px 20px;background:#080d09;border-top:1px solid #ffffff18}
+.cm-now{display:flex;align-items:center;gap:11px;min-width:0}.cm-cover{width:46px;height:46px;flex:0 0 46px;border-radius:7px;background:linear-gradient(135deg,#1ed760,#14552e);display:grid;place-items:center;color:#06210e;font-size:22px}
+.cm-now strong,.cm-now small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}.cm-now strong{font-size:12px}.cm-now small{font-size:10px;color:#91a096;margin-top:4px}
+.cm-controls{min-width:0}.cm-buttons{display:flex;justify-content:center;align-items:center;gap:17px;margin-bottom:8px}.cm-buttons button{border:0;background:transparent;color:#dce7df;font-size:14px;cursor:pointer}.cm-buttons .cm-play{width:30px;height:30px;border-radius:50%;background:#fff;color:#07130b}
+.cm-progress{display:flex;align-items:center;gap:9px;color:#9eaaa2;font-size:9px}.cm-progress input,.cm-volume input{width:100%;accent-color:#1ed760;cursor:pointer}
+.cm-volume{display:flex;align-items:center;gap:9px;color:#b6c4ba}.cm-volume input{max-width:120px}
+@media(max-width:700px){#music-player-window{height:calc(100vh - 76px);min-height:430px}.cm-header{padding:16px}.cm-header h2{font-size:19px}.cm-header p{max-width:230px}.cm-layout{grid-template-columns:1fr}.cm-sidebar{display:none}.cm-main{padding:18px 14px 110px}.cm-player{grid-template-columns:1fr 1.2fr;gap:10px;padding:10px}.cm-volume{display:none}.cm-now strong,.cm-now small{max-width:125px}}
+
 </style>
 
 <style id="cherry-onboarding-styles">
@@ -696,6 +733,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     <button class="app-icon" id="notes-app" type="button"><span class="glyph">📝</span><span>Notes</span></button>
     <button class="app-icon" id="cherry-links-app" type="button"><span class="glyph">🔗</span><span>Cherry Links</span></button>
     <button class="app-icon" id="cherry-store-app" type="button"><span class="glyph">🛍️</span><span>Cherry Store</span></button>
+    <button class="app-icon" id="music-player-app" type="button"><span class="glyph">🎵</span><span>Music Player</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
   <div id="desktop-brand">CHERRYOS</div>
@@ -723,6 +761,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
       <button type="button" data-launch="notes"><span>📝</span>Notes</button>
       <button type="button" data-launch="cherry-links"><span>🔗</span>Cherry Links</button>
       <button type="button" data-launch="cherry-store"><span>🛍️</span>Cherry Store</button>
+      <button type="button" data-launch="music-player"><span>🎵</span>Music Player</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
   </div>
@@ -833,6 +872,19 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     <div class="cl-foot">One generation per day per Google account. Your current site is excluded.</div>
   </div>
 </section>
+
+<section class="os-window" id="music-player-window" aria-label="Music Player" aria-hidden="true">
+ <div class="os-window-top"><span>🎵 Cherry Music</span><div class="window-actions"><button type="button" data-minimize="music-player-window" title="Minimize">—</button><button type="button" data-maximize="music-player-window" title="Maximize">□</button><button class="win-close" data-close="music-player-window" type="button" title="Close">×</button></div></div>
+ <div class="os-window-body cherry-music-body">
+  <header class="cm-header"><div><span class="cm-eyebrow">CHERRYOS MUSIC</span><h2>Your music, your library.</h2><p>Play audio files from your device in a desktop-style music player.</p></div><button type="button" id="cm-add">＋ Add music</button><input id="cm-file-input" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" multiple hidden></header>
+  <div class="cm-layout">
+   <aside class="cm-sidebar"><div class="cm-side-label">YOUR LIBRARY</div><button class="cm-nav active" type="button">♫ All songs</button><div class="cm-library-count" id="cm-library-count">0 songs added</div><div class="cm-drop" id="cm-drop"><span>＋</span><strong>Drop music here</strong><small>or use Add music</small></div></aside>
+   <main class="cm-main"><div class="cm-list-head"><div><span class="cm-eyebrow">LIBRARY</span><h3>All songs</h3></div><input id="cm-search" type="search" placeholder="Search your music…" aria-label="Search music"></div><div class="cm-track-list" id="cm-track-list"><div class="cm-empty"><span>♫</span><strong>Your library is empty</strong><p>Add MP3, WAV, OGG, M4A, or other audio files to start listening.</p><button type="button" id="cm-empty-add">Choose music files</button></div></div></main>
+  </div>
+  <footer class="cm-player"><div class="cm-now"><div class="cm-cover" id="cm-cover">♫</div><div><strong id="cm-now-title">Nothing playing</strong><small id="cm-now-sub">Choose a song from your library</small></div></div><div class="cm-controls"><div class="cm-buttons"><button id="cm-prev" type="button" title="Previous">|◀</button><button id="cm-play" class="cm-play" type="button" title="Play">▶</button><button id="cm-next" type="button" title="Next">▶|</button></div><div class="cm-progress"><span id="cm-current-time">0:00</span><input id="cm-seek" type="range" min="0" max="1000" value="0" aria-label="Seek"><span id="cm-duration">0:00</span></div></div><div class="cm-volume"><span>🔊</span><input id="cm-volume" type="range" min="0" max="100" value="80" aria-label="Volume"></div></footer>
+  <audio id="cm-audio" preload="metadata"></audio>
+ </div>
+</section>
 <section class="os-window" id="cherry-store-window" aria-label="Cherry Store" aria-hidden="true">
  <div class="os-window-top"><span>🛍️ Cherry Store</span><div class="window-actions"><button type="button" data-minimize="cherry-store-window" title="Minimize">—</button><button type="button" data-maximize="cherry-store-window" title="Maximize">□</button><button class="win-close" data-close="cherry-store-window" type="button" title="Close">×</button></div></div>
  <div class="os-window-body store-body">
@@ -894,13 +946,13 @@ const taskApps=document.getElementById('task-apps');
 const taskAppButtons=new Map();
 const pinnedTaskApps=new Set(JSON.parse(localStorage.getItem('cherryOSPinnedApps')||'[]'));
 function savePinnedTaskApps(){localStorage.setItem('cherryOSPinnedApps',JSON.stringify([...pinnedTaskApps]));}
-function taskAppDetails(key){return ({picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
+function taskAppDetails(key){return ({picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'music-player':['Music Player','🎵',()=>openOsWindow('music-player-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
 function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('div');b.className='task-app';b.innerHTML='<button type="button" class="task-main" aria-label="Open app"><span class="task-glyph"></span><span class="task-label"></span></button><button type="button" class="task-pin" title="Pin to taskbar" aria-label="Pin to taskbar">📌</button>';const main=b.querySelector('.task-main');main.addEventListener('click',()=>{if(b._activate)b._activate();});const pin=b.querySelector('.task-pin');pin.addEventListener('click',e=>{e.stopPropagation();const pinned=pinnedTaskApps.has(key);if(pinned)pinnedTaskApps.delete(key);else pinnedTaskApps.add(key);savePinnedTaskApps();syncTaskPin(b,key);if(!pinned&&b.dataset.closed==='true'){b.remove();taskAppButtons.delete(key);}});taskApps.appendChild(b);taskAppButtons.set(key,b);}const icon=b.querySelector('.task-glyph');if(key==='picker'||key==='game'){icon.innerHTML='<img class="minecraft-task-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="">';}else{icon.textContent=glyph;}b.querySelector('.task-label').textContent=label;b._activate=activate;b.dataset.closed='false';b.classList.toggle('minimized',!!minimized);syncTaskPin(b,key);return b;}
 function syncTaskPin(b,key){const pin=b.querySelector('.task-pin');if(!pin)return;const active=pinnedTaskApps.has(key);pin.classList.toggle('pinned',active);pin.textContent=active?'📌':'＋';pin.title=active?'Unpin from taskbar':'Pin to taskbar';pin.setAttribute('aria-label',pin.title);}
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(!b)return;if(pinnedTaskApps.has(key)){const [label,glyph,activate]=taskAppDetails(key);b.dataset.closed='true';b.classList.remove('active','minimized');b._activate=activate;b.querySelector('.task-label').textContent=label;syncTaskPin(b,key);}else{b.remove();taskAppButtons.delete(key);}}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
+function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'music-player-window':['music-player','Music Player','🎵'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
@@ -917,8 +969,50 @@ document.getElementById('settings-app').addEventListener('click',()=>openOsWindo
 document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.getElementById('cherry-links-app').addEventListener('click',()=>openOsWindow('cherry-links-window'));
 document.getElementById('cherry-store-app').addEventListener('click',()=>openOsWindow('cherry-store-window'));
-document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
+document.getElementById('music-player-app').addEventListener('click',()=>openOsWindow('music-player-window'));
+document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='music-player')openOsWindow('music-player-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','music-player-window':'music-player','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
+
+// Cherry Music: user-owned audio files are stored locally in IndexedDB.
+(()=>{
+ const audio=document.getElementById('cm-audio');if(!audio)return;
+ const dbName='cherryOSMusicLibrary',storeName='tracks';
+ let db=null,tracks=[],currentId=null,urls=new Map();
+ const $=id=>document.getElementById(id);
+ const openDb=()=>new Promise((resolve,reject)=>{const req=indexedDB.open(dbName,1);req.onupgradeneeded=()=>req.result.createObjectStore(storeName,{keyPath:'id'});req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+ const allTracks=()=>new Promise((resolve,reject)=>{const req=db.transaction(storeName).objectStore(storeName).getAll();req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error);});
+ const saveTrack=t=>new Promise((resolve,reject)=>{const req=db.transaction(storeName,'readwrite').objectStore(storeName).put(t);req.onsuccess=resolve;req.onerror=()=>reject(req.error);});
+ const deleteTrack=id=>new Promise((resolve,reject)=>{const req=db.transaction(storeName,'readwrite').objectStore(storeName).delete(id);req.onsuccess=resolve;req.onerror=()=>reject(req.error);});
+ const fmt=n=>{if(!Number.isFinite(n))return'0:00';return Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');};
+ const safeName=n=>n.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function urlFor(t){if(!urls.has(t.id))urls.set(t.id,URL.createObjectURL(t.blob));return urls.get(t.id);}
+ function draw(){
+  const q=$('cm-search').value.trim().toLowerCase(),visible=tracks.filter(t=>t.name.toLowerCase().includes(q));
+  $('cm-library-count').textContent=tracks.length+' song'+(tracks.length===1?'':'s')+' added';
+  const list=$('cm-track-list');list.replaceChildren();
+  if(!visible.length){const empty=document.createElement('div');empty.className='cm-empty';empty.innerHTML=tracks.length?'<span>⌕</span><strong>No matching songs</strong><p>Try another search.</p>':'<span>♫</span><strong>Your library is empty</strong><p>Add MP3, WAV, OGG, M4A, or other audio files to start listening.</p><button type="button" id="cm-empty-add">Choose music files</button>';list.append(empty);$('cm-empty-add')?.addEventListener('click',()=>$('cm-file-input').click());return;}
+  visible.forEach((t,i)=>{const row=document.createElement('div');row.className='cm-track'+(t.id===currentId?' playing':'');const num=document.createElement('span');num.className='cm-track-num';num.textContent=t.id===currentId?'♫':String(i+1);const name=document.createElement('div');name.className='cm-track-name';name.textContent=t.name;const type=document.createElement('small');type.className='cm-track-type';type.textContent=(t.blob.type||'Audio file').replace('audio/','').toUpperCase();name.append(type);const play=document.createElement('button');play.type='button';play.textContent=t.id===currentId&&!audio.paused?'Ⅱ':'▶';play.title='Play song';play.addEventListener('click',()=>playTrack(t.id));const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.title='Remove from library';remove.addEventListener('click',async()=>{if(currentId===t.id){audio.pause();audio.removeAttribute('src');currentId=null;updateNow(null);}const u=urls.get(t.id);if(u)URL.revokeObjectURL(u);urls.delete(t.id);await deleteTrack(t.id);tracks=tracks.filter(x=>x.id!==t.id);draw();});row.append(num,name,play,remove);row.addEventListener('dblclick',()=>playTrack(t.id));list.append(row);});
+ }
+ function updateNow(t){$('cm-now-title').textContent=t?t.name:'Nothing playing';$('cm-now-sub').textContent=t?'Added to your local library':'Choose a song from your library';$('cm-cover').textContent='♫';$('cm-play').textContent=audio.paused?'▶':'Ⅱ';}
+ async function playTrack(id){const t=tracks.find(x=>x.id===id);if(!t)return;currentId=id;audio.src=urlFor(t);audio.volume=Number($('cm-volume').value)/100;try{await audio.play();}catch(e){$('cm-now-sub').textContent='Playback could not start for this file.';}updateNow(t);draw();}
+ async function addFiles(files){for(const file of Array.from(files)){if(!file.type.startsWith('audio/')&&!/\.(mp3|wav|ogg|m4a|aac|flac|opus)$/i.test(file.name))continue;const t={id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),name:file.name,blob:file,addedAt:Date.now()};await saveTrack(t);tracks.push(t);}draw();}
+ $('cm-add').addEventListener('click',()=>$('cm-file-input').click());$('cm-empty-add')?.addEventListener('click',()=>$('cm-file-input').click());
+ $('cm-file-input').addEventListener('change',e=>{addFiles(e.target.files);e.target.value='';});
+ $('cm-search').addEventListener('input',draw);
+ $('cm-play').addEventListener('click',()=>{if(!audio.src){if(tracks[0])playTrack(tracks[0].id);return;}if(audio.paused)audio.play();else audio.pause();});
+ $('cm-prev').addEventListener('click',()=>{let i=tracks.findIndex(t=>t.id===currentId);if(i>0)playTrack(tracks[i-1].id);});
+ $('cm-next').addEventListener('click',()=>{let i=tracks.findIndex(t=>t.id===currentId);if(i<tracks.length-1)playTrack(tracks[i+1].id);});
+ $('cm-volume').addEventListener('input',e=>audio.volume=Number(e.target.value)/100);
+ $('cm-seek').addEventListener('input',e=>{if(Number.isFinite(audio.duration))audio.currentTime=audio.duration*Number(e.target.value)/1000;});
+ audio.addEventListener('timeupdate',()=>{$('cm-current-time').textContent=fmt(audio.currentTime);$('cm-duration').textContent=fmt(audio.duration);if(Number.isFinite(audio.duration))$('cm-seek').value=String(audio.currentTime/audio.duration*1000);});
+ audio.addEventListener('play',()=>{updateNow(tracks.find(t=>t.id===currentId));draw();});
+ audio.addEventListener('pause',()=>{updateNow(tracks.find(t=>t.id===currentId));draw();});
+ audio.addEventListener('ended',()=>{let i=tracks.findIndex(t=>t.id===currentId);if(i>=0&&i<tracks.length-1)playTrack(tracks[i+1].id);});
+ const drop=$('cm-drop');['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('dragover');}));['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('dragover');}));drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+ const body=document.querySelector('#music-player-window .cherry-music-body');body.addEventListener('dragover',e=>e.preventDefault());body.addEventListener('drop',e=>{if(e.target.closest('#cm-drop'))return;e.preventDefault();addFiles(e.dataTransfer.files);});
+ openDb().then(async value=>{db=value;tracks=await allTracks();draw();}).catch(()=>{$('cm-now-sub').textContent='Local music storage is unavailable in this browser.';});
+ window.addEventListener('beforeunload',()=>urls.forEach(URL.revokeObjectURL));
+})();
 const notesArea=document.getElementById('notes-area');
 const notesStatus=document.getElementById('notes-status');
 const notesKey='cherryOSNotes';
