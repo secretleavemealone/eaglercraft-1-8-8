@@ -593,6 +593,23 @@ html,body{background:#080910!important}
  #start-menu{bottom:59px!important;width:calc(100vw - 14px)!important;padding:15px!important}
  #start-menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+/* Minecraft launcher full edition shell */
+#picker{position:fixed;z-index:30;inset:4vh 2vw 7vh 2vw;transform:none;width:auto;height:auto;max-height:none;padding:0;display:none;overflow:hidden;grid-template-columns:154px minmax(0,1fr);grid-template-rows:28px minmax(0,1fr);border:1px solid #555;border-radius:6px;background:#242424;color:#f5f5f5;box-shadow:0 25px 90px #000d;backdrop-filter:none}
+#picker.open{display:grid}#picker.minimized{display:none}
+.launcher-titlebar{grid-column:1/3;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:#202020;border-bottom:1px solid #3c3c3c;font-size:11px;color:#ddd}
+.launcher-titlebar .window-actions{display:flex;gap:2px}.launcher-titlebar .window-actions button{width:34px;height:25px;margin:0;padding:0;background:transparent;border:0;border-radius:0;color:#ddd;font-size:13px}.launcher-titlebar .window-actions button:hover{background:#444}.launcher-titlebar #close-picker:hover{background:#c42b36}
+.mc-sidebar{grid-column:1;grid-row:2;display:flex;flex-direction:column;min-height:0;background:#2d2d2d;border-right:1px solid #484848}
+.mc-profile{height:60px;display:flex;align-items:center;gap:8px;padding:8px;border-bottom:1px solid #555;font-size:11px}.mc-profile>span:nth-child(2){flex:1;min-width:0}.mc-profile strong,.mc-profile small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-profile small{margin-top:3px;color:#aaa}.mc-avatar{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#27516b;font-weight:bold}
+.mc-side-link{min-height:48px;display:flex;align-items:center;gap:9px;padding:7px 9px;margin:0;border:0;border-bottom:1px solid #494949;border-radius:0;background:transparent;color:#eee;text-align:left;font-size:10px;font-weight:700;line-height:1.25}.mc-side-link span{font-size:19px}.mc-side-link:hover,.mc-side-link.selected{background:#414141;border-left:3px solid #70bd50;padding-left:6px}.mc-side-bottom{margin-top:auto;border-top:1px solid #555}
+.mc-main{grid-column:2;grid-row:2;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:auto;background:#242424}
+.mc-topnav{height:58px;flex:none;padding:9px 18px 0;background:#202020;border-bottom:1px solid #454545}.mc-topnav strong{display:block;margin-bottom:7px;font-size:10px}.mc-topnav>div{display:flex;gap:24px;overflow-x:auto}.mc-topnav button{width:auto;margin:0;padding:0 0 7px;border:0;border-radius:0;background:transparent;color:#eee;font-size:13px;font-weight:400;white-space:nowrap}.mc-topnav button.active{border-bottom:3px solid #5cae42;font-weight:700}
+.mc-hero{position:relative;flex:1;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden;padding:24px;background:radial-gradient(ellipse at 50% 80%,#e46a27 0%,#8c351e 32%,#321a20 70%,#151319 100%)}.mc-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0009,#0001 48%,#0008),repeating-linear-gradient(90deg,transparent 0 9%,#100d0d44 9.2% 10%),linear-gradient(0deg,#100a0acc,transparent 70%)}.mc-logo{position:relative;z-index:1;text-align:center;font-size:clamp(27px,4vw,54px);font-weight:1000;letter-spacing:-3px;color:#f5f5f5;text-shadow:4px 5px #292929,-2px -2px #aaa,0 8px 15px #000}.mc-logo small{display:block;font-size:13px;letter-spacing:2px;line-height:1;text-shadow:2px 2px #222}.mc-hero-caption{position:relative;z-index:1;align-self:flex-start;max-width:500px;text-shadow:0 3px 10px #000}.mc-hero-caption span{font-size:10px;letter-spacing:2px;color:#ffd18e}.mc-hero-caption h2{font-size:clamp(20px,2.5vw,34px);margin:7px 0}.mc-hero-caption p{margin:0;color:#eee;font-size:13px}
+.mc-playbar{min-height:78px;display:grid;grid-template-columns:minmax(130px,1fr) minmax(180px,1.2fr) minmax(110px,1fr);align-items:center;gap:12px;padding:9px 18px;background:#292929;border-top:1px solid #555;border-bottom:1px solid #111}.mc-version label{display:block;margin:0 0 4px;font-size:9px;color:#bbb}.mc-version select{width:100%;padding:7px 9px;border-radius:2px;background:#353535;border:1px solid #578c43;font-size:12px}.mc-version small{font-size:9px;color:#aaa}.mc-playcenter{text-align:center}.mc-playcenter #play{width:min(200px,100%);margin:0 auto;padding:11px;background:#39882d;border:2px solid #152d12;border-radius:2px;box-shadow:0 3px #172e13;font-size:17px;letter-spacing:1px}.mc-playcenter small{display:block;margin-top:5px;font-size:9px;color:#ddd}.mc-chat-shortcut{text-align:right}.mc-chat-shortcut #chat-toggle{width:auto;display:inline-block;margin:0;padding:9px 12px;border:1px solid #666;border-radius:2px;background:#393939;font-size:11px}
+.mc-news-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px 18px;background:#202020}.mc-news-strip article{min-height:90px;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;padding:12px;background:linear-gradient(145deg,#15518a,#101c37);border:1px solid #555;box-shadow:inset 0 0 35px #0005}.mc-news-strip article:nth-child(2){background:linear-gradient(145deg,#5d2524,#21141c)}.mc-news-strip article:nth-child(3){background:linear-gradient(145deg,#4b315d,#17132a)}.mc-news-strip b{font-size:13px;letter-spacing:.5px}.mc-news-strip span{font-size:10px;color:#ddd}.mc-extra{padding:0 18px 12px;background:#202020}.mc-extra #direct{width:auto;display:inline-block;margin:0;padding:7px 10px;border-radius:2px;font-size:10px}#chat-panel{width:calc(100% - 36px);margin:0 18px 12px}
+#picker h1,#picker>.sub{display:none}
+@media(max-width:680px){#picker{inset:2vh 1vw 7vh 1vw;grid-template-columns:86px minmax(0,1fr)}.mc-profile{padding:4px;gap:4px}.mc-profile>span:nth-child(2),.mc-profile>span:last-child{display:none}.mc-side-link{flex-direction:column;justify-content:center;gap:3px;padding:5px 2px;font-size:8px;text-align:center}.mc-side-link span{font-size:16px}.mc-topnav{padding-left:9px}.mc-topnav>div{gap:14px}.mc-playbar{grid-template-columns:1fr 1.2fr;gap:7px;padding:8px}.mc-chat-shortcut{grid-column:1/3;text-align:center}.mc-news-strip{grid-template-columns:1fr;gap:7px}.mc-news-strip article{min-height:55px}}
+
 </style>
 </head>
 <body>
@@ -735,26 +752,21 @@ html,body{background:#080910!important}
   <div class="store-grid"><article class="store-item"><div class="store-item-art">🎮</div><span class="store-coming">COMING LATER</span><h3>Cherry Games</h3><p>A place for games and future game releases inside CherryOS.</p><button type="button" disabled style="opacity:.55;cursor:not-allowed">Not available yet</button></article></div>
  </div>
 </section>
-<main class="card" id="picker">
-<div class="window-top"><span>🟩 Minecraft Launcher</span><div class="window-actions"><button type="button" id="minimize-picker" title="Minimize">—</button><button type="button" id="maximize-picker" title="Maximize">□</button><button class="win-close" id="close-picker" type="button" title="Close">×</button></div></div>
-<h1>Minecraft Launcher</h1>
-<p class="sub">Choose your edition and jump into the game.</p>
-<p class="sub" style="margin-top:-14px;color:#a7f3d0;font-weight:700">New version added: Minecraft 1.12.2!</p>
-<label for="version">Game version</label>
-<select id="version">
-<option value="1.8.8">Minecraft 1.8.8</option>
-<option value="1.12.2">Minecraft 1.12.2</option>
-</select>
-<button id="play" type="button">Play Minecraft 1.8.8</button>
-<a class="launch secondary" id="direct" href="./game.html" target="_blank" rel="noopener noreferrer">Open local game files in a new tab</a>
-<button id="chat-toggle" type="button">Open Server Chat</button>
-<aside id="chat-panel" aria-label="Minecraft chat">
-  <div id="chat-head"><span>Server Chat</span><button id="chat-close" type="button">Close</button></div>
-  <div id="chat-status">Connecting to chat...</div>
-  <div id="chat-messages" aria-live="polite"></div>
-  <form id="chat-form"><input id="chat-input" maxlength="300" autocomplete="off" placeholder="Type a message..." aria-label="Message"><button id="chat-send" type="submit">Send</button></form>
-</aside>
-</main>
+<main class="card" id="picker" aria-label="Minecraft Launcher">
+<div class="launcher-titlebar"><span>🟩 Minecraft Launcher</span><div class="window-actions"><button type="button" id="minimize-picker" title="Minimize">—</button><button type="button" id="maximize-picker" title="Maximize">□</button><button class="win-close" id="close-picker" type="button" title="Close">×</button></div></div>
+<aside class="mc-sidebar"><div class="mc-profile"><span class="mc-avatar">R</span><span><strong>CherryOS Player</strong><small>Account</small></span><span>⌄</span></div>
+<button class="mc-side-link selected" type="button" data-mc-tab="home"><span>🏠</span> HOME</button>
+<button class="mc-side-link" type="button" data-mc-tab="java"><span>🟩</span> MINECRAFT: JAVA EDITION</button>
+<button class="mc-side-link" type="button" data-mc-tab="bedrock"><span>🧱</span> MINECRAFT: BEDROCK EDITION</button>
+<button class="mc-side-link" type="button" data-mc-tab="dungeons"><span>🏰</span> MINECRAFT DUNGEONS</button>
+<button class="mc-side-link" type="button" data-mc-tab="legends"><span>⚔️</span> MINECRAFT LEGENDS</button>
+<div class="mc-side-bottom"><button class="mc-side-link" type="button" data-mc-tab="news"><span>▤</span> WHAT'S NEW</button><button class="mc-side-link" type="button" data-launch="settings"><span>☷</span> SETTINGS</button></div></aside>
+<section class="mc-main"><nav class="mc-topnav"><strong>MINECRAFT: JAVA EDITION</strong><div><button class="active" type="button">Play</button><button type="button" data-mc-tab="installations">Installations</button><button type="button" data-mc-tab="realms">Realms</button><button type="button" data-mc-tab="skins">Skins</button><button type="button" data-mc-tab="patch">Patch Notes</button></div></nav>
+<div class="mc-hero"><div class="mc-logo">MINECRAFT<small>JAVA EDITION</small></div><div class="mc-hero-caption"><span>YOUR NEXT ADVENTURE STARTS HERE</span><h2>Explore. Build. Survive.</h2><p>Jump back into your world.</p></div></div>
+<div class="mc-playbar"><div class="mc-version"><label for="version">VERSION</label><select id="version"><option value="1.8.8">Minecraft 1.8.8</option><option value="1.12.2">Minecraft 1.12.2</option></select><small>Java Edition</small></div><div class="mc-playcenter"><button id="play" type="button">PLAY</button><small>New version added: Minecraft 1.12.2!</small></div><div class="mc-chat-shortcut"><button id="chat-toggle" type="button">Server Chat</button></div></div>
+<div class="mc-news-strip"><article><b>DEEP FREEZE</b><span>Discover new adventures</span></article><article><b>EXPLORE MORE</b><span>Build your next world</span></article><article><b>COMMUNITY</b><span>Play and create together</span></article></div>
+<div class="mc-extra"><a class="launch secondary" id="direct" href="./game.html" target="_blank" rel="noopener noreferrer">Open local game files in a new tab</a></div>
+<aside id="chat-panel" aria-label="Minecraft chat"><div id="chat-head"><span>Server Chat</span><button id="chat-close" type="button">Close</button></div><div id="chat-status">Connecting to chat...</div><div id="chat-messages" aria-live="polite"></div><form id="chat-form"><input id="chat-input" maxlength="300" autocomplete="off" placeholder="Type a message..." aria-label="Message"><button id="chat-send" type="submit">Send</button></form></aside></section></main>
 <section id="game" aria-label="Minecraft game">
 <div id="game-titlebar"><span>⛏️ Minecraft</span><div id="game-controls"><button id="game-fullscreen" type="button">⛶ Fullscreen</button><button id="game-exit-fullscreen" type="button" style="display:none">Exit fullscreen</button><button id="game-minimize" type="button" title="Minimize">—</button><button id="game-close" type="button" title="Close">×</button></div></div>
 <div id="loading-message">Minecraft 1.12.2 is loading...<br>Please wait — this might take a minute.</div>
