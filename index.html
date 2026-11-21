@@ -544,6 +544,55 @@ button:not(:disabled):active{transform:scale(.985)}
 }
 @media(prefers-reduced-motion:reduce){#desktop:before{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
+
+/* Desktop-first shell: remove the landing-page / floating-dock appearance */
+html,body{background:#080910!important}
+#desktop{inset:0!important;background:radial-gradient(ellipse at 70% 28%,#76253b55 0%,transparent 32%),radial-gradient(ellipse at 22% 82%,#293a5b44 0%,transparent 38%),linear-gradient(135deg,#101521 0%,#17101b 52%,#090e18 100%)!important}
+#desktop:before{content:"";position:absolute;inset:-18%;width:auto;height:auto;left:auto;top:auto;border-radius:0;filter:blur(0);opacity:.9;pointer-events:none;background:radial-gradient(ellipse at 50% 110%,#fa526b24,transparent 48%),radial-gradient(ellipse at 0% 0%,#6278a522,transparent 42%);animation:none!important}
+#desktop:after{opacity:.12!important;mask-image:linear-gradient(120deg,#000,transparent 75%)!important}
+#system-bar,#clock,#desktop-brand,#dock,#desktop-time{display:none!important}
+.desktop-icons{position:absolute!important;top:24px!important;left:22px!important;right:auto!important;display:grid!important;grid-template-columns:78px!important;grid-auto-rows:88px!important;gap:7px!important;z-index:2!important}
+.app-icon{width:76px!important;min-height:82px!important;height:82px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:5px!important;border:1px solid transparent!important;border-radius:5px!important;background:transparent!important;color:#f7f7fb!important;font-size:12px!important;font-weight:500!important;text-shadow:0 1px 4px #000!important;box-shadow:none!important;transform:none!important}
+.app-icon .glyph{width:43px!important;height:43px!important;display:grid!important;place-items:center!important;border:0!important;border-radius:8px!important;font-size:30px!important;background:transparent!important;box-shadow:0 3px 9px #0006!important}
+.minecraft-app-image{border-radius:5px!important}
+.app-icon:hover{background:#ffffff19!important;border:1px solid #ffffff25!important;transform:none!important}
+#taskbar{position:fixed!important;z-index:40!important;left:0!important;right:0!important;bottom:0!important;height:54px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:0 14px!important;background:rgba(19,21,29,.82)!important;border-top:1px solid #ffffff24!important;box-shadow:0 -6px 24px #0004!important;backdrop-filter:blur(26px) saturate(145%)!important}
+#start-button{position:absolute!important;left:14px!important;top:7px!important;width:40px!important;height:40px!important;margin:0!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#f8f8ff!important;font-size:24px!important;box-shadow:none!important}
+#start-button:hover{background:#ffffff18!important;transform:none!important}
+.task-divider,#taskbar-spacer{display:none!important}
+#task-apps{position:absolute!important;left:50%!important;top:6px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:max-content!important;max-width:calc(100vw - 210px)!important;min-width:0!important;overflow-x:auto!important;scrollbar-width:none!important}
+#task-apps::-webkit-scrollbar{display:none}
+.task-app{min-width:42px!important;width:auto!important;height:42px!important;max-width:155px!important;margin:0!important;padding:0 11px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important;color:#f5f6fb!important;font-size:12px!important}
+.task-app:hover,.task-app.active{background:#ffffff18!important;border-color:#ffffff12!important}
+.task-app.active{box-shadow:inset 0 -2px #ff657d!important}
+#tray{position:absolute!important;right:14px!important;top:0!important;height:53px!important;display:flex!important;align-items:center!important;gap:12px!important;padding:0 4px!important;color:#f1f2f8!important}
+#tray-clock{font-size:12px!important;line-height:1.35!important;text-align:center!important;font-weight:500!important}
+#tray-clock small{font-size:11px!important;color:#e0e2ea!important;margin-top:1px!important}
+#start-menu{position:fixed!important;z-index:60!important;left:50%!important;bottom:64px!important;transform:translateX(-50%)!important;width:min(610px,calc(100vw - 24px))!important;padding:22px!important;border:1px solid #ffffff26!important;border-radius:12px!important;background:rgba(27,29,38,.96)!important;box-shadow:0 22px 70px #000b!important;backdrop-filter:blur(28px)!important}
+#start-menu.open{animation:winStartIn .16s ease-out!important}
+@keyframes winStartIn{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+#start-menu h3{margin:0 0 18px!important;color:#f7f7fb!important;font-size:14px!important;letter-spacing:.2px!important;font-weight:650!important}
+#start-menu .menu-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+#start-menu .menu-grid button{min-height:74px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:11px!important;padding:10px 12px!important;background:#ffffff09!important;border:1px solid #ffffff0c!important;border-radius:8px!important;color:#f4f5fa!important;font-size:13px!important;text-align:left!important}
+#start-menu .menu-grid button span{display:grid!important;place-items:center!important;width:34px!important;height:34px!important;margin:0!important;font-size:23px!important}
+#start-menu .menu-grid button:hover{background:#ffffff18!important;border-color:#ffffff20!important;transform:none!important}
+#start-menu .menu-footer{margin-top:18px!important;padding-top:13px!important;color:#b7bdca!important;border-top:1px solid #ffffff17!important}
+.os-window{border-radius:10px!important;background:#171a23f7!important;border:1px solid #ffffff2b!important;box-shadow:0 24px 90px #000b!important;backdrop-filter:blur(22px)!important}
+.os-window-top{height:44px!important;background:#20232df2!important;border-bottom:1px solid #ffffff16!important}
+.window-actions button{border-radius:5px!important}
+#picker{border-radius:12px!important}
+@media(max-width:700px){
+ .desktop-icons{left:7px!important;top:12px!important;grid-template-columns:68px!important;grid-auto-rows:77px!important}
+ .app-icon{width:66px!important;height:74px!important;min-height:74px!important}
+ #taskbar{height:52px!important;justify-content:flex-start!important;padding:0 7px!important}
+ #start-button{left:7px!important;width:38px!important}
+ #task-apps{left:52px!important;right:94px!important;transform:none!important;justify-content:flex-start!important;max-width:none!important}
+ #tray{right:5px!important;gap:5px!important}
+ #tray>span:not(#tray-clock){display:none!important}
+ #tray-clock small{font-size:9px!important}
+ #start-menu{bottom:59px!important;width:calc(100vw - 14px)!important;padding:15px!important}
+ #start-menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
 </style>
 </head>
 <body>
