@@ -854,6 +854,31 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
   }
 }
 
+
+/* iPad: six icons down, then continue in the next column */
+@media (max-width: 1100px) {
+  .desktop-icons {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-template-rows: repeat(6, 77px) !important;
+    grid-template-columns: none !important;
+    grid-auto-columns: 66px !important;
+    grid-auto-rows: 77px !important;
+    align-content: start !important;
+    justify-content: start !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: normal !important;
+  }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .desktop-icons {
+    grid-template-rows: repeat(6, 88px) !important;
+    grid-auto-columns: 78px !important;
+    grid-auto-rows: 88px !important;
+  }
+}
+
 </style>
 
 <style id="cherry-onboarding-styles">
