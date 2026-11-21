@@ -698,8 +698,6 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
     <button class="app-icon" id="notes-app" type="button"><span class="glyph">📝</span><span>Notes</span></button>
     <button class="app-icon" id="cherry-links-app" type="button"><span class="glyph">🔗</span><span>Cherry Links</span></button>
-    <button class="app-icon" id="retro-bowl-app" type="button"><span class="glyph">🏈</span><span>Retro Bowl</span></button>
-    <button class="app-icon" id="games-app" type="button"><span class="glyph">🎮</span><span>Games</span></button>
     <button class="app-icon" id="cherry-store-app" type="button"><span class="glyph">🛍️</span><span>Cherry Store</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
@@ -727,8 +725,6 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
       <button type="button" data-launch="notes"><span>📝</span>Notes</button>
       <button type="button" data-launch="cherry-links"><span>🔗</span>Cherry Links</button>
-      <button type="button" data-launch="retro-bowl"><span>🏈</span>Retro Bowl</button>
-      <button type="button" data-launch="games"><span>🎮</span>Games</button>
       <button type="button" data-launch="cherry-store"><span>🛍️</span>Cherry Store</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
@@ -811,24 +807,21 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     </main>
   </div>
 </section>
-<section class="os-window" id="retro-bowl-window" aria-label="Retro Bowl" aria-hidden="true" style="flex-direction:column;overflow:hidden;width:min(1100px,96vw);height:min(780px,90vh);max-height:none">
-  <div class="os-window-top" style="flex:0 0 44px"><span>🏈 Retro Bowl</span><div class="window-actions"><button type="button" data-minimize="retro-bowl-window" title="Minimize">—</button><button type="button" data-maximize="retro-bowl-window" title="Maximize">□</button><button class="win-close" data-close="retro-bowl-window" type="button" title="Close">×</button></div></div>
-  <div class="os-window-body" style="padding:0;background:#101010;overflow:hidden;display:flex;flex:1;min-height:0;flex-direction:column">
-    <div style="position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:hidden;background:#101010">
-      <iframe title="Retro Bowl" src="https://game316009.konggames.com/gamez/0031/6009/live/index.html" style="position:absolute;left:0;top:-36px;display:block;width:100%;height:calc(100% + 72px);min-height:0;border:0;background:#101010" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
 <section class="os-window" id="games-window" aria-label="Games" aria-hidden="true" style="width:min(760px,94vw);height:min(620px,86vh)">
  <div class="os-window-top"><span>🎮 Games Library</span><div class="window-actions"><button type="button" data-minimize="games-window" title="Minimize">—</button><button type="button" data-maximize="games-window" title="Maximize">□</button><button class="win-close" data-close="games-window" type="button" title="Close">×</button></div></div>
  <div class="os-window-body" style="overflow:auto">
-  <h2>My Games</h2><p>Games available on your CherryOS desktop.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px">
-   <article style="padding:18px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff0a">
-    <div style="height:112px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,#2454b8,#17347a);font-size:58px">🏈</div>
-    <h3 style="margin:14px 0 6px">Retro Bowl</h3><p style="margin:0 0 14px;color:#b8c1d2;font-size:13px">Football season management and arcade action.</p>
-    <button type="button" data-open-retro-bowl style="width:100%">Play</button>
-   </article>
+  <div id="games-library-view"><h2>My Games</h2><p>Games available in your CherryOS Games app.</p>
+   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px">
+    <article style="padding:18px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff0a">
+     <div style="height:150px;display:grid;place-items:center;border-radius:10px;overflow:hidden;background:#397b22">
+      <svg viewBox="0 0 180 180" role="img" aria-label="Retro Bowl logo" style="width:100%;height:100%;display:block"><rect width="180" height="180" fill="#397b22"/><g fill="#fff" font-family="Georgia,serif" font-weight="900" text-anchor="middle"><text x="90" y="31" font-size="26">RETRO</text><text x="90" y="55" font-size="25">BOWL</text></g><g shape-rendering="crispEdges"><rect x="83" y="61" width="16" height="15" fill="#f2d9a1"/><rect x="75" y="74" width="31" height="18" fill="#fff"/><rect x="66" y="87" width="48" height="18" fill="#e8a34d"/><rect x="56" y="93" width="28" height="18" fill="#a95b1c"/><rect x="98" y="91" width="22" height="15" fill="#fff"/><rect x="77" y="104" width="31" height="29" fill="#fff"/><rect x="66" y="110" width="18" height="20" fill="#a95b1c"/><rect x="105" y="111" width="20" height="17" fill="#e8a34d"/><rect x="78" y="131" width="16" height="27" fill="#f2d9a1"/><rect x="96" y="132" width="16" height="25" fill="#f2d9a1"/><rect x="70" y="154" width="25" height="10" fill="#fff"/><rect x="95" y="154" width="25" height="10" fill="#fff"/></g></svg>
+     </div><h3 style="margin:14px 0 6px">Retro Bowl</h3><p style="margin:0 0 14px;color:#b8c1d2;font-size:13px">Football season management and arcade action.</p><button type="button" data-play-game="retro-bowl" style="width:100%">Play</button>
+    </article>
+   </div>
+  </div>
+  <div id="retro-bowl-player" hidden style="height:100%;min-height:440px;flex-direction:column;overflow:hidden">
+   <div style="display:flex;align-items:center;gap:12px;padding:0 0 12px"><button type="button" id="retro-bowl-back">← Back to games</button><strong>Retro Bowl</strong></div>
+   <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#101010;border-radius:10px"><iframe title="Retro Bowl game" src="https://game316009.konggames.com/gamez/0031/6009/live/index.html" style="position:absolute;left:0;top:-36px;width:100%;height:calc(100% + 72px);border:0;background:#101010" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe></div>
   </div>
  </div>
 </section>
@@ -867,11 +860,11 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
  <div class="os-window-top"><span>🛍️ Cherry Store</span><div class="window-actions"><button type="button" data-minimize="cherry-store-window" title="Minimize">—</button><button type="button" data-maximize="cherry-store-window" title="Maximize">□</button><button class="win-close" data-close="cherry-store-window" type="button" title="Close">×</button></div></div>
  <div class="os-window-body store-body">
   <div class="store-hero store-hero-v2"><div class="store-hero-copy"><span class="store-eyebrow">THE CHERRYOS MARKETPLACE</span><h2>Make it yours.</h2><p>Fresh looks and little upgrades for your desktop.</p><div class="store-hero-meta"><span>✦ Free collection</span><span>•</span><span>Saved on this device</span></div></div><div class="store-hero-art"><div class="store-orbit orbit-one"></div><div class="store-orbit orbit-two"></div><div class="store-big-cherry">🍒</div><span class="store-spark spark-a">✦</span><span class="store-spark spark-b">✧</span></div></div>
-  <div class="store-section-heading"><div><span class="store-kicker">CHERRYOS APP STORE</span><h3>Apps coming soon</h3><p>New CherryOS apps are on the way.</p></div><span class="store-count">3 APPS</span></div>
+  <div class="store-section-heading"><div><span class="store-kicker">CHERRYOS APP STORE</span><h3>Apps &amp; games</h3><p>Download apps to add them to your desktop.</p></div><span class="store-count">3 APPS</span></div>
   <div class="store-grid store-grid-v2" id="store-products">
    <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Cherry Cursors"><div class="store-product-art art-cherry"><span style="font-size:58px">↖</span><b>🍒</b></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">COMING SOON</span></div><h3>Cherry Cursors</h3><p>A collection of custom Cherry, Neon, Ocean, Pixel and classic pointers.</p><button type="button" disabled>Coming soon</button></div></article>
    <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Cherry Trails"><div class="store-product-art art-rainbow"><span style="font-size:48px">✦　·　✧</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">COMING SOON</span></div><h3>Cherry Trails</h3><p>Mouse trails with Cherry, Sparkle, Rainbow, Heart, Bubble and more.</p><button type="button" disabled>Coming soon</button></div></article>
-   <article class="store-item store-item-v2" data-store-category="games" data-store-name="Cherry Games"><div class="store-product-art art-games"><span style="font-size:52px">🎮</span><i>✦</i></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">GAME COLLECTION</span><span class="store-price">AVAILABLE</span></div><h3>Cherry Games</h3><p>Open your game library and play games from your CherryOS desktop.</p><button type="button" data-open-games>Open Games</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="games" data-store-name="Games"><div class="store-product-art art-games"><span style="font-size:52px">🎮</span><i>✦</i></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">FREE</span></div><h3>Games</h3><p>Download your game library and play Retro Bowl from inside the app.</p><button type="button" data-install-decor-app="games">Download Games</button></div></article>
   </div><p class="store-empty" id="store-empty" hidden>No apps match that search.</p>
   <div class="store-footer"><span>🍒 CHERRY STORE</span><span>Your desktop, your style.</span></div>
  </div>
@@ -924,19 +917,19 @@ const taskApps=document.getElementById('task-apps');
 const taskAppButtons=new Map();
 const pinnedTaskApps=new Set(JSON.parse(localStorage.getItem('cherryOSPinnedApps')||'[]'));
 function savePinnedTaskApps(){localStorage.setItem('cherryOSPinnedApps',JSON.stringify([...pinnedTaskApps]));}
-function taskAppDetails(key){return ({'retro-bowl':['Retro Bowl','🏈',()=>openOsWindow('retro-bowl-window')],games:['Games','🎮',()=>openOsWindow('games-window')],picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
+function taskAppDetails(key){return ({games:['Games','🎮',()=>openOsWindow('games-window')],picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
 function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('div');b.className='task-app';b.innerHTML='<button type="button" class="task-main" aria-label="Open app"><span class="task-glyph"></span><span class="task-label"></span></button><button type="button" class="task-pin" title="Pin to taskbar" aria-label="Pin to taskbar">📌</button>';const main=b.querySelector('.task-main');main.addEventListener('click',()=>{if(b._activate)b._activate();});const pin=b.querySelector('.task-pin');pin.addEventListener('click',e=>{e.stopPropagation();const pinned=pinnedTaskApps.has(key);if(pinned)pinnedTaskApps.delete(key);else pinnedTaskApps.add(key);savePinnedTaskApps();syncTaskPin(b,key);if(!pinned&&b.dataset.closed==='true'){b.remove();taskAppButtons.delete(key);}});taskApps.appendChild(b);taskAppButtons.set(key,b);}const icon=b.querySelector('.task-glyph');if(key==='picker'||key==='game'){icon.innerHTML='<img class="minecraft-task-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="">';}else{icon.textContent=glyph;}b.querySelector('.task-label').textContent=label;b._activate=activate;b.dataset.closed='false';b.classList.toggle('minimized',!!minimized);syncTaskPin(b,key);return b;}
 function syncTaskPin(b,key){const pin=b.querySelector('.task-pin');if(!pin)return;const active=pinnedTaskApps.has(key);pin.classList.toggle('pinned',active);pin.textContent=active?'📌':'＋';pin.title=active?'Unpin from taskbar':'Pin to taskbar';pin.setAttribute('aria-label',pin.title);}
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(!b)return;if(pinnedTaskApps.has(key)){const [label,glyph,activate]=taskAppDetails(key);b.dataset.closed='true';b.classList.remove('active','minimized');b._activate=activate;b.querySelector('.task-label').textContent=label;syncTaskPin(b,key);}else{b.remove();taskAppButtons.delete(key);}}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'retro-bowl-window':['retro-bowl','Retro Bowl','🏈'],'games-window':['games','Games','🎮'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
+function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'games-window':['games','Games','🎮'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
 makeDraggable(picker,picker.querySelector('.window-top'));
 picker.addEventListener('pointerdown',()=>bringToFront(picker));
-document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':w.id==='cherry-links-window'?'cherry-links':w.id==='cherry-store-window'?'cherry-store':w.id==='cursor-manager-window'?'cursor-manager':w.id==='trail-manager-window'?'trail-manager':w.id==='retro-bowl-window'?'retro-bowl':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
+document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':w.id==='cherry-links-window'?'cherry-links':w.id==='cherry-store-window'?'cherry-store':w.id==='cursor-manager-window'?'cursor-manager':w.id==='trail-manager-window'?'trail-manager':w.id==='games-window'?'games':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
 document.querySelectorAll('[data-maximize]').forEach(b=>b.addEventListener('click',()=>setWindowMaximized(document.getElementById(b.dataset.maximize))));
 document.getElementById('minimize-picker').addEventListener('click',()=>{picker.classList.add('minimized');const item=taskAppButtons.get('picker');if(item)item.classList.add('minimized');});
 document.getElementById('maximize-picker').addEventListener('click',()=>setWindowMaximized(picker));
@@ -946,13 +939,11 @@ document.getElementById('dock-files').addEventListener('click',()=>openOsWindow(
 document.getElementById('settings-app').addEventListener('click',()=>openOsWindow('settings-window'));
 document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.getElementById('cherry-links-app').addEventListener('click',()=>openOsWindow('cherry-links-window'));
-document.getElementById('retro-bowl-app').addEventListener('click',()=>openOsWindow('retro-bowl-window'));
-document.getElementById('games-app').addEventListener('click',()=>openOsWindow('games-window'));
-document.querySelectorAll('[data-open-games]').forEach(b=>b.addEventListener('click',()=>openOsWindow('games-window')));
-document.querySelectorAll('[data-open-retro-bowl]').forEach(b=>b.addEventListener('click',()=>openOsWindow('retro-bowl-window')));
+document.querySelectorAll('[data-play-game="retro-bowl"]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('games-library-view').hidden=true;const player=document.getElementById('retro-bowl-player');player.hidden=false;player.style.display='flex';}));
+document.getElementById('retro-bowl-back').addEventListener('click',()=>{const player=document.getElementById('retro-bowl-player');player.hidden=true;player.style.display='none';document.getElementById('games-library-view').hidden=false;});
 document.getElementById('cherry-store-app').addEventListener('click',()=>openOsWindow('cherry-store-window'));
-document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='retro-bowl')openOsWindow('retro-bowl-window');else if(app==='games')openOsWindow('games-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','retro-bowl-window':'retro-bowl','games-window':'games','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
+document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='games'&&installed.games)openOsWindow('games-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','games-window':'games','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
 
 const notesArea=document.getElementById('notes-area');
 const notesStatus=document.getElementById('notes-status');
@@ -1661,8 +1652,8 @@ const destinations=[
  "https://eaglercraft-1-8-8-ten.vercel.app/",
  "https://eaglercraft-1-8-8.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/",
  "https://moomoocow.egrfhtysgdsgghrsggreghtgoodtryfsbftbhahahadugnhbebegsjfenbstfgj.workers.dev/",
- "https://ertys28rdsjkwqnafnet.netlify.app/",
- "https://moomoocow6060js.netlify.app/"
+ ,
+ 
 ];
 const $=id=>document.getElementById(id);
 let signedUser=null;
@@ -1723,14 +1714,14 @@ $("cl-copy").addEventListener("click",async()=>{
 <script>
 (()=>{
  const storageKey='cherryOSMouseEffects',installedKey='cherryOSDecorApps';
- let settings={cursor:'default',trail:'off'},installed={cursor:false,trail:false};
+ let settings={cursor:'default',trail:'off'},installed={cursor:false,trail:false,games:false};
  try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
  try{installed={...installed,...JSON.parse(localStorage.getItem(installedKey)||'{}')};}catch{}
  const layer=document.getElementById('cherry-trail-layer'),download=document.getElementById('decor-download-screen');
  const cursorClasses=['cherry-cursor','cherry-cursor-neon','cherry-cursor-blue','cherry-cursor-pixel'];
  const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.remove(...cursorClasses);if(settings.cursor==='cherry')document.body.classList.add('cherry-cursor');if(settings.cursor==='neon')document.body.classList.add('cherry-cursor-neon');if(settings.cursor==='blue')document.body.classList.add('cherry-cursor-blue');if(settings.cursor==='pixel')document.body.classList.add('cherry-cursor-pixel');};
  const saveInstalled=()=>localStorage.setItem(installedKey,JSON.stringify(installed));
- const appInfo={cursor:{id:'cursor-manager-app',label:'Cherry Cursors',glyph:'🖱️',window:'cursor-manager-window',key:'cursor-manager',title:'Cherry Cursors'},trail:{id:'trail-manager-app',label:'Cherry Trails',glyph:'✨',window:'trail-manager-window',key:'trail-manager',title:'Cherry Trails'}};
+ const appInfo={cursor:{id:'cursor-manager-app',label:'Cherry Cursors',glyph:'🖱️',window:'cursor-manager-window',key:'cursor-manager',title:'Cherry Cursors'},trail:{id:'trail-manager-app',label:'Cherry Trails',glyph:'✨',window:'trail-manager-window',key:'trail-manager',title:'Cherry Trails'},games:{id:'games-app',label:'Games',glyph:'🎮',window:'games-window',key:'games',title:'Games'}};
  function addAppShortcuts(type){
   const info=appInfo[type];
   if(!document.getElementById(info.id)){
