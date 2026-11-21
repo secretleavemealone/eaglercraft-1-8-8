@@ -755,33 +755,31 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 }
 
 
-/* Keep desktop app icons fully above the dock and bottom taskbar on iPad */
-@media (min-width: 601px) and (max-width: 1100px) {
+/* iPad and phone desktop icons: reserve a fixed safe area above the dock/taskbar */
+@media (max-width: 1100px) {
+  #desktop { overflow: hidden; }
   .desktop-icons {
-    top: 62px;
-    bottom: 148px;
-    max-height: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    align-content: start;
-    grid-auto-rows: min-content;
-    padding: 4px 4px 12px;
+    position: absolute !important;
+    top: 62px !important;
+    bottom: auto !important;
+    height: calc(100dvh - 230px) !important;
+    max-height: calc(100dvh - 230px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    align-content: start !important;
+    grid-auto-rows: min-content !important;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 4px 4px 14px !important;
     scrollbar-width: thin;
-    scrollbar-color: #ffffff55 transparent;
   }
-  #taskbar { height: 66px; }
+  #taskbar { z-index: 20 !important; }
 }
 @media (max-width: 600px) {
   .desktop-icons {
-    bottom: 132px;
-    max-height: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    align-content: start;
-    grid-auto-rows: min-content;
-    padding-bottom: 12px;
-    scrollbar-width: thin;
-    scrollbar-color: #ffffff55 transparent;
+    top: 48px !important;
+    height: calc(100dvh - 210px) !important;
+    max-height: calc(100dvh - 210px) !important;
   }
 }
 </style>
