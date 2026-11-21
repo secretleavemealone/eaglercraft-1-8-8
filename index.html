@@ -782,6 +782,38 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     max-height: calc(100dvh - 210px) !important;
   }
 }
+
+/* iPad fix: stop the last desktop icon at the taskbar edge */
+@media (max-width: 1100px) {
+  .desktop-icons {
+    position: fixed !important;
+    top: 12px !important;
+    bottom: calc(54px + env(safe-area-inset-bottom, 0px)) !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    grid-auto-rows: 88px !important;
+    align-content: start !important;
+    padding-bottom: 8px !important;
+    box-sizing: border-box !important;
+    overscroll-behavior: contain;
+  }
+  #taskbar {
+    position: fixed !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    isolation: isolate;
+  }
+}
+@media (max-width: 700px) {
+  .desktop-icons {
+    top: 10px !important;
+    bottom: calc(52px + env(safe-area-inset-bottom, 0px)) !important;
+    grid-auto-rows: 77px !important;
+  }
+}
+
 </style>
 
 <style id="cherry-onboarding-styles">
