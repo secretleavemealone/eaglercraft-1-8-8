@@ -385,6 +385,31 @@ html,body{min-width:320px}
 
 
 #cherry-links-window{width:min(620px,calc(100% - 28px));background:#171116;color:#fff;border:1px solid #ff6b853d;border-radius:16px;overflow:hidden;box-shadow:0 24px 90px #000b}#cherry-links-window .os-window-top{background:#21151c;color:#fff;border-bottom:1px solid #ffffff14}#cherry-links-window .os-window-body{position:relative;padding:26px;background:radial-gradient(ellipse at 15% 0%,#572033 0%,#21141c 55%,#171116 100%)}.cherry-links-hero{display:flex;align-items:center;gap:14px;margin-bottom:22px}.cherry-links-mark{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:28px;background:#f23c61;color:#fff;box-shadow:0 8px 24px #f23c6140}.cherry-links-hero h2{margin:0 0 5px;font-size:23px}.cherry-links-hero p{margin:0;color:#cdbbc3;font-size:13px}.cl-account{padding:12px 14px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:10px;color:#e8dbe1;font-size:13px}.cl-counter{position:absolute;top:14px;right:18px;display:flex;align-items:center;gap:7px;margin:0;padding:7px 11px;border:1px solid #ff718d44;border-radius:10px;background:#171116dd;box-shadow:0 5px 18px #0004}.cl-counter strong{font-size:16px;color:#ff718d}.cl-counter span{color:#d8c7ce;font-size:11px}.cl-generate,#cl-copy{border:0;border-radius:10px;padding:13px 18px;background:#f04468;color:white;font-weight:700;cursor:pointer}.cl-generate{width:100%;font-size:15px}.cl-generate:disabled{opacity:.45;cursor:not-allowed}.cl-result{display:grid;gap:9px;margin-top:16px;padding:15px;border:1px solid #ff718d55;border-radius:12px;background:#ffffff0b}.cl-result span{font-size:10px;letter-spacing:2px;color:#d8aebb}.cl-result a{color:#ff9bb0;overflow-wrap:anywhere;font-size:13px}.cl-result button{justify-self:start}.cl-status{min-height:18px;color:#e5cbd4;font-size:12px}.cl-foot{padding-top:13px;border-top:1px solid #ffffff18;color:#bba9b1;font-size:11px;line-height:1.5}
+
+/* Cherry Store, custom pointer and mouse trails */
+#cherry-store-window{width:min(920px,calc(100% - 28px));max-height:calc(100vh - 110px)}
+#cherry-store-window .os-window-body{padding:24px}
+.store-hero{display:flex;align-items:center;gap:16px;padding:20px;border:1px solid #ff668733;border-radius:18px;background:radial-gradient(circle at 15% 20%,#ff4c7128,transparent 45%),#ffffff08;margin-bottom:20px}
+.store-hero-mark{width:58px;height:58px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(145deg,#ff718d,#9e183f);font-size:32px;box-shadow:0 8px 25px #e22c5540}
+.store-hero h2{margin:0 0 5px;font-size:25px}.store-hero p{margin:0;color:#b8c0d0;font-size:13px}
+.store-section-title{margin:20px 0 12px;color:#f4dce3;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+.store-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.store-item{min-width:0;padding:16px;border:1px solid #ffffff20;border-radius:15px;background:linear-gradient(145deg,#ffffff0c,#ffffff04)}
+.store-item-art{height:82px;display:grid;place-items:center;border-radius:11px;background:radial-gradient(circle,#ff456a35,transparent 70%),#090c14;font-size:38px;margin-bottom:12px}
+.store-item h3{font-size:15px;margin:0 0 6px}.store-item p{min-height:34px;margin:0 0 12px;color:#aeb8cb;font-size:12px;line-height:1.45}
+.store-item button{margin:0;padding:10px;background:linear-gradient(135deg,#ee5272,#9e2948);font-size:12px}
+.store-item button.applied{background:#285b42;border:1px solid #5eaa7a}
+.store-coming{display:inline-block;margin-bottom:10px;padding:5px 8px;border-radius:20px;background:#ffffff12;color:#e4c5ce;font-size:10px;letter-spacing:1px}
+#cherry-trail-layer{position:fixed;inset:0;z-index:9998;pointer-events:none;overflow:hidden}
+.cherry-trail-dot{position:fixed;left:0;top:0;width:11px;height:11px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 30%,#fff,#ffb5c5 24%,#ff3e68 58%,#a20c37);box-shadow:0 0 12px #ff3e68a8;animation:cherryTrailFade .58s ease-out forwards}
+.cherry-trail-dot.sparkle{width:8px;height:8px;border-radius:2px;background:#ffd6e2;box-shadow:0 0 12px #ff7b9e;transform:rotate(45deg)}
+@keyframes cherryTrailFade{to{opacity:0;scale:.15;filter:blur(3px)}}
+body.cherry-cursor,body.cherry-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M5 3 L8 25 L13 19 L18 28 L22 25 L17 16 L25 15 Z' fill='%23fff' stroke='%239b173d' stroke-width='1.8'/%3E%3Ccircle cx='22' cy='7' r='5' fill='%23ed315d' stroke='%23fff' stroke-width='1'/%3E%3Cpath d='M21 2 Q22 -2 27 0' fill='none' stroke='%236bc36b' stroke-width='2'/%3E%3C/svg%3E") 4 3,auto!important}
+body.cherry-cursor input,body.cherry-cursor textarea,body.cherry-cursor [contenteditable="true"]{cursor:text!important}
+body.cherry-cursor button,body.cherry-cursor a,body.cherry-cursor select{cursor:pointer!important}
+@media(max-width:680px){.store-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.store-hero{padding:14px}.store-hero-mark{width:48px;height:48px}}
+@media(max-width:420px){.store-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -396,6 +421,7 @@ html,body{min-width:320px}
     <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
     <button class="app-icon" id="notes-app" type="button"><span class="glyph">📝</span><span>Notes</span></button>
     <button class="app-icon" id="cherry-links-app" type="button"><span class="glyph">🔗</span><span>Cherry Links</span></button>
+    <button class="app-icon" id="cherry-store-app" type="button"><span class="glyph">🛍️</span><span>Cherry Store</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
   <div id="desktop-brand">CHERRYOS</div>
@@ -422,6 +448,7 @@ html,body{min-width:320px}
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
       <button type="button" data-launch="notes"><span>📝</span>Notes</button>
       <button type="button" data-launch="cherry-links"><span>🔗</span>Cherry Links</button>
+      <button type="button" data-launch="cherry-store"><span>🛍️</span>Cherry Store</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
   </div>
@@ -506,6 +533,25 @@ html,body{min-width:320px}
     <div class="cl-foot">One generation per day per Google account. Your current site is excluded.</div>
   </div>
 </section>
+<section class="os-window" id="cherry-store-window" aria-label="Cherry Store" aria-hidden="true">
+ <div class="os-window-top"><span>🛍️ Cherry Store</span><div class="window-actions"><button type="button" data-minimize="cherry-store-window" title="Minimize">—</button><button type="button" data-maximize="cherry-store-window" title="Maximize">□</button><button class="win-close" data-close="cherry-store-window" type="button" title="Close">×</button></div></div>
+ <div class="os-window-body">
+  <div class="store-hero"><div class="store-hero-mark">🍒</div><div><h2>Cherry Store</h2><p>Personalize your CherryOS desktop. These starter items are free.</p></div></div>
+  <div class="store-section-title">Mouse cursors</div>
+  <div class="store-grid">
+   <article class="store-item"><div class="store-item-art">🍒</div><h3>Cherry Pointer</h3><p>A custom CherryOS cursor with a tiny cherry accent.</p><button type="button" data-store-action="cursor-cherry">Apply cursor</button></article>
+   <article class="store-item"><div class="store-item-art">↖️</div><h3>Classic Pointer</h3><p>Return to your browser's normal mouse cursor.</p><button type="button" data-store-action="cursor-default">Use default</button></article>
+  </div>
+  <div class="store-section-title">Mouse trails</div>
+  <div class="store-grid">
+   <article class="store-item"><div class="store-item-art">🔴</div><h3>Cherry Trail</h3><p>Small glowing cherry-red particles follow your pointer.</p><button type="button" data-store-action="trail-cherry">Enable trail</button></article>
+   <article class="store-item"><div class="store-item-art">✨</div><h3>Sparkle Trail</h3><p>A soft pink sparkle effect follows your mouse.</p><button type="button" data-store-action="trail-sparkle">Enable trail</button></article>
+   <article class="store-item"><div class="store-item-art">〰️</div><h3>No Trail</h3><p>Turn off the mouse trail effect.</p><button type="button" data-store-action="trail-off">Turn off</button></article>
+  </div>
+  <div class="store-section-title">Games</div>
+  <div class="store-grid"><article class="store-item"><div class="store-item-art">🎮</div><span class="store-coming">COMING LATER</span><h3>Cherry Games</h3><p>A place for games and future game releases inside CherryOS.</p><button type="button" disabled style="opacity:.55;cursor:not-allowed">Not available yet</button></article></div>
+ </div>
+</section>
 <main class="card" id="picker">
 <div class="window-top"><span>🟩 Minecraft Launcher</span><div class="window-actions"><button type="button" id="minimize-picker" title="Minimize">—</button><button type="button" id="maximize-picker" title="Maximize">□</button><button class="win-close" id="close-picker" type="button" title="Close">×</button></div></div>
 <h1>Minecraft Launcher</h1>
@@ -547,13 +593,13 @@ function syncTaskPin(b,key){const pin=b.querySelector('.task-pin');if(!pin)retur
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(!b)return;if(pinnedTaskApps.has(key)){const [label,glyph,activate]=taskAppDetails(key);b.dataset.closed='true';b.classList.remove('active','minimized');b._activate=activate;b.querySelector('.task-label').textContent=label;syncTaskPin(b,key);}else{b.remove();taskAppButtons.delete(key);}}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const key=id==='files-window'?'files':id==='notes-window'?'notes':id==='cherry-links-window'?'cherry-links':'settings';const label=id==='files-window'?'Files':id==='notes-window'?'Notes':id==='cherry-links-window'?'Cherry Links':'Settings';const glyph=id==='files-window'?'📁':id==='notes-window'?'📝':id==='cherry-links-window'?'🔗':'⚙️';showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
+function openOsWindow(id){const w=document.getElementById(id);w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const key=id==='files-window'?'files':id==='notes-window'?'notes':id==='cherry-links-window'?'cherry-links':id==='cherry-store-window'?'cherry-store':'settings';const label=id==='files-window'?'Files':id==='notes-window'?'Notes':id==='cherry-links-window'?'Cherry Links':id==='cherry-store-window'?'Cherry Store':'Settings';const glyph=id==='files-window'?'📁':id==='notes-window'?'📝':id==='cherry-links-window'?'🔗':id==='cherry-store-window'?'🛍️':'⚙️';showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
 makeDraggable(picker,picker.querySelector('.window-top'));
 picker.addEventListener('pointerdown',()=>bringToFront(picker));
-document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':w.id==='cherry-links-window'?'cherry-links':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
+document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.minimize);w.classList.add('minimized');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':w.id==='cherry-links-window'?'cherry-links':w.id==='cherry-store-window'?'cherry-store':'settings';const item=taskAppButtons.get(key);if(item)item.classList.add('minimized');}));
 document.querySelectorAll('[data-maximize]').forEach(b=>b.addEventListener('click',()=>setWindowMaximized(document.getElementById(b.dataset.maximize))));
 document.getElementById('minimize-picker').addEventListener('click',()=>{picker.classList.add('minimized');const item=taskAppButtons.get('picker');if(item)item.classList.add('minimized');});
 document.getElementById('maximize-picker').addEventListener('click',()=>setWindowMaximized(picker));
@@ -563,7 +609,8 @@ document.getElementById('dock-files').addEventListener('click',()=>openOsWindow(
 document.getElementById('settings-app').addEventListener('click',()=>openOsWindow('settings-window'));
 document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.getElementById('cherry-links-app').addEventListener('click',()=>openOsWindow('cherry-links-window'));
-document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');}));
+document.getElementById('cherry-store-app').addEventListener('click',()=>openOsWindow('cherry-store-window'));
+document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');}));
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key=w.id==='files-window'?'files':w.id==='notes-window'?'notes':w.id==='cherry-links-window'?'cherry-links':'settings';removeTaskApp(key);}));
 const notesArea=document.getElementById('notes-area');
 const notesStatus=document.getElementById('notes-status');
@@ -780,7 +827,51 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
+<div id="cherry-trail-layer" aria-hidden="true"></div>
+<script>
+(()=>{
+ const storageKey='cherryOSMouseEffects';
+ let settings={cursor:'default',trail:'off'};
+ try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
+ const layer=document.getElementById('cherry-trail-layer');
+ const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.toggle('cherry-cursor',settings.cursor==='cherry');};
+ save();
+ let last=0,trailCount=0;
+ document.addEventListener('pointermove',event=>{
+  if(settings.trail==='off'||event.pointerType==='touch')return;
+  const now=performance.now();if(now-last<24||trailCount>26)return;last=now;
+  const dot=document.createElement('i');dot.className='cherry-trail-dot'+(settings.trail==='sparkle'?' sparkle':'');
+  dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';layer.append(dot);trailCount++;
+  dot.addEventListener('animationend',()=>{dot.remove();trailCount=Math.max(0,trailCount-1);},{once:true});
+ },{passive:true});
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-store-action]');if(!button)return;
+  const action=button.dataset.storeAction;
+  if(action==='cursor-cherry')settings.cursor='cherry';
+  if(action==='cursor-default')settings.cursor='default';
+  if(action==='trail-cherry')settings.trail='cherry';
+  if(action==='trail-sparkle')settings.trail='sparkle';
+  if(action==='trail-off')settings.trail='off';
+  save();
+  document.querySelectorAll('[data-store-action]').forEach(item=>{
+   const a=item.dataset.storeAction;
+   const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
+   item.classList.toggle('applied',active);
+   if(active)item.textContent='Applied ✓';
+   else item.textContent=({'cursor-cherry':'Apply cursor','cursor-default':'Use default','trail-cherry':'Enable trail','trail-sparkle':'Enable trail','trail-off':'Turn off'})[a];
+  });
+ });
+ document.addEventListener('DOMContentLoaded',()=>{});
+ document.querySelectorAll('[data-store-action]').forEach(item=>{
+  const a=item.dataset.storeAction;
+  const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
+  item.classList.toggle('applied',active);if(active)item.textContent='Applied ✓';
+ });
+})();
+</script>
+
+</body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
