@@ -724,7 +724,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
       <button type="button" data-launch="notes"><span>📝</span>Notes</button>
       <button type="button" data-launch="cherry-links"><span>🔗</span>Cherry Links</button>
-      <button type="button" data-launch="retro-bowl"><span>🏈</span>Retro Bowl</button>
+      <button type="button" data-launch="retro-bowl"><span>🏈</span>Cherry Football</button>
       <button type="button" data-launch="cherry-store"><span>🛍️</span>Cherry Store</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
@@ -807,10 +807,23 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     </main>
   </div>
 </section>
-<section class="os-window" id="retro-bowl-window" aria-label="Retro Bowl" aria-hidden="true">
-  <div class="os-window-top"><span>🏈 Retro Bowl</span><div class="window-actions"><button type="button" data-minimize="retro-bowl-window" title="Minimize">—</button><button type="button" data-maximize="retro-bowl-window" title="Maximize">□</button><button class="win-close" data-close="retro-bowl-window" type="button" title="Close">×</button></div></div>
-  <div class="os-window-body" style="padding:28px;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#17251d,#0c1110);color:#fff;min-height:340px">
-    <div style="max-width:520px"><div style="font-size:58px;margin-bottom:12px">🏈</div><h2 style="margin:0 0 10px">Retro Bowl</h2><p style="color:#c8d4cb;line-height:1.6">Open the browser edition hosted by Poki, the licensed web home for Retro Bowl.</p><button type="button" id="retro-bowl-play" style="border:0;border-radius:12px;padding:13px 24px;background:#f3c84b;color:#182016;font-weight:800;cursor:pointer;font-size:15px">Play Retro Bowl ↗</button><p style="font-size:12px;color:#aebbb2;margin-top:14px">The game opens in a new tab. Your save is handled by the game website.</p></div>
+<section class="os-window" id="retro-bowl-window" aria-label="Cherry Football" aria-hidden="true" style="width:min(900px,94vw);height:min(700px,86vh)">
+  <div class="os-window-top"><span>🏈 Cherry Football</span><div class="window-actions"><button type="button" data-minimize="retro-bowl-window" title="Minimize">—</button><button type="button" data-maximize="retro-bowl-window" title="Maximize">□</button><button class="win-close" data-close="retro-bowl-window" type="button" title="Close">×</button></div></div>
+  <div class="os-window-body" style="padding:14px;background:#101b17;color:#fff;overflow:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+      <div><strong style="font-size:20px">CHERRY FOOTBALL</strong><div style="font-size:12px;color:#b7c9bd">An original arcade football game · Local gameplay</div></div>
+      <div id="cf-score" style="font-weight:800;font-variant-numeric:tabular-nums">CHERRY 0 — 0 VISITORS&nbsp; · &nbsp;1st &amp; 10</div>
+    </div>
+    <div style="position:relative;max-width:820px;margin:auto">
+      <canvas id="cf-field" width="800" height="440" aria-label="Football field game" style="display:block;width:100%;height:auto;border:2px solid #d7e5d8;border-radius:10px;background:#267b43;touch-action:none"></canvas>
+      <div id="cf-overlay" style="position:absolute;inset:0;display:grid;place-items:center;background:#07140dcc;text-align:center;padding:20px;border-radius:10px">
+        <div><div style="font-size:44px">🏈</div><h2 style="margin:8px 0">Cherry Football</h2><p style="max-width:420px;line-height:1.5;color:#d8e8dc">Run the ball to the end zone. Dodge defenders, earn first downs, and score touchdowns.</p><button id="retro-bowl-play" type="button" style="padding:12px 22px;border:0;border-radius:10px;background:#ff526d;color:#fff;font-weight:800;cursor:pointer">KICK OFF</button></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:12px 0">
+      <button class="cf-control" data-cf-key="ArrowUp">▲</button><button class="cf-control" data-cf-key="ArrowLeft">◀</button><button class="cf-control" data-cf-key="ArrowDown">▼</button><button class="cf-control" data-cf-key="ArrowRight">▶</button><button class="cf-control" data-cf-key="Space" style="background:#ff526d">SPRINT</button>
+    </div>
+    <div style="text-align:center;color:#b7c9bd;font-size:12px">Controls: WASD / Arrow keys to move · Hold Shift or SPRINT to speed up · Reach the far end zone to score. Press Space to start the next play.</div>
   </div>
 </section>
 <section class="os-window" id="files-window" aria-label="Files" aria-hidden="true">
@@ -905,13 +918,13 @@ const taskApps=document.getElementById('task-apps');
 const taskAppButtons=new Map();
 const pinnedTaskApps=new Set(JSON.parse(localStorage.getItem('cherryOSPinnedApps')||'[]'));
 function savePinnedTaskApps(){localStorage.setItem('cherryOSPinnedApps',JSON.stringify([...pinnedTaskApps]));}
-function taskAppDetails(key){return ({'retro-bowl':['Retro Bowl','🏈',()=>openOsWindow('retro-bowl-window')],picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
+function taskAppDetails(key){return ({'retro-bowl':['Cherry Football','🏈',()=>openOsWindow('retro-bowl-window')],picker:['Minecraft','⛏️',openMinecraft],game:['Minecraft','⛏️',()=>{game.style.display='block';setTaskActive('game');}],files:['Files','📁',()=>openOsWindow('files-window')],settings:['Settings','⚙️',()=>openOsWindow('settings-window')],notes:['Notes','📝',()=>openOsWindow('notes-window')],'cherry-links':['Cherry Links','🔗',()=>openOsWindow('cherry-links-window')],'cherry-store':['Cherry Store','🛍️',()=>openOsWindow('cherry-store-window')],'cursor-manager':['Cherry Cursors','🖱️',()=>openOsWindow('cursor-manager-window')],'trail-manager':['Cherry Trails','✨',()=>openOsWindow('trail-manager-window')]})[key]||[key,'•',()=>{}];}
 function showTaskApp(key,label,glyph,activate,minimized){let b=taskAppButtons.get(key);if(!b){b=document.createElement('div');b.className='task-app';b.innerHTML='<button type="button" class="task-main" aria-label="Open app"><span class="task-glyph"></span><span class="task-label"></span></button><button type="button" class="task-pin" title="Pin to taskbar" aria-label="Pin to taskbar">📌</button>';const main=b.querySelector('.task-main');main.addEventListener('click',()=>{if(b._activate)b._activate();});const pin=b.querySelector('.task-pin');pin.addEventListener('click',e=>{e.stopPropagation();const pinned=pinnedTaskApps.has(key);if(pinned)pinnedTaskApps.delete(key);else pinnedTaskApps.add(key);savePinnedTaskApps();syncTaskPin(b,key);if(!pinned&&b.dataset.closed==='true'){b.remove();taskAppButtons.delete(key);}});taskApps.appendChild(b);taskAppButtons.set(key,b);}const icon=b.querySelector('.task-glyph');if(key==='picker'||key==='game'){icon.innerHTML='<img class="minecraft-task-image" src="https://th.bing.com/th/id/OIP.0L9oSnoLyNKnqNE4jLTUBAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="">';}else{icon.textContent=glyph;}b.querySelector('.task-label').textContent=label;b._activate=activate;b.dataset.closed='false';b.classList.toggle('minimized',!!minimized);syncTaskPin(b,key);return b;}
 function syncTaskPin(b,key){const pin=b.querySelector('.task-pin');if(!pin)return;const active=pinnedTaskApps.has(key);pin.classList.toggle('pinned',active);pin.textContent=active?'📌':'＋';pin.title=active?'Unpin from taskbar':'Pin to taskbar';pin.setAttribute('aria-label',pin.title);}
 function setTaskActive(key){taskAppButtons.forEach((b,k)=>b.classList.toggle('active',k===key));}
 function removeTaskApp(key){const b=taskAppButtons.get(key);if(!b)return;if(pinnedTaskApps.has(key)){const [label,glyph,activate]=taskAppDetails(key);b.dataset.closed='true';b.classList.remove('active','minimized');b._activate=activate;b.querySelector('.task-label').textContent=label;syncTaskPin(b,key);}else{b.remove();taskAppButtons.delete(key);}}
 function bringToFront(w){w.style.zIndex=String(++topZ);}
-function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'retro-bowl-window':['retro-bowl','Retro Bowl','🏈'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
+function openOsWindow(id){const w=document.getElementById(id);if(!w)return;w.classList.remove('minimized');w.classList.add('open');w.setAttribute('aria-hidden','false');bringToFront(w);const map={'files-window':['files','Files','📁'],'notes-window':['notes','Notes','📝'],'cherry-links-window':['cherry-links','Cherry Links','🔗'],'cherry-store-window':['cherry-store','Cherry Store','🛍️'],'cursor-manager-window':['cursor-manager','Cherry Cursors','🖱️'],'trail-manager-window':['trail-manager','Cherry Trails','✨'],'retro-bowl-window':['retro-bowl','Cherry Football','🏈'],'settings-window':['settings','Settings','⚙️']};const [key,label,glyph]=map[id]||['settings','Settings','⚙️'];showTaskApp(key,label,glyph,()=>openOsWindow(id),false);setTaskActive(key);}
 function setWindowMaximized(w){w.classList.toggle('maximized');}
 function makeDraggable(w,handle){let sx=0,sy=0,ox=0,oy=0,drag=false;handle.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;if(w.classList.contains('maximized'))return;drag=true;bringToFront(w);const r=w.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;handle.setPointerCapture(e.pointerId);});handle.addEventListener('pointermove',e=>{if(!drag)return;w.style.left=Math.max(0,Math.min(innerWidth-100,ox+e.clientX-sx))+'px';w.style.top=Math.max(42,Math.min(innerHeight-80,oy+e.clientY-sy))+'px';w.style.transform='none';});const stop=()=>drag=false;handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);}
 document.querySelectorAll('.os-window').forEach(w=>{makeDraggable(w,w.querySelector('.os-window-top'));w.addEventListener('pointerdown',()=>bringToFront(w));});
@@ -928,7 +941,7 @@ document.getElementById('settings-app').addEventListener('click',()=>openOsWindo
 document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.getElementById('cherry-links-app').addEventListener('click',()=>openOsWindow('cherry-links-window'));
 document.getElementById('retro-bowl-app').addEventListener('click',()=>openOsWindow('retro-bowl-window'));
-document.getElementById('retro-bowl-play').addEventListener('click',()=>window.open('https://poki.com/en/g/retro-bowl','_blank','noopener,noreferrer'));
+document.getElementById('retro-bowl-play').addEventListener('click',startFootballGame);
 document.getElementById('cherry-store-app').addEventListener('click',()=>openOsWindow('cherry-store-window'));
 document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='retro-bowl')openOsWindow('retro-bowl-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','retro-bowl-window':'retro-bowl','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
@@ -1148,7 +1161,50 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
+<script>
+(function(){
+ const canvas=document.getElementById('cf-field'); if(!canvas)return;
+ const ctx=canvas.getContext('2d'), overlay=document.getElementById('cf-overlay'), score=document.getElementById('cf-score');
+ const W=800,H=440, keys=new Set();
+ let running=false, player={x:95,y:220,r:12}, defenders=[], scoreHome=0, scoreAway=0, down=1, yards=10, play=0, message='Ready for kickoff', frame=0, last=0, raf=0, endTimer=0;
+ function resetPlay(){player={x:95,y:220,r:12};defenders=[{x:320,y:95,r:13},{x:390,y:340,r:13},{x:500,y:210,r:14},{x:610,y:115,r:13},{x:650,y:330,r:13}];play++;message='Run to the end zone!';}
+ function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#267b43';ctx.fillRect(0,0,W,H);
+  for(let y=0;y<H;y+=55){ctx.fillStyle=y%110===0?'#ffffff08':'#00000008';ctx.fillRect(0,y,W,55);}
+  ctx.fillStyle='#d9efc8';ctx.fillRect(0,0,52,H);ctx.fillRect(W-52,0,52,H);
+  ctx.save();ctx.translate(26,H/2);ctx.rotate(-Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('CHERRY',0,6);ctx.restore();
+  ctx.save();ctx.translate(W-26,H/2);ctx.rotate(Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('TOUCHDOWN',0,6);ctx.restore();
+  ctx.strokeStyle='#ffffffb8';ctx.lineWidth=2;for(let x=100;x<W-50;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.fillStyle='#ffffffaa';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(String(Math.round((x-100)/7)),x,18);ctx.fillText(String(Math.round((x-100)/7)),x,H-8);}
+  ctx.strokeStyle='#ffffff55';ctx.setLineDash([5,7]);ctx.beginPath();ctx.moveTo(300,0);ctx.lineTo(300,H);ctx.stroke();ctx.setLineDash([]);
+  defenders.forEach(d=>{ctx.fillStyle='#e5eaf0';ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263447';ctx.fillRect(d.x-7,d.y-4,14,8);ctx.fillStyle='#101820';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('D',d.x,d.y+4);});
+  ctx.fillStyle='#ff526d';ctx.beginPath();ctx.arc(player.x,player.y,player.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(player.x-6,player.y-4,12,8);ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('YOU',player.x,player.y-19);
+  ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='left';ctx.fillText(message,16,28);
+ }
+ function hud(){score.textContent='CHERRY '+scoreHome+' — '+scoreAway+' VISITORS  ·  '+down+' & '+yards;}
+ function finish(text,td){running=false;message=text;if(td){scoreHome++;hud();}overlay.style.display='grid';overlay.innerHTML='<div><div style="font-size:42px">'+(td?'🏆':'🏈')+'</div><h2 style="margin:8px 0">'+text+'</h2><p style="color:#d8e8dc">Score: '+scoreHome+' — '+scoreAway+'</p><button id="retro-bowl-play" type="button" style="padding:12px 22px;border:0;border-radius:10px;background:#ff526d;color:#fff;font-weight:800;cursor:pointer">'+(td?'NEXT KICKOFF':'NEXT PLAY')+'</button></div>';document.getElementById('retro-bowl-play').addEventListener('click',startFootballGame);}
+ function update(dt){
+  const speed=(keys.has('Shift')||keys.has('s')||keys.has('S')||keys.has('Space'))?235:155;
+  let dx=0,dy=0;if(keys.has('ArrowRight')||keys.has('d')||keys.has('D'))dx++;if(keys.has('ArrowLeft')||keys.has('a')||keys.has('A'))dx--;if(keys.has('ArrowDown')||keys.has('s')||keys.has('S'))dy++;if(keys.has('ArrowUp')||keys.has('w')||keys.has('W'))dy--;
+  const len=Math.hypot(dx,dy)||1;player.x=Math.max(60,Math.min(740,player.x+dx/len*speed*dt));player.y=Math.max(28,Math.min(412,player.y+dy/len*speed*dt));
+  defenders.forEach(d=>{const vx=player.x-d.x,vy=player.y-d.y,l=Math.hypot(vx,vy)||1;d.x+=vx/l*(62+play*2)*dt;d.y+=vy/l*(62+play*2)*dt;});
+  if(defenders.some(d=>Math.hypot(player.x-d.x,player.y-d.y)<player.r+d.r-2)){down++;yards=10;finish('Tackled! Try another play.',false);return;}
+  if(player.x>748){finish('TOUCHDOWN!',true);return;}
+  if(player.x>390&&yards===10){yards=5;down=1;}
+  frame++; if(frame>900){finish('Time ran out. Next play!',false);}
+  hud();
+ }
+ function loop(t){if(!running)return;const dt=Math.min((t-last)/1000,.04);last=t;update(dt);draw();if(running)raf=requestAnimationFrame(loop);}
+ window.startFootballGame=function(){cancelAnimationFrame(raf);overlay.style.display='none';frame=0;resetPlay();running=true;last=performance.now();raf=requestAnimationFrame(loop);canvas.focus();};
+ window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();}keys.add(e.key===' '?'Space':e.key);if(e.key===' '&&!running)window.startFootballGame();});
+ window.addEventListener('keyup',e=>keys.delete(e.key===' '?'Space':e.key));
+ document.querySelectorAll('[data-cf-key]').forEach(b=>{const k=b.dataset.cfKey;b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(k==='Space'?'Space':k);});['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>keys.delete(k==='Space'?'Space':k)));});
+ document.querySelectorAll('.cf-control').forEach(b=>{b.style.border='1px solid #ffffff33';b.style.borderRadius='9px';b.style.padding='10px 15px';b.style.background='#263c31';b.style.color='#fff';b.style.fontWeight='800';b.style.cursor='pointer';});
+ hud();draw();
+})();
+</script>
+
+</body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
