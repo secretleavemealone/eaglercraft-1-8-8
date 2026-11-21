@@ -1139,6 +1139,7 @@ play.addEventListener('click',async()=>{
  const updates=document.getElementById('cherry-updates-overlay');
  if(!tour||!updates)return;
  const storage={get(key){try{return localStorage.getItem(key)}catch(e){return null}},set(key,value){try{localStorage.setItem(key,value)}catch(e){}}};
+ const tourCompletionKey='cherryOSOnboardingComplete_v2';
  const steps=[
   {icon:'🖥️',title:'Your CherryOS desktop',copy:'This is your desktop. The icons on the left open your apps, and you can move app windows around the screen.',tip:'Try opening an app with a desktop icon. Every app window has controls to minimize, maximize, and close it.'},
   {icon:'✿',title:'Start menu and taskbar',copy:'Use the Cherry button at the bottom-left to open the Start menu and find your apps. Open apps appear along the taskbar.',tip:'The taskbar makes it easy to switch between apps. You can pin supported app tabs there too.'},
@@ -1154,7 +1155,7 @@ play.addEventListener('click',async()=>{
   const step=steps[index];$('cherry-tour-icon').textContent=step.icon;$('cherry-onboarding-title').textContent=step.title;$('cherry-tour-copy').textContent=step.copy;$('cherry-tour-tip').textContent=step.tip;$('cherry-tour-step').textContent='STEP '+(index+1)+' OF '+steps.length;$('cherry-tour-progress').style.width=((index+1)/steps.length*100)+'%';$('cherry-tour-back').style.visibility=index===0?'hidden':'visible';$('cherry-tour-next').textContent=index===steps.length-1?'Finish':'Next';
  }
  function showUpdates(){updates.classList.add('open');}
- function finishTour(){storage.set('cherryOSOnboardingComplete','1');tour.classList.remove('open');showUpdates();}
+ function finishTour(){storage.set(tourCompletionKey,'1');tour.classList.remove('open');showUpdates();}
  function startTour(){index=0;render();tour.classList.add('open');}
  $('cherry-tour-next').addEventListener('click',()=>{if(index===steps.length-1){finishTour();return;}index++;render();});
  $('cherry-tour-back').addEventListener('click',()=>{if(index>0){index--;render();}});
@@ -1164,7 +1165,7 @@ play.addEventListener('click',async()=>{
  $('cherry-updates-close').addEventListener('click',closeUpdates);
  $('cherry-updates-done').addEventListener('click',closeUpdates);
  updates.addEventListener('click',e=>{if(e.target===updates)closeUpdates();});
- if(storage.get('cherryOSOnboardingComplete')!=='1')startTour();else showUpdates();
+ if(storage.get(tourCompletionKey)!=='1')startTour();else showUpdates();
 })();
 </script>
 </body></html>';
