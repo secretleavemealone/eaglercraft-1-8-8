@@ -827,51 +827,7 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
-<div id="cherry-trail-layer" aria-hidden="true"></div>
-<script>
-(()=>{
- const storageKey='cherryOSMouseEffects';
- let settings={cursor:'default',trail:'off'};
- try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
- const layer=document.getElementById('cherry-trail-layer');
- const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.toggle('cherry-cursor',settings.cursor==='cherry');};
- save();
- let last=0,trailCount=0;
- document.addEventListener('pointermove',event=>{
-  if(settings.trail==='off'||event.pointerType==='touch')return;
-  const now=performance.now();if(now-last<24||trailCount>26)return;last=now;
-  const dot=document.createElement('i');dot.className='cherry-trail-dot'+(settings.trail==='sparkle'?' sparkle':'');
-  dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';layer.append(dot);trailCount++;
-  dot.addEventListener('animationend',()=>{dot.remove();trailCount=Math.max(0,trailCount-1);},{once:true});
- },{passive:true});
- document.addEventListener('click',event=>{
-  const button=event.target.closest('[data-store-action]');if(!button)return;
-  const action=button.dataset.storeAction;
-  if(action==='cursor-cherry')settings.cursor='cherry';
-  if(action==='cursor-default')settings.cursor='default';
-  if(action==='trail-cherry')settings.trail='cherry';
-  if(action==='trail-sparkle')settings.trail='sparkle';
-  if(action==='trail-off')settings.trail='off';
-  save();
-  document.querySelectorAll('[data-store-action]').forEach(item=>{
-   const a=item.dataset.storeAction;
-   const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
-   item.classList.toggle('applied',active);
-   if(active)item.textContent='Applied ✓';
-   else item.textContent=({'cursor-cherry':'Apply cursor','cursor-default':'Use default','trail-cherry':'Enable trail','trail-sparkle':'Enable trail','trail-off':'Turn off'})[a];
-  });
- });
- document.addEventListener('DOMContentLoaded',()=>{});
- document.querySelectorAll('[data-store-action]').forEach(item=>{
-  const a=item.dataset.storeAction;
-  const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
-  item.classList.toggle('applied',active);if(active)item.textContent='Applied ✓';
- });
-})();
-</script>
-
-</body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
@@ -1366,5 +1322,47 @@ $("cl-copy").addEventListener("click",async()=>{
 });
 </script>
 
+<div id="cherry-trail-layer" aria-hidden="true"></div>
+<script>
+(()=>{
+ const storageKey='cherryOSMouseEffects';
+ let settings={cursor:'default',trail:'off'};
+ try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
+ const layer=document.getElementById('cherry-trail-layer');
+ const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.toggle('cherry-cursor',settings.cursor==='cherry');};
+ save();
+ let last=0,trailCount=0;
+ document.addEventListener('pointermove',event=>{
+  if(settings.trail==='off'||event.pointerType==='touch')return;
+  const now=performance.now();if(now-last<24||trailCount>26)return;last=now;
+  const dot=document.createElement('i');dot.className='cherry-trail-dot'+(settings.trail==='sparkle'?' sparkle':'');
+  dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';layer.append(dot);trailCount++;
+  dot.addEventListener('animationend',()=>{dot.remove();trailCount=Math.max(0,trailCount-1);},{once:true});
+ },{passive:true});
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-store-action]');if(!button)return;
+  const action=button.dataset.storeAction;
+  if(action==='cursor-cherry')settings.cursor='cherry';
+  if(action==='cursor-default')settings.cursor='default';
+  if(action==='trail-cherry')settings.trail='cherry';
+  if(action==='trail-sparkle')settings.trail='sparkle';
+  if(action==='trail-off')settings.trail='off';
+  save();
+  document.querySelectorAll('[data-store-action]').forEach(item=>{
+   const a=item.dataset.storeAction;
+   const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
+   item.classList.toggle('applied',active);
+   if(active)item.textContent='Applied ✓';
+   else item.textContent=({'cursor-cherry':'Apply cursor','cursor-default':'Use default','trail-cherry':'Enable trail','trail-sparkle':'Enable trail','trail-off':'Turn off'})[a];
+  });
+ });
+ document.addEventListener('DOMContentLoaded',()=>{});
+ document.querySelectorAll('[data-store-action]').forEach(item=>{
+  const a=item.dataset.storeAction;
+  const active=(a==='cursor-cherry'&&settings.cursor==='cherry')||(a==='cursor-default'&&settings.cursor==='default')||(a==='trail-cherry'&&settings.trail==='cherry')||(a==='trail-sparkle'&&settings.trail==='sparkle')||(a==='trail-off'&&settings.trail==='off');
+  item.classList.toggle('applied',active);if(active)item.textContent='Applied ✓';
+ });
+})();
+</script>
 </body>
 </html>
