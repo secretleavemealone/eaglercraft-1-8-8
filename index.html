@@ -646,6 +646,9 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .decor-app-heading{margin-bottom:20px}.decor-app-heading>span{color:#ff91a8;font-size:10px;font-weight:800;letter-spacing:2px}.decor-app-heading h2{margin:7px 0;font-size:27px;color:#fff}.decor-app-heading p{margin:0;color:#aeb5c4;font-size:12px}
 .decor-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.decor-option{padding:13px;border:1px solid #ffffff18;border-radius:14px;background:#ffffff08}.decor-preview{height:90px;display:grid;place-items:center;margin-bottom:12px;border-radius:10px;background:#171923;font-size:40px}.cherry-preview{color:#fff;text-shadow:0 0 15px #ff5578}.neon-preview{color:#69f4ff;text-shadow:0 0 16px #00dfff}.ocean-preview{color:#80b7ff;text-shadow:0 0 16px #287bff}.pixel-preview{color:#dfc3ff;text-shadow:3px 3px #8156ce}.classic-preview{color:#fff}.trail-cherry-preview{color:#ff5578;text-shadow:0 0 12px #ff315b;font-size:20px}.trail-sparkle-preview{color:#ffc2e5;text-shadow:0 0 14px #f56fc4;font-size:23px}.trail-rainbow-preview{font-size:20px}.trail-heart-preview{color:#ff9dbb;text-shadow:0 0 14px #ff4d8c}.trail-bubble-preview{color:#a7efff;text-shadow:0 0 14px #48cfff}.trail-off-preview{color:#aab3c4}.decor-option h3{margin:0 0 5px;color:#f7edf1;font-size:14px}.decor-option p{min-height:30px;margin:0 0 12px;color:#aeb5c4;font-size:11px;line-height:1.45}.decor-option button{width:100%;padding:9px;border:1px solid #ff7c9655;border-radius:8px;background:linear-gradient(135deg,#ef5b7b,#b83256);color:white;font-size:11px;font-weight:800;cursor:pointer}.decor-option button.applied{background:linear-gradient(135deg,#286b4b,#204d3b);border-color:#58a77b}
 @media(max-width:650px){.decor-options{grid-template-columns:repeat(2,minmax(0,1fr))}.decor-manager-body{padding:15px}}@media(max-width:420px){.decor-options{grid-template-columns:1fr}}
+/* App install and uninstall flow */
+.decor-uninstall{margin-top:13px;padding:8px 12px;border:1px solid #ff6e8060;border-radius:8px;background:#ff40501a;color:#ff9ba8;font-size:11px;font-weight:700;cursor:pointer}.decor-uninstall:hover{background:#ff405033}
+.decor-download-screen{position:fixed;inset:0;z-index:99999;display:none;place-items:center;background:#05060bd9;backdrop-filter:blur(18px);padding:20px}.decor-download-screen.active{display:grid}.decor-download-card{width:min(410px,100%);padding:30px;border:1px solid #ffffff25;border-radius:20px;background:linear-gradient(145deg,#211520,#10131d);box-shadow:0 25px 90px #000b;text-align:center}.download-app-icon{width:66px;height:66px;margin:0 auto 18px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#ff6485,#922b4a);font-size:34px;box-shadow:0 8px 30px #f43c6b55}.decor-download-card h2{margin:8px 0;color:#fff;font-size:24px}.decor-download-card p{margin:0 0 22px;color:#aeb5c4;font-size:12px}.download-progress{height:9px;overflow:hidden;border-radius:20px;background:#ffffff16}.download-progress span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#ff587b,#ff9ab1);transition:width .12s linear}.download-progress-meta{display:flex;justify-content:space-between;margin-top:9px;color:#b7bdcb;font-size:10px}.download-complete{margin-top:18px;color:#8ce0ad;font-size:12px;font-weight:800}
 </style>
 </head>
 <body>
@@ -783,7 +786,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 </section>
 <section class="os-window decor-manager-window" id="cursor-manager-window" aria-label="Cherry Cursors" aria-hidden="true">
  <div class="os-window-top"><span>🖱️ Cherry Cursors</span><div class="window-actions"><button type="button" data-minimize="cursor-manager-window" title="Minimize">—</button><button type="button" data-maximize="cursor-manager-window" title="Maximize">□</button><button class="win-close" data-close="cursor-manager-window" type="button" title="Close">×</button></div></div>
- <div class="os-window-body decor-manager-body"><div class="decor-app-heading"><span>CURSOR COLLECTION</span><h2>Choose your pointer.</h2><p>Pick a style and it applies across your CherryOS desktop.</p></div><div class="decor-options">
+ <div class="os-window-body decor-manager-body"><div class="decor-app-heading"><span>CURSOR COLLECTION</span><h2>Choose your pointer.</h2><p>Pick a style and it applies across your CherryOS desktop.</p><button type="button" class="decor-uninstall" data-uninstall-decor-app="cursor">Uninstall Cherry Cursors</button></div><div class="decor-options">
   <article class="decor-option"><div class="decor-preview cherry-preview">↖🍒</div><h3>Cherry Pointer</h3><p>CherryOS signature pointer.</p><button data-decor-setting="cursor-cherry">Apply cursor</button></article>
   <article class="decor-option"><div class="decor-preview neon-preview">➤</div><h3>Neon Cursor</h3><p>Bright cyan with a glowing edge.</p><button data-decor-setting="cursor-neon">Apply cursor</button></article>
   <article class="decor-option"><div class="decor-preview ocean-preview">➤</div><h3>Ocean Cursor</h3><p>Cool blue pointer style.</p><button data-decor-setting="cursor-blue">Apply cursor</button></article>
@@ -793,7 +796,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 </section>
 <section class="os-window decor-manager-window" id="trail-manager-window" aria-label="Cherry Trails" aria-hidden="true">
  <div class="os-window-top"><span>✨ Cherry Trails</span><div class="window-actions"><button type="button" data-minimize="trail-manager-window" title="Minimize">—</button><button type="button" data-maximize="trail-manager-window" title="Maximize">□</button><button class="win-close" data-close="trail-manager-window" type="button" title="Close">×</button></div></div>
- <div class="os-window-body decor-manager-body"><div class="decor-app-heading"><span>POINTER EFFECTS</span><h2>Leave a little trail.</h2><p>Choose an effect to follow your mouse around the desktop.</p></div><div class="decor-options">
+ <div class="os-window-body decor-manager-body"><div class="decor-app-heading"><span>POINTER EFFECTS</span><h2>Leave a little trail.</h2><p>Choose an effect to follow your mouse around the desktop.</p><button type="button" class="decor-uninstall" data-uninstall-decor-app="trail">Uninstall Cherry Trails</button></div><div class="decor-options">
   <article class="decor-option"><div class="decor-preview trail-cherry-preview">● · ● · ●</div><h3>Cherry Trail</h3><p>Glowing cherry-red particles.</p><button data-decor-setting="trail-cherry">Enable trail</button></article>
   <article class="decor-option"><div class="decor-preview trail-sparkle-preview">✦ · ✧ · ✦</div><h3>Sparkle Trail</h3><p>Soft pink sparkles.</p><button data-decor-setting="trail-sparkle">Enable trail</button></article>
   <article class="decor-option"><div class="decor-preview trail-rainbow-preview">🌈 · 🌈</div><h3>Rainbow Trail</h3><p>A colorful shifting glow.</p><button data-decor-setting="trail-rainbow">Enable trail</button></article>
@@ -1565,29 +1568,54 @@ $("cl-copy").addEventListener("click",async()=>{
 </script>
 
 <div id="cherry-trail-layer" aria-hidden="true"></div>
+<div id="decor-download-screen" class="decor-download-screen" aria-hidden="true"><div class="decor-download-card"><div class="download-app-icon" id="download-app-icon">🍒</div><span class="store-eyebrow">CHERRYOS STORE</span><h2 id="download-title">Installing app</h2><p id="download-status">Preparing your download…</p><div class="download-progress"><span id="download-progress-fill"></span></div><div class="download-progress-meta"><span id="download-progress-percent">0%</span><span id="download-progress-size">0 / 100 MB</span></div><div class="download-complete" id="download-complete" hidden>✓ Installed successfully</div></div></div>
 <script>
 (()=>{
  const storageKey='cherryOSMouseEffects',installedKey='cherryOSDecorApps';
  let settings={cursor:'default',trail:'off'},installed={cursor:false,trail:false};
  try{settings={...settings,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch{}
  try{installed={...installed,...JSON.parse(localStorage.getItem(installedKey)||'{}')};}catch{}
- const layer=document.getElementById('cherry-trail-layer');
+ const layer=document.getElementById('cherry-trail-layer'),download=document.getElementById('decor-download-screen');
  const cursorClasses=['cherry-cursor','cherry-cursor-neon','cherry-cursor-blue','cherry-cursor-pixel'];
  const save=()=>{localStorage.setItem(storageKey,JSON.stringify(settings));document.body.classList.remove(...cursorClasses);if(settings.cursor==='cherry')document.body.classList.add('cherry-cursor');if(settings.cursor==='neon')document.body.classList.add('cherry-cursor-neon');if(settings.cursor==='blue')document.body.classList.add('cherry-cursor-blue');if(settings.cursor==='pixel')document.body.classList.add('cherry-cursor-pixel');};
  const saveInstalled=()=>localStorage.setItem(installedKey,JSON.stringify(installed));
- const appInfo={cursor:{id:'cursor-manager-app',label:'Cherry Cursors',glyph:'🖱️',window:'cursor-manager-window',key:'cursor-manager'},trail:{id:'trail-manager-app',label:'Cherry Trails',glyph:'✨',window:'trail-manager-window',key:'trail-manager'}};
- function installApp(type){
-  installed[type]=true;saveInstalled();
+ const appInfo={cursor:{id:'cursor-manager-app',label:'Cherry Cursors',glyph:'🖱️',window:'cursor-manager-window',key:'cursor-manager',title:'Cherry Cursors'},trail:{id:'trail-manager-app',label:'Cherry Trails',glyph:'✨',window:'trail-manager-window',key:'trail-manager',title:'Cherry Trails'}};
+ function addAppShortcuts(type){
   const info=appInfo[type];
   if(!document.getElementById(info.id)){
    const icon=document.createElement('button');icon.className='app-icon';icon.id=info.id;icon.type='button';icon.innerHTML='<span class="glyph">'+info.glyph+'</span><span>'+info.label+'</span>';
    icon.addEventListener('click',()=>openOsWindow(info.window));document.querySelector('.desktop-icons').append(icon);
    const menu=document.createElement('button');menu.type='button';menu.dataset.launch=info.key;menu.innerHTML='<span>'+info.glyph+'</span>'+info.label;
-   menu.addEventListener('click',()=>{document.getElementById('start-menu').classList.remove('open');openOsWindow(info.window);});document.querySelector('.menu-grid').append(menu);
+   menu.addEventListener('click',()=>{document.getElementById('start-menu')?.classList.remove('open');openOsWindow(info.window);});document.querySelector('.menu-grid').append(menu);
   }
   const button=document.querySelector('[data-install-decor-app="'+type+'"]');if(button){button.textContent='Installed ✓';button.classList.add('applied');}
  }
- Object.keys(appInfo).forEach(type=>{if(installed[type])installApp(type);});
+ function installApp(type){
+  if(installed[type]){openOsWindow(appInfo[type].window);return;}
+  const info=appInfo[type],title=document.getElementById('download-title'),status=document.getElementById('download-status'),fill=document.getElementById('download-progress-fill'),percent=document.getElementById('download-progress-percent'),size=document.getElementById('download-progress-size'),icon=document.getElementById('download-app-icon'),complete=document.getElementById('download-complete');
+  icon.textContent=info.glyph;title.textContent='Downloading '+info.title;status.textContent='Connecting to CherryOS Store…';fill.style.width='0%';percent.textContent='0%';size.textContent='0 / 100 MB';complete.hidden=true;download.classList.add('active');download.setAttribute('aria-hidden','false');
+  let progress=0;const steps=[{at:12,msg:'Downloading app files…'},{at:48,msg:'Installing desktop components…'},{at:78,msg:'Setting up your app…'},{at:96,msg:'Finishing up…'}];
+  const timer=setInterval(()=>{
+   progress=Math.min(100,progress+2+Math.random()*4);
+   fill.style.width=progress+'%';percent.textContent=Math.floor(progress)+'%';size.textContent=Math.floor(progress)+' / 100 MB';
+   const step=[...steps].reverse().find(x=>progress>=x.at);if(step)status.textContent=step.msg;
+   if(progress>=100){clearInterval(timer);installed[type]=true;saveInstalled();addAppShortcuts(type);status.textContent='Your app is ready.';complete.hidden=false;title.textContent='Download complete';setTimeout(()=>{download.classList.remove('active');download.setAttribute('aria-hidden','true');openOsWindow(info.window);},850);}
+  },115);
+ }
+ function uninstallApp(type){
+  if(!installed[type])return;
+  const info=appInfo[type],w=document.getElementById(info.window);
+  if(w){w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key=info.key;const task=document.getElementById('task-'+key);if(task)task.remove();}
+  const icon=document.getElementById(info.id);if(icon)icon.remove();
+  document.querySelectorAll('[data-launch="'+info.key+'"]').forEach(el=>el.remove());
+  installed[type]=false;
+  if(type==='cursor'){settings.cursor='default';}
+  if(type==='trail'){settings.trail='off';}
+  saveInstalled();save();refreshChoices();
+  const button=document.querySelector('[data-install-decor-app="'+type+'"]');if(button){button.textContent='Install app';button.classList.remove('applied');}
+  const win=document.getElementById(info.window);if(win)win.classList.remove('open','maximized','minimized');
+ }
+ Object.keys(appInfo).forEach(type=>{if(installed[type])addAppShortcuts(type);});
  save();
  let last=0,trailCount=0;
  document.addEventListener('pointermove',event=>{
@@ -1600,6 +1628,7 @@ $("cl-copy").addEventListener("click",async()=>{
  },{passive:true});
  document.addEventListener('click',event=>{
   const install=event.target.closest('[data-install-decor-app]');if(install){installApp(install.dataset.installDecorApp);return;}
+  const uninstall=event.target.closest('[data-uninstall-decor-app]');if(uninstall){uninstallApp(uninstall.dataset.uninstallDecorApp);return;}
   const choice=event.target.closest('[data-decor-setting]');if(!choice)return;
   const value=choice.dataset.decorSetting;
   if(value.startsWith('cursor-')&&installed.cursor)settings.cursor=value.slice(7);
@@ -1613,7 +1642,6 @@ $("cl-copy").addEventListener("click",async()=>{
   });
  }
  refreshChoices();
-
 })();
 </script>
 <script>
