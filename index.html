@@ -650,6 +650,40 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .decor-uninstall{margin-top:13px;padding:8px 12px;border:1px solid #ff6e8060;border-radius:8px;background:#ff40501a;color:#ff9ba8;font-size:11px;font-weight:700;cursor:pointer}.decor-uninstall:hover{background:#ff405033}
 .decor-download-screen{position:fixed;inset:0;z-index:99999;display:none;place-items:center;background:#05060bd9;backdrop-filter:blur(18px);padding:20px}.decor-download-screen.active{display:grid}.decor-download-card{width:min(410px,100%);padding:30px;border:1px solid #ffffff25;border-radius:20px;background:linear-gradient(145deg,#211520,#10131d);box-shadow:0 25px 90px #000b;text-align:center}.download-app-icon{width:66px;height:66px;margin:0 auto 18px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#ff6485,#922b4a);font-size:34px;box-shadow:0 8px 30px #f43c6b55}.decor-download-card h2{margin:8px 0;color:#fff;font-size:24px}.decor-download-card p{margin:0 0 22px;color:#aeb5c4;font-size:12px}.download-progress{height:9px;overflow:hidden;border-radius:20px;background:#ffffff16}.download-progress span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#ff587b,#ff9ab1);transition:width .12s linear}.download-progress-meta{display:flex;justify-content:space-between;margin-top:9px;color:#b7bdcb;font-size:10px}.download-complete{margin-top:18px;color:#8ce0ad;font-size:12px;font-weight:800}
 </style>
+
+<style id="cherry-onboarding-styles">
+#cherry-onboarding-overlay{position:fixed;inset:0;z-index:100500;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,5,10,.76);backdrop-filter:blur(13px)}
+#cherry-onboarding-overlay.open{display:flex}
+.cherry-onboarding-card{width:min(560px,100%);max-height:min(780px,calc(100vh - 40px));overflow:auto;border:1px solid #ffffff24;border-radius:24px;background:linear-gradient(145deg,#20202d,#10121c 72%);box-shadow:0 30px 100px #000c;color:#f8edf1;padding:26px}
+.cherry-onboarding-top{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#ff9bb0;font-size:10px;font-weight:900;letter-spacing:2px}
+.cherry-onboarding-top button,.cherry-onboarding-close{border:1px solid #ffffff22;background:#ffffff0b;color:#fff;border-radius:10px;width:34px;height:34px;font-size:20px;cursor:pointer}
+.cherry-onboarding-icon{width:66px;height:66px;border-radius:19px;display:grid;place-items:center;margin:24px 0 16px;background:linear-gradient(145deg,#ff7894,#9e2448);font-size:34px;box-shadow:0 12px 35px #ff456833}
+.cherry-onboarding-card h2{font-size:clamp(24px,4vw,32px);margin:0 0 9px;letter-spacing:-.7px}
+.cherry-onboarding-card p{color:#bac0ce;font-size:14px;line-height:1.7;margin:0}
+.cherry-onboarding-tip{margin-top:18px;padding:14px 15px;border:1px solid #ffffff14;border-radius:13px;background:#ffffff08;color:#e9dce2;font-size:12px;line-height:1.6}
+.cherry-onboarding-progress{height:5px;background:#ffffff13;border-radius:10px;overflow:hidden;margin:24px 0 17px}
+.cherry-onboarding-progress span{height:100%;display:block;background:linear-gradient(90deg,#ff5478,#ff9db1);transition:width .2s}
+.cherry-onboarding-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cherry-onboarding-step{font-size:11px;color:#aab0bf}
+.cherry-onboarding-actions{display:flex;gap:8px}
+.cherry-onboarding-actions button{border:1px solid #ffffff20;border-radius:11px;padding:11px 16px;background:#ffffff0b;color:#fff;font-weight:700;cursor:pointer}
+.cherry-onboarding-actions button.primary{background:linear-gradient(135deg,#ff6484,#c52d55);border-color:transparent}
+#cherry-updates-overlay{position:fixed;inset:0;z-index:100400;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,5,10,.68);backdrop-filter:blur(10px)}
+#cherry-updates-overlay.open{display:flex}
+.cherry-updates-card{width:min(620px,100%);max-height:min(760px,calc(100vh - 40px));overflow:auto;border:1px solid #ffffff24;border-radius:23px;background:linear-gradient(145deg,#20202d,#10121c 72%);box-shadow:0 30px 100px #000c;color:#f8edf1;padding:25px}
+.cherry-updates-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.cherry-updates-eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:#ff91aa}
+.cherry-updates-head h2{font-size:27px;margin:6px 0 4px}
+.cherry-updates-head p{font-size:13px;color:#aeb5c5;margin:0}
+.cherry-updates-close{border:1px solid #ffffff22;background:#ffffff0b;color:#fff;border-radius:10px;width:36px;height:36px;font-size:22px;cursor:pointer;flex:0 0 auto}
+.cherry-update-list{display:grid;gap:10px;margin:22px 0}
+.cherry-update-item{display:flex;gap:13px;padding:14px;border:1px solid #ffffff14;border-radius:14px;background:#ffffff07}
+.cherry-update-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;background:#ff65851c;font-size:19px}
+.cherry-update-item strong{display:block;font-size:13px;margin:1px 0 4px}
+.cherry-update-item p{font-size:12px;line-height:1.55;color:#b6bdca;margin:0}
+.cherry-updates-done{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(135deg,#ff6484,#c52d55);color:#fff;font-weight:800;cursor:pointer}
+@media(max-width:480px){.cherry-onboarding-card,.cherry-updates-card{padding:20px;border-radius:19px}.cherry-onboarding-footer{align-items:flex-start;flex-direction:column}.cherry-onboarding-actions{width:100%}.cherry-onboarding-actions button{flex:1}}
+</style>
 </head>
 <body>
 <div id="desktop">
@@ -692,6 +726,31 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
   </div>
 
+<div id="cherry-onboarding-overlay" role="dialog" aria-modal="true" aria-labelledby="cherry-onboarding-title">
+ <div class="cherry-onboarding-card">
+  <div class="cherry-onboarding-top"><span>🍒 CHERRYOS QUICK TOUR</span><button type="button" id="cherry-tour-skip-top" aria-label="Skip tutorial">×</button></div>
+  <div class="cherry-onboarding-icon" id="cherry-tour-icon">🍒</div>
+  <h2 id="cherry-onboarding-title">Welcome to CherryOS</h2>
+  <p id="cherry-tour-copy"></p>
+  <div class="cherry-onboarding-tip" id="cherry-tour-tip"></div>
+  <div class="cherry-onboarding-progress"><span id="cherry-tour-progress"></span></div>
+  <div class="cherry-onboarding-footer"><span class="cherry-onboarding-step" id="cherry-tour-step"></span><div class="cherry-onboarding-actions"><button type="button" id="cherry-tour-skip">Skip tour</button><button type="button" id="cherry-tour-back">Back</button><button type="button" class="primary" id="cherry-tour-next">Next</button></div></div>
+ </div>
+</div>
+<div id="cherry-updates-overlay" role="dialog" aria-modal="true" aria-labelledby="cherry-updates-title">
+ <div class="cherry-updates-card">
+  <div class="cherry-updates-head"><div><div class="cherry-updates-eyebrow">🍒 CHERRYOS CHANGELOG</div><h2 id="cherry-updates-title">What's new</h2><p>Here's what's new in your desktop.</p></div><button class="cherry-updates-close" type="button" id="cherry-updates-close" aria-label="Close updates">×</button></div>
+  <div class="cherry-update-list">
+   <article class="cherry-update-item"><span class="cherry-update-icon">🛍️</span><div><strong>Cherry Store updates</strong><p>Cherry Cursors, Cherry Trails, and Cherry Games now appear as Coming Soon.</p></div></article>
+   <article class="cherry-update-item"><span class="cherry-update-icon">🖥️</span><div><strong>Desktop app controls</strong><p>Open apps in their own windows, move them around, and use the minimize, maximize, and close controls.</p></div></article>
+   <article class="cherry-update-item"><span class="cherry-update-icon">⛏️</span><div><strong>Minecraft Java Edition</strong><p>Choose between Minecraft 1.8.8 and 1.12.2 from the Minecraft launcher.</p></div></article>
+   <article class="cherry-update-item"><span class="cherry-update-icon">📝</span><div><strong>Notes</strong><p>Your notes save automatically on this device.</p></div></article>
+   <article class="cherry-update-item"><span class="cherry-update-icon">📁</span><div><strong>Files and Google Drive</strong><p>Connect your Google account in Settings to access files you've selected for CherryOS.</p></div></article>
+   <article class="cherry-update-item"><span class="cherry-update-icon">🎨</span><div><strong>Personalization</strong><p>Import your own desktop wallpaper from Settings → Personalization.</p></div></article>
+  </div>
+  <button class="cherry-updates-done" type="button" id="cherry-updates-done">Got it</button>
+ </div>
+</div>
 <section class="os-window" id="settings-window" aria-label="Settings" aria-hidden="true">
   <div class="os-window-top settings-titlebar"><span>⚙️ Settings</span><div class="window-actions"><button type="button" data-minimize="settings-window" title="Minimize">—</button><button type="button" data-maximize="settings-window" title="Maximize">□</button><button class="win-close" data-close="settings-window" type="button" title="Close">×</button></div></div>
   <div class="win-settings">
@@ -1073,7 +1132,42 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
+<script id="cherry-onboarding-script">
+(()=>{
+ const tour=document.getElementById('cherry-onboarding-overlay');
+ const updates=document.getElementById('cherry-updates-overlay');
+ if(!tour||!updates)return;
+ const storage={get(key){try{return localStorage.getItem(key)}catch(e){return null}},set(key,value){try{localStorage.setItem(key,value)}catch(e){}}};
+ const steps=[
+  {icon:'🖥️',title:'Your CherryOS desktop',copy:'This is your desktop. The icons on the left open your apps, and you can move app windows around the screen.',tip:'Try opening an app with a desktop icon. Every app window has controls to minimize, maximize, and close it.'},
+  {icon:'✿',title:'Start menu and taskbar',copy:'Use the Cherry button at the bottom-left to open the Start menu and find your apps. Open apps appear along the taskbar.',tip:'The taskbar makes it easy to switch between apps. You can pin supported app tabs there too.'},
+  {icon:'⛏️',title:'Minecraft Java Edition',copy:'Open Minecraft to reach the version picker. Choose Java Edition 1.8.8 or 1.12.2, then press Play.',tip:'Server Chat is available from the version picker. The game opens in its own window, with fullscreen and window controls.'},
+  {icon:'📁',title:'Files and Google Drive',copy:'Files connects to Google Drive. First sign in with Google in Settings → Accounts, then connect the limited Drive access when prompted.',tip:'CherryOS only requests access to files you select or open with the app. If you are not signed in, Files explains what to do.'},
+  {icon:'📝',title:'Notes and Cherry Links',copy:'Notes is a simple notepad that saves your writing automatically on this device. Cherry Links can generate a destination from the link collection.',tip:'Cherry Links requires Google sign-in and has a daily generation limit for regular accounts.'},
+  {icon:'🛍️',title:'Cherry Store',copy:'Cherry Store is where new desktop extras and games will appear. Cherry Cursors, Cherry Trails, and Cherry Games are currently marked Coming Soon.',tip:'Those three store listings are previews for now. Their Coming Soon buttons are not install buttons.'},
+  {icon:'⚙️',title:'Settings and personalization',copy:'Settings contains the controls for your CherryOS experience, including personalization, account options, and system preferences.',tip:'Open Personalization to import a wallpaper, or Accounts to sign in with Google. You can return to Settings whenever you need.'}
+ ];
+ let index=0;
+ const $=id=>document.getElementById(id);
+ function render(){
+  const step=steps[index];$('cherry-tour-icon').textContent=step.icon;$('cherry-onboarding-title').textContent=step.title;$('cherry-tour-copy').textContent=step.copy;$('cherry-tour-tip').textContent=step.tip;$('cherry-tour-step').textContent='STEP '+(index+1)+' OF '+steps.length;$('cherry-tour-progress').style.width=((index+1)/steps.length*100)+'%';$('cherry-tour-back').style.visibility=index===0?'hidden':'visible';$('cherry-tour-next').textContent=index===steps.length-1?'Finish':'Next';
+ }
+ function showUpdates(){updates.classList.add('open');}
+ function finishTour(){storage.set('cherryOSOnboardingComplete','1');tour.classList.remove('open');showUpdates();}
+ function startTour(){index=0;render();tour.classList.add('open');}
+ $('cherry-tour-next').addEventListener('click',()=>{if(index===steps.length-1){finishTour();return;}index++;render();});
+ $('cherry-tour-back').addEventListener('click',()=>{if(index>0){index--;render();}});
+ $('cherry-tour-skip').addEventListener('click',finishTour);
+ $('cherry-tour-skip-top').addEventListener('click',finishTour);
+ function closeUpdates(){updates.classList.remove('open');}
+ $('cherry-updates-close').addEventListener('click',closeUpdates);
+ $('cherry-updates-done').addEventListener('click',closeUpdates);
+ updates.addEventListener('click',e=>{if(e.target===updates)closeUpdates();});
+ if(storage.get('cherryOSOnboardingComplete')!=='1')startTour();else showUpdates();
+})();
+</script>
+</body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
