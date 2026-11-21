@@ -173,7 +173,8 @@ html,body{min-width:320px}
 /* CherryOS app windows and working controls */
 .os-window{display:none;position:fixed;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:min(500px,calc(100% - 28px));max-height: min(82vh,720px);overflow:auto;border:1px solid #ffffff30;border-radius:20px;background:linear-gradient(145deg,#1b1f2cf7,#0b0e17f7);box-shadow:0 30px 100px #000e,inset 0 1px #ffffff16;backdrop-filter:blur(24px)}
 .os-window.open{display:block}
-#retro-bowl-window.open{display:flex}
+#retro-bowl-window{display:none!important}
+#retro-bowl-window.open{display:flex!important}
 .os-window.maximized{left:8px!important;top:50px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 130px)!important;max-height:none!important;transform:none!important;resize:none!important;border-radius:14px}
 .os-window.minimized,#picker.minimized{display:none!important}
 #picker{z-index:9;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%)}
