@@ -1161,50 +1161,7 @@ play.addEventListener('click',async()=>{
    frame.src=URL.createObjectURL(html);
  }catch(error){
    loadingMessage.style.display='none';
-   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
-<script>
-(function(){
- const canvas=document.getElementById('cf-field'); if(!canvas)return;
- const ctx=canvas.getContext('2d'), overlay=document.getElementById('cf-overlay'), score=document.getElementById('cf-score');
- const W=800,H=440, keys=new Set();
- let running=false, player={x:95,y:220,r:12}, defenders=[], scoreHome=0, scoreAway=0, down=1, yards=10, play=0, message='Ready for kickoff', frame=0, last=0, raf=0, endTimer=0;
- function resetPlay(){player={x:95,y:220,r:12};defenders=[{x:320,y:95,r:13},{x:390,y:340,r:13},{x:500,y:210,r:14},{x:610,y:115,r:13},{x:650,y:330,r:13}];play++;message='Run to the end zone!';}
- function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#267b43';ctx.fillRect(0,0,W,H);
-  for(let y=0;y<H;y+=55){ctx.fillStyle=y%110===0?'#ffffff08':'#00000008';ctx.fillRect(0,y,W,55);}
-  ctx.fillStyle='#d9efc8';ctx.fillRect(0,0,52,H);ctx.fillRect(W-52,0,52,H);
-  ctx.save();ctx.translate(26,H/2);ctx.rotate(-Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('CHERRY',0,6);ctx.restore();
-  ctx.save();ctx.translate(W-26,H/2);ctx.rotate(Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('TOUCHDOWN',0,6);ctx.restore();
-  ctx.strokeStyle='#ffffffb8';ctx.lineWidth=2;for(let x=100;x<W-50;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.fillStyle='#ffffffaa';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(String(Math.round((x-100)/7)),x,18);ctx.fillText(String(Math.round((x-100)/7)),x,H-8);}
-  ctx.strokeStyle='#ffffff55';ctx.setLineDash([5,7]);ctx.beginPath();ctx.moveTo(300,0);ctx.lineTo(300,H);ctx.stroke();ctx.setLineDash([]);
-  defenders.forEach(d=>{ctx.fillStyle='#e5eaf0';ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263447';ctx.fillRect(d.x-7,d.y-4,14,8);ctx.fillStyle='#101820';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('D',d.x,d.y+4);});
-  ctx.fillStyle='#ff526d';ctx.beginPath();ctx.arc(player.x,player.y,player.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(player.x-6,player.y-4,12,8);ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('YOU',player.x,player.y-19);
-  ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='left';ctx.fillText(message,16,28);
- }
- function hud(){score.textContent='CHERRY '+scoreHome+' — '+scoreAway+' VISITORS  ·  '+down+' & '+yards;}
- function finish(text,td){running=false;message=text;if(td){scoreHome++;hud();}overlay.style.display='grid';overlay.innerHTML='<div><div style="font-size:42px">'+(td?'🏆':'🏈')+'</div><h2 style="margin:8px 0">'+text+'</h2><p style="color:#d8e8dc">Score: '+scoreHome+' — '+scoreAway+'</p><button id="retro-bowl-play" type="button" style="padding:12px 22px;border:0;border-radius:10px;background:#ff526d;color:#fff;font-weight:800;cursor:pointer">'+(td?'NEXT KICKOFF':'NEXT PLAY')+'</button></div>';document.getElementById('retro-bowl-play').addEventListener('click',startFootballGame);}
- function update(dt){
-  const speed=(keys.has('Shift')||keys.has('s')||keys.has('S')||keys.has('Space'))?235:155;
-  let dx=0,dy=0;if(keys.has('ArrowRight')||keys.has('d')||keys.has('D'))dx++;if(keys.has('ArrowLeft')||keys.has('a')||keys.has('A'))dx--;if(keys.has('ArrowDown')||keys.has('s')||keys.has('S'))dy++;if(keys.has('ArrowUp')||keys.has('w')||keys.has('W'))dy--;
-  const len=Math.hypot(dx,dy)||1;player.x=Math.max(60,Math.min(740,player.x+dx/len*speed*dt));player.y=Math.max(28,Math.min(412,player.y+dy/len*speed*dt));
-  defenders.forEach(d=>{const vx=player.x-d.x,vy=player.y-d.y,l=Math.hypot(vx,vy)||1;d.x+=vx/l*(62+play*2)*dt;d.y+=vy/l*(62+play*2)*dt;});
-  if(defenders.some(d=>Math.hypot(player.x-d.x,player.y-d.y)<player.r+d.r-2)){down++;yards=10;finish('Tackled! Try another play.',false);return;}
-  if(player.x>748){finish('TOUCHDOWN!',true);return;}
-  if(player.x>390&&yards===10){yards=5;down=1;}
-  frame++; if(frame>900){finish('Time ran out. Next play!',false);}
-  hud();
- }
- function loop(t){if(!running)return;const dt=Math.min((t-last)/1000,.04);last=t;update(dt);draw();if(running)raf=requestAnimationFrame(loop);}
- window.startFootballGame=function(){cancelAnimationFrame(raf);overlay.style.display='none';frame=0;resetPlay();running=true;last=performance.now();raf=requestAnimationFrame(loop);canvas.focus();};
- window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();}keys.add(e.key===' '?'Space':e.key);if(e.key===' '&&!running)window.startFootballGame();});
- window.addEventListener('keyup',e=>keys.delete(e.key===' '?'Space':e.key));
- document.querySelectorAll('[data-cf-key]').forEach(b=>{const k=b.dataset.cfKey;b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(k==='Space'?'Space':k);});['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>keys.delete(k==='Space'?'Space':k)));});
- document.querySelectorAll('.cf-control').forEach(b=>{b.style.border='1px solid #ffffff33';b.style.borderRadius='9px';b.style.padding='10px 15px';b.style.background='#263c31';b.style.color='#fff';b.style.fontWeight='800';b.style.cursor='pointer';});
- hud();draw();
-})();
-</script>
-
-</body></html>';
+   frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p></body></html>';
  }
 });
 document.getElementById('direct').href=gameUrl;
@@ -1852,6 +1809,47 @@ $("cl-copy").addEventListener("click",async()=>{
   filters.forEach(item=>item.classList.toggle('active',item===button));update();
  }));
  search?.addEventListener('input',update);
+})();
+</script>
+<script>
+(function(){
+ const canvas=document.getElementById('cf-field'); if(!canvas)return;
+ const ctx=canvas.getContext('2d'), overlay=document.getElementById('cf-overlay'), score=document.getElementById('cf-score');
+ const W=800,H=440, keys=new Set();
+ let running=false, player={x:95,y:220,r:12}, defenders=[], scoreHome=0, scoreAway=0, down=1, yards=10, play=0, message='Ready for kickoff', frame=0, last=0, raf=0, endTimer=0;
+ function resetPlay(){player={x:95,y:220,r:12};defenders=[{x:320,y:95,r:13},{x:390,y:340,r:13},{x:500,y:210,r:14},{x:610,y:115,r:13},{x:650,y:330,r:13}];play++;message='Run to the end zone!';}
+ function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#267b43';ctx.fillRect(0,0,W,H);
+  for(let y=0;y<H;y+=55){ctx.fillStyle=y%110===0?'#ffffff08':'#00000008';ctx.fillRect(0,y,W,55);}
+  ctx.fillStyle='#d9efc8';ctx.fillRect(0,0,52,H);ctx.fillRect(W-52,0,52,H);
+  ctx.save();ctx.translate(26,H/2);ctx.rotate(-Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('CHERRY',0,6);ctx.restore();
+  ctx.save();ctx.translate(W-26,H/2);ctx.rotate(Math.PI/2);ctx.fillStyle='#174a2b';ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.fillText('TOUCHDOWN',0,6);ctx.restore();
+  ctx.strokeStyle='#ffffffb8';ctx.lineWidth=2;for(let x=100;x<W-50;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.fillStyle='#ffffffaa';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(String(Math.round((x-100)/7)),x,18);ctx.fillText(String(Math.round((x-100)/7)),x,H-8);}
+  ctx.strokeStyle='#ffffff55';ctx.setLineDash([5,7]);ctx.beginPath();ctx.moveTo(300,0);ctx.lineTo(300,H);ctx.stroke();ctx.setLineDash([]);
+  defenders.forEach(d=>{ctx.fillStyle='#e5eaf0';ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263447';ctx.fillRect(d.x-7,d.y-4,14,8);ctx.fillStyle='#101820';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('D',d.x,d.y+4);});
+  ctx.fillStyle='#ff526d';ctx.beginPath();ctx.arc(player.x,player.y,player.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(player.x-6,player.y-4,12,8);ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('YOU',player.x,player.y-19);
+  ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='left';ctx.fillText(message,16,28);
+ }
+ function hud(){score.textContent='CHERRY '+scoreHome+' — '+scoreAway+' VISITORS  ·  '+down+' & '+yards;}
+ function finish(text,td){running=false;message=text;if(td){scoreHome++;hud();}overlay.style.display='grid';overlay.innerHTML='<div><div style="font-size:42px">'+(td?'🏆':'🏈')+'</div><h2 style="margin:8px 0">'+text+'</h2><p style="color:#d8e8dc">Score: '+scoreHome+' — '+scoreAway+'</p><button id="retro-bowl-play" type="button" style="padding:12px 22px;border:0;border-radius:10px;background:#ff526d;color:#fff;font-weight:800;cursor:pointer">'+(td?'NEXT KICKOFF':'NEXT PLAY')+'</button></div>';document.getElementById('retro-bowl-play').addEventListener('click',startFootballGame);}
+ function update(dt){
+  const speed=(keys.has('Shift')||keys.has('s')||keys.has('S')||keys.has('Space'))?235:155;
+  let dx=0,dy=0;if(keys.has('ArrowRight')||keys.has('d')||keys.has('D'))dx++;if(keys.has('ArrowLeft')||keys.has('a')||keys.has('A'))dx--;if(keys.has('ArrowDown')||keys.has('s')||keys.has('S'))dy++;if(keys.has('ArrowUp')||keys.has('w')||keys.has('W'))dy--;
+  const len=Math.hypot(dx,dy)||1;player.x=Math.max(60,Math.min(740,player.x+dx/len*speed*dt));player.y=Math.max(28,Math.min(412,player.y+dy/len*speed*dt));
+  defenders.forEach(d=>{const vx=player.x-d.x,vy=player.y-d.y,l=Math.hypot(vx,vy)||1;d.x+=vx/l*(62+play*2)*dt;d.y+=vy/l*(62+play*2)*dt;});
+  if(defenders.some(d=>Math.hypot(player.x-d.x,player.y-d.y)<player.r+d.r-2)){down++;yards=10;finish('Tackled! Try another play.',false);return;}
+  if(player.x>748){finish('TOUCHDOWN!',true);return;}
+  if(player.x>390&&yards===10){yards=5;down=1;}
+  frame++; if(frame>900){finish('Time ran out. Next play!',false);}
+  hud();
+ }
+ function loop(t){if(!running)return;const dt=Math.min((t-last)/1000,.04);last=t;update(dt);draw();if(running)raf=requestAnimationFrame(loop);}
+ window.startFootballGame=function(){cancelAnimationFrame(raf);overlay.style.display='none';frame=0;resetPlay();running=true;last=performance.now();raf=requestAnimationFrame(loop);canvas.focus();};
+ window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();}keys.add(e.key===' '?'Space':e.key);if(e.key===' '&&!running)window.startFootballGame();});
+ window.addEventListener('keyup',e=>keys.delete(e.key===' '?'Space':e.key));
+ document.querySelectorAll('[data-cf-key]').forEach(b=>{const k=b.dataset.cfKey;b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(k==='Space'?'Space':k);});['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>keys.delete(k==='Space'?'Space':k)));});
+ document.querySelectorAll('.cf-control').forEach(b=>{b.style.border='1px solid #ffffff33';b.style.borderRadius='9px';b.style.padding='10px 15px';b.style.background='#263c31';b.style.color='#fff';b.style.fontWeight='800';b.style.cursor='pointer';});
+ hud();draw();
 })();
 </script>
 </body>
