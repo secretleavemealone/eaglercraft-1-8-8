@@ -662,6 +662,8 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .games-eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;color:#b99bff}
 .games-heading h2{font-size:30px;letter-spacing:-.8px;margin:7px 0 5px;color:#f7f5ff}
 .games-heading p{margin:0;color:#9da6ba;font-size:14px}
+.games-uninstall{margin:0;white-space:nowrap}
+@media(max-width:520px){.games-heading{align-items:flex-start;gap:12px;flex-direction:column}.games-uninstall{margin-top:4px}}
 .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,310px));gap:20px}
 .game-card{overflow:hidden;border:1px solid #ffffff18;border-radius:17px;background:linear-gradient(145deg,#252938,#191c28);box-shadow:0 16px 38px #0004;transition:transform .18s,border-color .18s}
 .game-card:hover{transform:translateY(-3px);border-color:#a78bfa88}
@@ -843,7 +845,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 <section class="os-window" id="games-window" aria-label="Games" aria-hidden="true" style="width:min(1080px,96vw);height:min(820px,90vh)">
  <div class="os-window-top"><span>🎮 Games Library</span><div class="window-actions"><button type="button" data-minimize="games-window" title="Minimize">—</button><button type="button" data-maximize="games-window" title="Maximize">□</button><button class="win-close" data-close="games-window" type="button" title="Close">×</button></div></div>
  <div class="os-window-body games-window-body">
-  <div id="games-library-view" class="games-library-view"><div class="games-heading"><div><span class="games-eyebrow">CHERRYOS ARCADE</span><h2>My Games</h2><p>Pick a game and jump straight in.</p></div></div>
+  <div id="games-library-view" class="games-library-view"><div class="games-heading"><div><span class="games-eyebrow">CHERRYOS ARCADE</span><h2>My Games</h2><p>Pick a game and jump straight in.</p></div><button type="button" class="decor-uninstall games-uninstall" data-uninstall-decor-app="games">Uninstall Games</button></div>
    <div class="games-grid"><article class="game-card">
     <div class="game-art"><img src="https://images.launchbox-app.com//b9e6898e-722b-443a-b9aa-914f34b86146.png" alt="Retro Bowl logo"></div>
     <div class="game-card-info"><div><h3>Retro Bowl</h3><p>Build your team. Lead your season.</p></div><button type="button" data-play-game="retro-bowl">Play now <span>→</span></button></div>
@@ -1777,7 +1779,7 @@ $("cl-copy").addEventListener("click",async()=>{
  function uninstallApp(type){
   if(!installed[type])return;
   const info=appInfo[type],w=document.getElementById(info.window);
-  if(w){w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key=info.key;const task=document.getElementById('task-'+key);if(task)task.remove();}
+  if(w){w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');removeTaskApp(info.key);}
   const icon=document.getElementById(info.id);if(icon)icon.remove();
   document.querySelectorAll('[data-launch="'+info.key+'"]').forEach(el=>el.remove());
   installed[type]=false;
