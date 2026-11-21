@@ -753,6 +753,37 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
   .dock-icon { width: 32px; height: 32px; }
   .os-window, #picker { max-height: calc(100dvh - 58px) !important; }
 }
+
+
+/* Keep desktop app icons fully above the dock and bottom taskbar on iPad */
+@media (min-width: 601px) and (max-width: 1100px) {
+  .desktop-icons {
+    top: 62px;
+    bottom: 148px;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-content: start;
+    grid-auto-rows: min-content;
+    padding: 4px 4px 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff55 transparent;
+  }
+  #taskbar { height: 66px; }
+}
+@media (max-width: 600px) {
+  .desktop-icons {
+    bottom: 132px;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-content: start;
+    grid-auto-rows: min-content;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff55 transparent;
+  }
+}
 </style>
 
 <style id="cherry-onboarding-styles">
