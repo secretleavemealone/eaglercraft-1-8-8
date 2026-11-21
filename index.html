@@ -696,7 +696,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     <button class="app-icon" id="settings-app" type="button"><span class="glyph">⚙️</span><span>Settings</span></button>
     <button class="app-icon" id="notes-app" type="button"><span class="glyph">📝</span><span>Notes</span></button>
     <button class="app-icon" id="cherry-links-app" type="button"><span class="glyph">🔗</span><span>Cherry Links</span></button>
-    <button class="app-icon" id="retro-bowl-app" type="button"><span class="glyph">🏈</span><span>Cherry Football</span></button>
+    <button class="app-icon" id="retro-bowl-app" type="button"><span class="glyph">🏈</span><span>Retro Bowl</span></button>
     <button class="app-icon" id="cherry-store-app" type="button"><span class="glyph">🛍️</span><span>Cherry Store</span></button>
   </div>
   <div id="clock">2:51 PM<small>THURSDAY, NOVEMBER 12</small></div>
@@ -724,7 +724,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
       <button type="button" data-launch="settings"><span>⚙️</span>Settings</button>
       <button type="button" data-launch="notes"><span>📝</span>Notes</button>
       <button type="button" data-launch="cherry-links"><span>🔗</span>Cherry Links</button>
-      <button type="button" data-launch="retro-bowl"><span>🏈</span>Cherry Football</button>
+      <button type="button" data-launch="retro-bowl"><span>🏈</span>Retro Bowl</button>
       <button type="button" data-launch="cherry-store"><span>🛍️</span>Cherry Store</button>
     </div>
     <div class="menu-footer">CherryOS Desktop · Your workspace</div>
@@ -807,23 +807,10 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
     </main>
   </div>
 </section>
-<section class="os-window" id="retro-bowl-window" aria-label="Cherry Football" aria-hidden="true" style="width:min(900px,94vw);height:min(700px,86vh)">
-  <div class="os-window-top"><span>🏈 Cherry Football</span><div class="window-actions"><button type="button" data-minimize="retro-bowl-window" title="Minimize">—</button><button type="button" data-maximize="retro-bowl-window" title="Maximize">□</button><button class="win-close" data-close="retro-bowl-window" type="button" title="Close">×</button></div></div>
-  <div class="os-window-body" style="padding:14px;background:#101b17;color:#fff;overflow:auto">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
-      <div><strong style="font-size:20px">CHERRY FOOTBALL</strong><div style="font-size:12px;color:#b7c9bd">An original arcade football game · Local gameplay</div></div>
-      <div id="cf-score" style="font-weight:800;font-variant-numeric:tabular-nums">CHERRY 0 — 0 VISITORS&nbsp; · &nbsp;1st &amp; 10</div>
-    </div>
-    <div style="position:relative;max-width:820px;margin:auto">
-      <canvas id="cf-field" width="800" height="440" aria-label="Football field game" style="display:block;width:100%;height:auto;border:2px solid #d7e5d8;border-radius:10px;background:#267b43;touch-action:none"></canvas>
-      <div id="cf-overlay" style="position:absolute;inset:0;display:grid;place-items:center;background:#07140dcc;text-align:center;padding:20px;border-radius:10px">
-        <div><div style="font-size:44px">🏈</div><h2 style="margin:8px 0">Cherry Football</h2><p style="max-width:420px;line-height:1.5;color:#d8e8dc">Run the ball to the end zone. Dodge defenders, earn first downs, and score touchdowns.</p><button id="retro-bowl-play" type="button" style="padding:12px 22px;border:0;border-radius:10px;background:#ff526d;color:#fff;font-weight:800;cursor:pointer">KICK OFF</button></div>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:12px 0">
-      <button class="cf-control" data-cf-key="ArrowUp">▲</button><button class="cf-control" data-cf-key="ArrowLeft">◀</button><button class="cf-control" data-cf-key="ArrowDown">▼</button><button class="cf-control" data-cf-key="ArrowRight">▶</button><button class="cf-control" data-cf-key="Space" style="background:#ff526d">SPRINT</button>
-    </div>
-    <div style="text-align:center;color:#b7c9bd;font-size:12px">Controls: WASD / Arrow keys to move · Hold Shift or SPRINT to speed up · Reach the far end zone to score. Press Space to start the next play.</div>
+<section class="os-window" id="retro-bowl-window" aria-label="Retro Bowl" aria-hidden="true" style="width:min(1100px,96vw);height:min(780px,90vh)">
+  <div class="os-window-top"><span>🏈 Retro Bowl</span><div class="window-actions"><button type="button" data-minimize="retro-bowl-window" title="Minimize">—</button><button type="button" data-maximize="retro-bowl-window" title="Maximize">□</button><button class="win-close" data-close="retro-bowl-window" type="button" title="Close">×</button></div></div>
+  <div class="os-window-body" style="padding:0;background:#101010;overflow:hidden">
+    <iframe title="Retro Bowl" src="https://game316009.konggames.com/gamez/0031/6009/live/index.html" style="display:block;width:100%;height:100%;min-height:520px;border:0;background:#101010" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
   </div>
 </section>
 <section class="os-window" id="files-window" aria-label="Files" aria-hidden="true">
@@ -941,7 +928,6 @@ document.getElementById('settings-app').addEventListener('click',()=>openOsWindo
 document.getElementById('notes-app').addEventListener('click',()=>openOsWindow('notes-window'));
 document.getElementById('cherry-links-app').addEventListener('click',()=>openOsWindow('cherry-links-window'));
 document.getElementById('retro-bowl-app').addEventListener('click',()=>openOsWindow('retro-bowl-window'));
-document.getElementById('retro-bowl-play').addEventListener('click',startFootballGame);
 document.getElementById('cherry-store-app').addEventListener('click',()=>openOsWindow('cherry-store-window'));
 document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>{const app=button.dataset.launch;document.getElementById('start-menu').classList.remove('open');if(app==='minecraft')openMinecraft();else if(app==='files')openOsWindow('files-window');else if(app==='settings')openOsWindow('settings-window');else if(app==='notes')openOsWindow('notes-window');else if(app==='cherry-links')openOsWindow('cherry-links-window');else if(app==='retro-bowl')openOsWindow('retro-bowl-window');else if(app==='cherry-store')openOsWindow('cherry-store-window');else if(app==='cursor-manager')openOsWindow('cursor-manager-window');else if(app==='trail-manager')openOsWindow('trail-manager-window');}));
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const w=document.getElementById(b.dataset.close);w.classList.remove('open','maximized','minimized');w.setAttribute('aria-hidden','true');const key={'files-window':'files','notes-window':'notes','cherry-links-window':'cherry-links','cherry-store-window':'cherry-store','cursor-manager-window':'cursor-manager','trail-manager-window':'trail-manager','retro-bowl-window':'retro-bowl','settings-window':'settings'}[w.id]||'settings';removeTaskApp(key);}));
