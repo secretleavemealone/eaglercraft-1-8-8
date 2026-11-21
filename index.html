@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Minecraft 1.8.8</title>
+<title>CherryOS — Your Desktop</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,sans-serif;background:#050609;color:#f5f7ff}
@@ -409,6 +409,140 @@ body.cherry-cursor input,body.cherry-cursor textarea,body.cherry-cursor [content
 body.cherry-cursor button,body.cherry-cursor a,body.cherry-cursor select{cursor:pointer!important}
 @media(max-width:680px){.store-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.store-hero{padding:14px}.store-hero-mark{width:48px;height:48px}}
 @media(max-width:420px){.store-grid{grid-template-columns:1fr}}
+
+
+/* CHERRYOS SIGNATURE REDESIGN — polished glass desktop */
+:root{
+ --cherry:#ff4568;--cherry-soft:#ff7890;--glass:rgba(17,19,29,.66);
+ --line:rgba(255,255,255,.13);--muted:#aeb5c5;
+}
+html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.01em}
+#desktop{
+ isolation:isolate;
+ background:
+  radial-gradient(ellipse at 50% 43%,rgba(255,54,91,.17),transparent 24%),
+  radial-gradient(ellipse at 82% 16%,rgba(91,116,180,.14),transparent 30%),
+  radial-gradient(ellipse at 8% 92%,rgba(190,45,80,.12),transparent 34%),
+  linear-gradient(135deg,#080910 0%,#111019 48%,#080b13 100%)!important;
+}
+#desktop:before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;width:min(68vw,1050px);height:min(68vw,1050px);
+ left:calc(50% - min(34vw,525px));top:8%;border-radius:50%;
+ background:conic-gradient(from 25deg,transparent 0 18%,#ff36591a 28%,transparent 43%,#8198d018 58%,transparent 74%,#ff365912 88%,transparent);
+ filter:blur(35px);animation:cherryAura 34s linear infinite;
+}
+#desktop:after{
+ opacity:.2!important;mix-blend-mode:screen;
+ background-image:radial-gradient(1px 1px at 12% 20%,#fff 98%,transparent),radial-gradient(1px 1px at 72% 16%,#fff 98%,transparent),radial-gradient(1px 1px at 42% 72%,#fff 98%,transparent),radial-gradient(1px 1px at 88% 65%,#fff 98%,transparent),linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px)!important;
+ background-size:230px 190px,310px 240px,270px 220px,360px 280px,76px 76px,76px 76px!important;
+}
+@keyframes cherryAura{to{transform:rotate(360deg)}}
+#system-bar{
+ height:46px!important;padding:0 26px!important;
+ background:rgba(8,9,15,.48)!important;border-bottom:1px solid rgba(255,255,255,.09)!important;
+ box-shadow:0 8px 35px #0002!important;backdrop-filter:blur(28px) saturate(150%)!important;
+}
+#system-bar .brand{font-size:11px!important;letter-spacing:4px!important;font-weight:850!important}
+#system-bar .brand:before{width:9px!important;height:9px!important;background:var(--cherry)!important;box-shadow:0 0 8px var(--cherry),0 0 22px #ff456888!important}
+#system-bar .right{font-size:11px!important;letter-spacing:1px!important;color:#aeb2c2!important}
+.desktop-icons{top:76px!important;left:30px!important;gap:15px 10px!important}
+.app-icon{
+ min-height:94px!important;padding:9px 5px!important;gap:9px!important;
+ border-radius:17px!important;color:#f4f3f8!important;font-size:12px!important;font-weight:600!important;
+ text-shadow:0 2px 9px #000!important;transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease!important;
+}
+.app-icon .glyph{
+ width:54px!important;height:54px!important;border-radius:17px!important;
+ border:1px solid #ffffff2c!important;box-shadow:0 12px 28px #0008,inset 0 1px #ffffff48!important;
+ transition:transform .22s ease,box-shadow .22s ease!important;
+}
+.app-icon:hover{transform:translateY(-4px) scale(1.025)!important;background:#ffffff0c!important;border-color:#ffffff1b!important;box-shadow:0 12px 28px #0003!important}
+.app-icon:hover .glyph{transform:translateY(-2px) rotate(-2deg)!important;box-shadow:0 17px 34px #0009,inset 0 1px #ffffff55!important}
+.app-icon:focus-visible,.dock-icon:focus-visible,#start-button:focus-visible{outline:2px solid #ff8298;outline-offset:4px}
+#clock{
+ top:clamp(90px,13vh,180px)!important;font-size:clamp(54px,6.2vw,112px)!important;
+ letter-spacing:-.075em!important;font-weight:650!important;
+ background:linear-gradient(180deg,#fff 20%,#f5dce3 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;
+ filter:drop-shadow(0 12px 35px #0008);text-shadow:none!important;
+}
+#clock small{font-size:10px!important;letter-spacing:5px!important;font-weight:650!important;color:#e6b8c4!important}
+#desktop-brand{right:38px!important;top:44%!important;color:#ffffff32!important;font-size:13px!important;letter-spacing:11px!important;font-weight:800!important}
+#dock{
+ bottom:22px!important;gap:11px!important;padding:11px 14px!important;
+ border:1px solid rgba(255,255,255,.17)!important;border-radius:23px!important;
+ background:linear-gradient(145deg,rgba(38,39,52,.78),rgba(12,14,23,.78))!important;
+ box-shadow:0 22px 70px #0009,inset 0 1px #ffffff22!important;
+ backdrop-filter:blur(32px) saturate(160%)!important;
+}
+.dock-icon{
+ width:46px!important;height:46px!important;border-radius:15px!important;
+ border:1px solid transparent!important;background:transparent!important;
+ filter:drop-shadow(0 4px 8px #0005);transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s!important;
+}
+.dock-icon:hover{transform:translateY(-7px) scale(1.08)!important;background:#ffffff16!important;border-color:#ffffff20!important}
+#taskbar{
+ background:rgba(10,11,18,.72)!important;border-top:1px solid rgba(255,255,255,.11)!important;
+ box-shadow:0 -12px 45px #0004!important;backdrop-filter:blur(30px) saturate(150%)!important;
+}
+#start-button{
+ border-radius:13px!important;background:linear-gradient(145deg,#ff6b83,#c92d50)!important;
+ box-shadow:0 5px 18px #ff456844,inset 0 1px #ffffff70!important;
+ transition:transform .2s,filter .2s!important;
+}
+#start-button:hover{transform:translateY(-2px) scale(1.04)!important;filter:brightness(1.1)}
+#task-apps button,.task-app{
+ border-radius:11px!important;background:#ffffff0a!important;border:1px solid #ffffff12!important;
+ transition:background .2s,border-color .2s!important;
+}
+#task-apps button:hover,.task-app:hover{background:#ffffff18!important;border-color:#ffffff28!important}
+#tray{color:#dce0ec!important}
+#tray-clock{font-weight:650!important}
+#start-menu{
+ border:1px solid #ffffff20!important;border-radius:23px!important;
+ background:linear-gradient(145deg,rgba(30,31,44,.96),rgba(10,12,20,.96))!important;
+ box-shadow:0 28px 100px #000b,inset 0 1px #ffffff1c!important;
+ backdrop-filter:blur(34px) saturate(150%)!important;
+}
+#start-menu h3{letter-spacing:2.5px!important;color:#ff9aac!important}
+#start-menu .menu-grid button{
+ border:1px solid #ffffff0c!important;border-radius:15px!important;background:#ffffff08!important;
+ transition:transform .18s,background .18s,border-color .18s!important;
+}
+#start-menu .menu-grid button:hover{transform:translateY(-3px)!important;background:#ffffff14!important;border-color:#ffffff24!important}
+.os-window,#picker{
+ border:1px solid rgba(255,255,255,.17)!important;border-radius:20px!important;
+ background:linear-gradient(145deg,rgba(27,29,42,.97),rgba(10,12,20,.97))!important;
+ box-shadow:0 35px 110px #000c,0 0 0 1px #ffffff08,inset 0 1px #ffffff18!important;
+ backdrop-filter:blur(30px) saturate(140%)!important;
+}
+.os-window-top,.window-top{
+ background:linear-gradient(90deg,#ffffff0b,#ffffff04)!important;
+ border-bottom:1px solid #ffffff13!important;
+}
+.os-window-top .window-actions button,.window-actions button{
+ border-radius:8px!important;transition:background .15s,transform .15s!important;
+}
+.os-window-top .window-actions button:hover,.window-actions button:hover{transform:scale(1.06)!important;background:#ffffff25!important}
+button,.launch,select,input,textarea{font-family:inherit}
+button:not(.app-icon):not(.dock-icon):not(.window-actions button){transition:filter .18s,transform .18s,box-shadow .18s}
+button:not(:disabled):active{transform:scale(.985)}
+#desktop-time{color:#f4eaf0!important}
+#desktop-time small{color:#c7aeb8!important}
+@media(max-width:600px){
+ #system-bar{height:40px!important;padding:0 13px!important}
+ #system-bar .right{display:none!important}
+ .desktop-icons{top:55px!important;left:9px!important}
+ .app-icon{min-height:74px!important}
+ .app-icon .glyph{width:44px!important;height:44px!important;border-radius:14px!important}
+ #clock{top:15%!important;font-size:clamp(40px,12vw,58px)!important}
+ #clock small{font-size:8px!important;letter-spacing:3px!important}
+ #desktop-brand{display:none!important}
+ #dock{bottom:13px!important;gap:3px!important;padding:8px!important}
+ .dock-icon{width:34px!important;height:36px!important;border-radius:11px!important}
+ #desktop-time{right:12px!important;bottom:76px!important}
+ #taskbar{padding-left:8px!important;padding-right:8px!important}
+}
+@media(prefers-reduced-motion:reduce){#desktop:before{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
 </style>
 </head>
