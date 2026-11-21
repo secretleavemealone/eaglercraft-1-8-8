@@ -915,6 +915,54 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .cherry-updates-done{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(135deg,#ff6484,#c52d55);color:#fff;font-weight:800;cursor:pointer}
 @media(max-width:480px){.cherry-onboarding-card,.cherry-updates-card{padding:20px;border-radius:19px}.cherry-onboarding-footer{align-items:flex-start;flex-direction:column}.cherry-onboarding-actions{width:100%}.cherry-onboarding-actions button{flex:1}}
 </style>
+
+<style id="cherry-six-app-columns">
+/* Always place desktop shortcuts top-to-bottom in groups of six, then start a new column. */
+#desktop .desktop-icons {
+  position: absolute !important;
+  top: 24px !important;
+  left: 22px !important;
+  right: 14px !important;
+  bottom: 66px !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  display: grid !important;
+  grid-auto-flow: column !important;
+  grid-template-columns: none !important;
+  grid-template-rows: repeat(6, 88px) !important;
+  grid-auto-columns: 78px !important;
+  grid-auto-rows: 88px !important;
+  align-content: start !important;
+  justify-content: start !important;
+  gap: 7px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 1100px) {
+  #desktop .desktop-icons {
+    top: 12px !important;
+    bottom: 54px !important;
+    grid-template-rows: repeat(6, 82px) !important;
+    grid-auto-columns: 72px !important;
+    grid-auto-rows: 82px !important;
+  }
+}
+@media (max-width: 700px) {
+  #desktop .desktop-icons {
+    top: 10px !important;
+    bottom: 52px !important;
+    left: 8px !important;
+    right: 8px !important;
+    grid-template-rows: repeat(6, 74px) !important;
+    grid-auto-columns: 68px !important;
+    grid-auto-rows: 74px !important;
+    gap: 5px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div id="desktop">
