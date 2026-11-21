@@ -687,6 +687,72 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
 .retro-game-screen iframe{display:block;width:100%;height:100%;border:0;background:#111}
 @media(max-width:700px){#games-window{width:96vw!important;height:88vh!important}.games-window-body{padding:20px!important}.games-grid{grid-template-columns:1fr}.game-card-info{align-items:flex-start;flex-direction:column}.game-card-info button{width:100%}.game-art{height:160px}.retro-game-stage{padding:6px}.retro-player-hint{display:none}}
 
+
+
+/* Responsive CherryOS layouts: desktop, tablet, and phone */
+@media (max-width: 900px) {
+  .os-window { width: min(760px, calc(100vw - 28px)); max-height: calc(100dvh - 92px); }
+  #games-window { width: min(760px, calc(100vw - 24px)) !important; height: auto !important; max-height: calc(100dvh - 82px); }
+  .games-window-body { overflow-y: auto; }
+  .games-grid { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+  .settings-layout, .settings-content, .settings-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .store-grid-v2, .decor-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .desktop-icons { grid-template-columns: repeat(2, 70px); }
+  #desktop-brand { display: none; }
+}
+@media (max-width: 600px) {
+  html, body { min-width: 320px; overflow: hidden; }
+  #desktop { min-height: 100dvh; }
+  #system-bar { height: 38px; padding: 0 12px; }
+  #system-bar .right { display: none; }
+  .desktop-icons { top: 52px; left: 8px; grid-template-columns: repeat(2, 62px); gap: 7px 4px; }
+  .app-icon { width: 60px; min-height: 70px; padding: 5px 2px; font-size: 10px; }
+  .app-icon .glyph { width: 40px; height: 40px; border-radius: 12px; font-size: 23px; }
+  #clock { top: 14%; left: 50%; width: max-content; max-width: 72vw; font-size: clamp(30px, 9vw, 44px); }
+  #clock small { font-size: 9px; letter-spacing: 2px; }
+  #dock { left: 50%; bottom: max(10px, env(safe-area-inset-bottom)); width: max-content; max-width: calc(100vw - 16px); gap: 4px; padding: 7px 9px; border-radius: 16px; }
+  .dock-icon { width: clamp(30px, 8vw, 38px); height: 36px; font-size: 19px; }
+  #desktop-time { right: 10px; bottom: 68px; font-size: 11px; }
+  .os-window, #picker { left: 8px !important; top: 48px !important; width: calc(100vw - 16px) !important; max-width: none !important; max-height: calc(100dvh - 108px) !important; height: auto; transform: none !important; border-radius: 15px; }
+  .os-window.maximized, #picker.maximized { left: 4px !important; top: 42px !important; width: calc(100vw - 8px) !important; height: calc(100dvh - 86px) !important; max-height: none !important; }
+  .os-window-top { height: 46px; padding: 0 11px; }
+  .os-window-body { padding: 15px; }
+  .games-heading { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .games-heading h2 { font-size: 23px; }
+  .games-uninstall { width: auto; max-width: 100%; margin: 0; }
+  .games-grid, .store-grid-v2, .decor-options { grid-template-columns: minmax(0, 1fr); }
+  .game-card { min-width: 0; }
+  .game-art { min-height: 150px; }
+  .game-card-info { flex-wrap: wrap; gap: 12px; }
+  .game-card-info button { width: 100%; margin: 0; }
+  .retro-player-toolbar { gap: 8px; flex-wrap: wrap; }
+  .retro-player-hint { display: none; }
+  .retro-game-stage { min-height: 220px; }
+  .setting-row { align-items: flex-start; flex-wrap: wrap; }
+  .setting-row select { max-width: 100%; }
+  #picker h1 { margin: 20px 18px 8px; }
+  #picker > .sub, #picker label { margin-left: 18px; margin-right: 18px; }
+  #picker select, #play, #picker .launch.secondary, #chat-toggle { width: calc(100% - 36px); margin-left: 18px; margin-right: 18px; }
+  #chat-panel { width: calc(100% - 36px); margin-left: 18px; margin-right: 18px; max-height: 42dvh; }
+  button, .launch { min-height: 42px; }
+}
+@media (max-width: 380px) {
+  .desktop-icons { grid-template-columns: repeat(2, 56px); }
+  .app-icon { width: 55px; }
+  #dock { gap: 2px; padding: 6px; }
+  .dock-icon { width: 29px; }
+  .os-window-body { padding: 12px; }
+  .games-heading h2 { font-size: 21px; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  #clock { top: 8%; font-size: clamp(26px, 6vw, 42px); }
+  .desktop-icons { top: 48px; gap: 2px 4px; }
+  .app-icon { min-height: 58px; }
+  .app-icon .glyph { width: 34px; height: 34px; }
+  #dock { bottom: 5px; padding: 5px 8px; }
+  .dock-icon { width: 32px; height: 32px; }
+  .os-window, #picker { max-height: calc(100dvh - 58px) !important; }
+}
 </style>
 
 <style id="cherry-onboarding-styles">
@@ -896,7 +962,7 @@ body.cherry-cursor-pixel,body.cherry-cursor-pixel *{cursor: url("data:image/svg+
   <div class="store-grid store-grid-v2" id="store-products">
    <article class="store-item store-item-v2" data-store-category="cursor" data-store-name="Cherry Cursors"><div class="store-product-art art-cherry"><span style="font-size:58px">↖</span><b>🍒</b></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">FREE</span></div><h3>Cherry Cursors</h3><p>Customize your pointer with Cherry, Neon, Ocean, Pixel and Classic styles.</p><button type="button" data-install-decor-app="cursor">Download Cherry Cursors</button></div></article>
    <article class="store-item store-item-v2" data-store-category="trail" data-store-name="Cherry Trails"><div class="store-product-art art-rainbow"><span style="font-size:48px">✦　·　✧</span></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">COMING SOON</span></div><h3>Cherry Trails</h3><p>Mouse trails with Cherry, Sparkle, Rainbow, Heart, Bubble and more.</p><button type="button" disabled>Coming soon</button></div></article>
-   <article class="store-item store-item-v2" data-store-category="games" data-store-name="Games"><div class="store-product-art art-games"><span style="font-size:52px">🎮</span><i>✦</i></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">FREE</span></div><h3>Games</h3><p>Download your game library and play Retro Bowl from inside the app.</p><button type="button" data-install-decor-app="games">Download Games</button></div></article>
+   <article class="store-item store-item-v2" data-store-category="games" data-store-name="Games"><div class="store-product-art art-games"><span style="font-size:52px">🎮</span><i>✦</i></div><div class="store-product-info"><div class="store-product-top"><span class="store-category-tag">DESKTOP APP</span><span class="store-price">COMING SOON</span></div><h3>Games</h3><p>The CherryOS game library is being prepared. Check back soon.</p><button type="button" disabled>Coming soon</button></div></article>
   </div><p class="store-empty" id="store-empty" hidden>No apps match that search.</p>
   <div class="store-footer"><span>🍒 CHERRY STORE</span><span>Your desktop, your style.</span></div>
  </div>
