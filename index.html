@@ -1133,6 +1133,19 @@ play.addEventListener('click',async()=>{
  }catch(error){
    loadingMessage.style.display='none';
    frame.srcdoc='<html><body style="background:#101827;color:white;font:16px Arial;padding:30px"><h2>1.12.2 game file missing</h2><p>Upload eaglercraft-1.12.2 (15).html.gz to the repository root, then reload.</p>
+</body></html>';
+</body></html>';
+ }
+});
+document.getElementById('direct').href=gameUrl;
+function leaveMinecraft(){if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});}game.style.display='none';frame.src='about:blank';loadingMessage.style.display='none';game.classList.remove('fullscreen-ui');document.getElementById('game-exit-fullscreen').style.display='none';removeTaskApp('game');}
+document.getElementById('game-minimize').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});game.style.display='none';const item=taskAppButtons.get('game');if(item)item.classList.add('minimized');});
+document.getElementById('game-close').addEventListener('click',leaveMinecraft);
+document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
+document.getElementById('game-exit-fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();});
+document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;game.classList.toggle('fullscreen-ui',on);document.getElementById('game-exit-fullscreen').style.display=on?'block':'none';});
+</script>
+
 <script id="cherry-onboarding-script">
 (()=>{
  const tour=document.getElementById('cherry-onboarding-overlay');
@@ -1167,17 +1180,6 @@ play.addEventListener('click',async()=>{
  updates.addEventListener('click',e=>{if(e.target===updates)closeUpdates();});
  if(storage.get(tourCompletionKey)!=='1')startTour();else showUpdates();
 })();
-</script>
-</body></html>';
- }
-});
-document.getElementById('direct').href=gameUrl;
-function leaveMinecraft(){if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});}game.style.display='none';frame.src='about:blank';loadingMessage.style.display='none';game.classList.remove('fullscreen-ui');document.getElementById('game-exit-fullscreen').style.display='none';removeTaskApp('game');}
-document.getElementById('game-minimize').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});game.style.display='none';const item=taskAppButtons.get('game');if(item)item.classList.add('minimized');});
-document.getElementById('game-close').addEventListener('click',leaveMinecraft);
-document.getElementById('game-fullscreen').addEventListener('click',async()=>{try{if(game.requestFullscreen)await game.requestFullscreen();}catch(e){loadingMessage.textContent='Fullscreen was blocked by your browser. Try the browser fullscreen key (F11).';loadingMessage.style.display='flex';setTimeout(()=>loadingMessage.style.display='none',2500);}});
-document.getElementById('game-exit-fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();});
-document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;game.classList.toggle('fullscreen-ui',on);document.getElementById('game-exit-fullscreen').style.display=on?'block':'none';});
 </script>
 
 <script type="module">
